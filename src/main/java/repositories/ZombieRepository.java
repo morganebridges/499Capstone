@@ -1,4 +1,5 @@
 package main.java.repositories;
+import main.java.models.*;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
