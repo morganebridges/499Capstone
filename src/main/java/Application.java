@@ -1,4 +1,4 @@
-package main.java.hello;
+package main.java;
 
 /**
  * Created by morganebridges on 5/25/16.
