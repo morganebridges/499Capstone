@@ -1,0 +1,6 @@
+#Ignore IDE files#
+*.iml
+*.project
+
+#Ignore Filesystem Specific Files#
+.DS_Store
