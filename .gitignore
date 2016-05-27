@@ -1,5 +1,5 @@
 #Ignore IDE files#
-
+/build/.*
 #Ignore Filesystem Specific Files#
 .DS_Store
 /.gradle/
