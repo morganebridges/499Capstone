@@ -8,7 +8,7 @@ import java.util.List;
 import main.java.models.Zombie;
 import main.java.repositories.ZombieRepository;
 
-import org.springframework.context.ApplicationC ontext;
+import org.springframework.context.ApplicationContext;
 
 
 import javax.persistence.EntityManager;
