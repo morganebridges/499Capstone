@@ -1,8 +1,9 @@
-package com.zombie.application;
+package com.zombie;
 
 
 //locals
 import com.zombie.models.Zombie;
+import com.zombie.repositories.ZombieRepo;
 import com.zombie.repositories.ZombieRepository;
 
 //system
@@ -11,6 +12,8 @@ import java.util.List;
 
 //frameworks
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.zombie"})
+@ComponentScan("com.zombie")
 @EnableAutoConfiguration
 public class Application implements CommandLineRunner{
     @Autowired
@@ -47,7 +51,7 @@ public class Application implements CommandLineRunner{
     }
     public void loadReferenceData(){
         Zombie zombie = new Zombie("testTag");
-        zombieRepo.save(zombie);
+        //zombieRepo.save(zombie);
     }
 
 
