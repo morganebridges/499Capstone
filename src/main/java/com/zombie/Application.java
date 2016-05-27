@@ -47,9 +47,12 @@ public class Application implements CommandLineRunner{
     }
     @Override
     public void run(String ...args){
+    		System.out.println("Inside run method");
     		loadReferenceData();
+    		
     }
     public void loadReferenceData(){
+    		System.out.println("Load Reference Data");
         Zombie zombie = new Zombie("testTag");
         zombieRepo.save(zombie);
     }
