@@ -10,8 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
+@EnableAutoConfiguration
 public class Application {
-
+    @Autowired
+    ZombieRepository zombieRepo;
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
@@ -22,6 +24,11 @@ public class Application {
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
+        loadReferenceData();
+    }
+    public static void loadReferenceData(){
+        Zombie zombie = new Zombie("testTag");
+
     }
 
 
