@@ -24,14 +24,7 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.cache.annotation.EnableCaching;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.torpeds.entities.SystemUser;
-import com.torpeds.entities.UserRole;
-import com.torpeds.entities.Vendor;
-import com.torpeds.mock.VendorUtil;
-import com.torpeds.repos.SystemUserRepository;
-import com.torpeds.repos.VendorRepository;
-import com.torpeds.security.BCrypt;
-import com.torpeds.services.VendorService;
+
 
 @SpringBootApplication
 @EnableAutoConfiguration
