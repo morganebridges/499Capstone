@@ -51,7 +51,7 @@ public class Application implements CommandLineRunner{
     }
     public void loadReferenceData(){
         Zombie zombie = new Zombie("testTag");
-        //zombieRepo.save(zombie);
+        zombieRepo.save(zombie);
     }
 
 
