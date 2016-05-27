@@ -33,15 +33,21 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
+    
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
+    
+    /* Testing */ 
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
     /* Data persistence - JPA */
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
+    
+    /*Database */
+    compile 'mysql:mysql-connector-java:5.1.31'
 }
 
 task wrapper(type: Wrapper) {

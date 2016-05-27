@@ -1,4 +1,4 @@
-package models;
+package com.zombie.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
