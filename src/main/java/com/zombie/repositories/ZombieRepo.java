@@ -1,6 +1,6 @@
 package com.zombie.repositories;
 
-import java.util.List;
+/*import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -86,4 +86,4 @@ public class ZombieRepo implements ZombieRepository{
 		return null;
 	}
 
-}
+}*/

@@ -3,7 +3,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 /**
  * Created by morganebridges on 5/25/16.
  */
@@ -13,6 +12,8 @@ public class Zombie {
     @GeneratedValue
     private long id;
     private String gamerTag;
+    
+    //@Field int hp;
 
     protected Zombie(){}
 
@@ -28,5 +29,13 @@ public class Zombie {
         );
     }
 
+	public String getGamerTag() {
+		// TODO Auto-generated method stub
+		return gamerTag;
+	}
+	public long getId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
 
 }

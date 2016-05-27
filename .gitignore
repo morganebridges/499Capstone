@@ -2,3 +2,5 @@
 
 #Ignore Filesystem Specific Files#
 .DS_Store
+/.gradle/
+/build/

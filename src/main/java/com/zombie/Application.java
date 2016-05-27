@@ -3,7 +3,6 @@ package com.zombie;
 
 //locals
 import com.zombie.models.Zombie;
-import com.zombie.repositories.ZombieRepo;
 import com.zombie.repositories.ZombieRepository;
 
 //system
@@ -33,29 +32,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class Application implements CommandLineRunner{
     @Autowired
     ZombieRepository zombieRepo;
+    
+    @PersistenceContext
+	private EntityManager entityManager;
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
-        System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            System.out.println(beanName);
-        }
+        System.out.println("Zombie Application is online.");
+       
        
     }
     @Override
     public void run(String ...args){
-    		System.out.println("Inside run method");
-    		loadReferenceData();
+    		System.out.println("Inside @Override CommandLineRunner.run method");
+    		ApplicationPrintTester printTester = new ApplicationPrintTester();
+    		printTester.loadReferenceData(zombieRepo);
     		
     }
-    public void loadReferenceData(){
-    		System.out.println("Load Reference Data");
-        Zombie zombie = new Zombie("testTag");
-        zombieRepo.save(zombie);
-    }
-
 
 }
