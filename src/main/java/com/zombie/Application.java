@@ -22,13 +22,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
 @SpringBootApplication(scanBasePackages = {"com.zombie"})
 @ComponentScan("com.zombie")
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = { RepositoryRestMvcAutoConfiguration.class })
 public class Application implements CommandLineRunner{
     @Autowired
     ZombieRepository zombieRepo;
