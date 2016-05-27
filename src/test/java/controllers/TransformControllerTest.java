@@ -1,5 +1,6 @@
-package test.java.controllers;
-import main.java.controllers.TransformController;
+package controllers;
+import com.zombie.controllers.TransformController;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +23,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class TransformControllerTest {
 
     private MockMvc mvc;
-
     @Before
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(new TransformController()).build();

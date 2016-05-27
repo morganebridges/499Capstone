@@ -1,0 +1,8 @@
+//org.eclipse.ui.commands/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.commands.radioState=false
+//org.eclipse.ui.commands/state/org.eclipse.wst.xml.views.XPathView.processor.xpathprocessor/org.eclipse.ui.commands.radioState=xpath10
+ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.ui.workbenchMisc\tTorg.eclipse.jdt.ui.presentation
+ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.jface.textfont
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=org.eclipse.m2e.discovery;
+eclipse.preferences.version=1
+org.eclipse.jface.textfont=1|Monaco|14.0|0|COCOA|1|Monaco;
+resourcetypes=<?xml version\="1.0" encoding\="UTF-8"?>\n<editors version\="3.1">\n<info extension\="java" name\="*">\n<editor id\="org.eclipse.wb.core.guiEditor"/>\n</info>\n<info extension\="gradle" name\="*">\n<editor id\="org.eclipse.buildship.ui.gradlebuildscripteditor"/>\n</info>\n<info extension\="pom" name\="*">\n<editor id\="org.eclipse.m2e.editor.MavenPomEditor"/>\n<defaultEditor id\="org.eclipse.m2e.editor.MavenPomEditor"/>\n</info>\n<info extension\="xml" name\="pom">\n<editor id\="org.eclipse.m2e.editor.MavenPomEditor"/>\n<defaultEditor id\="org.eclipse.m2e.editor.MavenPomEditor"/>\n</info>\n<info extension\="setup" name\="*">\n<editor id\="org.eclipse.oomph.setup.presentation.SetupEditorID"/>\n</info>\n<info extension\="workingsets" name\="*">\n<editor id\="org.eclipse.oomph.workingsets.presentation.WorkingSetsEditorID"/>\n</info>\n<info extension\="properties" name\="sample"/>\n</editors>
