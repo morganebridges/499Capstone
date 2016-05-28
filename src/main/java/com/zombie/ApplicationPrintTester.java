@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.zombie.models.User;
 import com.zombie.models.Zombie;
+import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -12,13 +14,16 @@ public class ApplicationPrintTester {
 	//@Autowired
 	//private ZombieRepository zombieRepo;
 	
-	public void loadReferenceData(ZombieRepository zombieRepo){
+	public void loadReferenceData(ZombieRepository zombieRepo, UserRepository userRepo){
 		System.out.println("Load Reference Data");
 	    /*
 	     * Tests for zombie 	
 	     */
 		Zombie zombie = new Zombie("testTag");
-	    zombieRepo.save(zombie);
+		zombieRepo.save(zombie);
+		
+		User user = new User("testTag");
+	    userRepo.save(user);
 	    
 	    System.out.println("Testing Zombie Repository Methods");
 	    Zombie testZombie = zombieRepo.findByGamerTag("testTag");

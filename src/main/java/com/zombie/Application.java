@@ -3,6 +3,7 @@ package com.zombie;
 
 //locals
 import com.zombie.models.Zombie;
+import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 
 //system
@@ -34,7 +35,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class Application implements CommandLineRunner{
     @Autowired
     ZombieRepository zombieRepo;
-    
+    @Autowired
+    UserRepository userRepo;
     @PersistenceContext
 	private EntityManager entityManager;
     public static void main(String[] args) {
@@ -48,7 +50,7 @@ public class Application implements CommandLineRunner{
     public void run(String ...args){
     		System.out.println("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-    		printTester.loadReferenceData(zombieRepo);
+    		printTester.loadReferenceData(zombieRepo, userRepo);
     		
     }
 

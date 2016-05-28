@@ -1,8 +1,11 @@
 package com.zombie.repositories;
 import com.zombie.models.*;
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.zombie.models.Zombie;
 
 /**
  * A repository class for keeping instances of the Zombie
@@ -13,11 +16,6 @@ import org.springframework.stereotype.Repository;
  * This is privately owned intellectual property, respect dat bitches.
  */
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-
-import com.zombie.models.Zombie;
 
 @Repository
 public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Long> {
