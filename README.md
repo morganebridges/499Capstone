@@ -19,4 +19,5 @@ This will compile the java files, set up the application context, and wrap the a
 
 To test the default endpoint I currently have set up (subject to change after further controller implementation), run the command: curl localhost:8080?input=5 
 
+GenMyModel account info : morganebridges@gmail.com / Software1984!!
 
