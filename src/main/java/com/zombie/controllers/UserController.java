@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ public class UserController {
 	UserRepository userRepo;
     @RequestMapping(path="/getuser", method=RequestMethod.POST)
    
-    public ResponseEntity<User> getUser(@RequestBody(value="gamerTag") String gamerTag, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<User> getUser(@RequestBody(required=true) String gamerTag, HttpServletRequest request, HttpServletResponse response) {
         User user = userRepo.findByGamerTag(gamerTag);
         ResponseEntity<User> theReturn = null;
         if(user != null){
