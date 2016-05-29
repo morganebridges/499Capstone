@@ -21,14 +21,14 @@ public class UserController {
 	UserRepository userRepo;
     @RequestMapping(path="/getuser", method=RequestMethod.POST)
    
-    public ResponseEntity<User> getUser(@RequestParam(value="tag") String gamerTag, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<User> getUser(@RequestBody(value="gamerTag") String gamerTag, HttpServletRequest request, HttpServletResponse response) {
         User user = userRepo.findByGamerTag(gamerTag);
         ResponseEntity<User> theReturn = null;
         if(user != null){
         		theReturn = new ResponseEntity(user, HttpStatus.OK);
         	return theReturn;
         }else{
-        	return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        	return new ResponseEntity (null, HttpStatus.NOT_FOUND);
         	
         }
         
