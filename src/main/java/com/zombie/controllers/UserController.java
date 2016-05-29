@@ -24,12 +24,16 @@ public class UserController {
    
     public ResponseEntity<User> getUser(@RequestBody(required=true) String gamerTag, HttpServletRequest request, HttpServletResponse response) {
         User user = userRepo.findByGamerTag(gamerTag);
+        
         ResponseEntity<User> theReturn = null;
+        
         if(user != null){
-        		theReturn = new ResponseEntity(user, HttpStatus.OK);
-        	return theReturn;
+        		theReturn = new ResponseEntity<User>(user, HttpStatus.OK);
+        		return theReturn;
         }else{
-        	return new ResponseEntity (null, HttpStatus.NOT_FOUND);
+        		user = new User(gamerTag);
+        		userRepo.save(user);	
+        		return new ResponseEntity<User>(user, HttpStatus.OK);
         	
         }
         
