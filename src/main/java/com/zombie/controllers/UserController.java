@@ -18,8 +18,8 @@ public class UserController {
 	UserRepository userRepo;
     @RequestMapping(path="/getuser", method=RequestMethod.POST)
    
-    public ResponseEntity<User> getUser(@RequestParam(value="u") User user) {
-        User theReturn = userRepo.findByGamerTag(user.getGamerTag());
+    public ResponseEntity<User> getUser(@RequestParam(value="tag") String gamerTag) {
+        User theReturn = userRepo.findByGamerTag(gamerTag);
         
         if(theReturn != null){
         	ResponseEntity<User> response = new ResponseEntity(theReturn, HttpStatus.OK);
