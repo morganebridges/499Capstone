@@ -11,29 +11,26 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private String gamerTag;
+    private String name;
     
     //@Field int hp;
 
     protected User(){}
 
-    public User(String gamerTag){
-        this.gamerTag = gamerTag;
+    public User(String name){
+        this.name = name;
     }
 
  
 
 	@Override
     public String toString(){
-        return String.format(
-          "GamerTag[id=%d, gamerTag='%s]",
-                id, gamerTag
-        );
+       return name;
     }
 
-	public String getGamerTag() {
+	public String getName() {
 		// TODO Auto-generated method stub
-		return gamerTag;
+		return name;
 	}
 	public long getId() {
 		// TODO Auto-generated method stub

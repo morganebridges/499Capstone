@@ -22,7 +22,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	@Query("select p from User p where p.id=:id")
 	User findById(@Param("id") long id);
 	
-	@Query("select u from User u where UPPER(u.gamerTag) like UPPER(:gamerTag)")
-	User findByGamerTag(@Param("gamerTag")String gamerTag);
+	@Query("select u from User u where UPPER(u.name) like UPPER(:name)")
+	User findByName(@Param("name")String name);
 
 }

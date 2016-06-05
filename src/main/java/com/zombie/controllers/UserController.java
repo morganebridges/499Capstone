@@ -20,18 +20,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 	@Autowired
 	UserRepository userRepo;
-    @RequestMapping(path="/getuser", method=RequestMethod.POST)
-   
-    public ResponseEntity<User> getUser(@RequestBody(required=true) String gamerTag, HttpServletRequest request, HttpServletResponse response) {
-        User user = userRepo.findByGamerTag(gamerTag);
-        
+    
+	@RequestMapping(path="/getuser", method=RequestMethod.POST)
+    public ResponseEntity<User> getUser(@RequestParam(required=true) String name, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("User controller hit, requesting user Object for name: " + name);
+    		
+        User user = userRepo.findByName(name);
+        if(user != null)
+        		System.out.println("User query to database produce user object with name: " + user.getName() + "\n with id: " + user.getId());
         ResponseEntity<User> theReturn = null;
+        
+        
         
         if(user != null){
         		theReturn = new ResponseEntity<User>(user, HttpStatus.OK);
         		return theReturn;
         }else{
-        		user = new User(gamerTag);
+        		System.out.println("User not found in database, creating new user");
+        		user = new User(name);
         		userRepo.save(user);	
         		return new ResponseEntity<User>(user, HttpStatus.OK);
         	
