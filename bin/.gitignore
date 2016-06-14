@@ -1,2 +1,5 @@
 /application.properties
 /com/
+/controllers/
+/models/
+/services/
