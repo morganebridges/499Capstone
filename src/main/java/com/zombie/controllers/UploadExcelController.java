@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @MultipartConfig(fileSizeThreshold = 20971520)
 public class UploadExcelController {
 
-    @RequestMapping(value = "/upload")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String uploadFile(
             @RequestParam("uploadedFile") MultipartFile uploadedFileRef) {
     // Get name of uploaded file.
