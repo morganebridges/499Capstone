@@ -1,5 +1,6 @@
 package com.zombie.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,14 +36,14 @@ public class UploadExcelController {
     // Now create the output file on the server.
     File outputFile = new File(path);
 
-    FileInputStream reader = null;
+    ByteArrayInputStream reader = null;
     FileOutputStream writer = null;
     int totalBytes = 0;
     try {
         outputFile.createNewFile();
         	System.out.println("Trying to read the file");
         // Create the input stream to uploaded file to read data from it.
-        reader = (FileInputStream) uploadedFileRef.getInputStream();
+        reader = (ByteArrayInputStream) uploadedFileRef.getInputStream();
         System.out.println("after instantiating reader");
         // Create writer for 'outputFile' to write data read from
         // 'uploadedFileRef'
