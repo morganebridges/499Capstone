@@ -23,11 +23,12 @@ public class UploadExcelController {
     public String uploadFile(
             @RequestParam("uploadedFile") MultipartFile uploadedFileRef) {
     // Get name of uploaded file.
+    	
     String fileName = uploadedFileRef.getOriginalFilename();
 
     // Path where the uploaded file will be stored.
     String path = fileName;
-
+    System.out.println("Path: " + path);
     // This buffer will store the data read from 'uploadedFileRef'
     byte[] buffer = new byte[1000];
 
