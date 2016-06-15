@@ -26,7 +26,7 @@ public class UploadExcelController {
     String fileName = uploadedFileRef.getOriginalFilename();
 
     // Path where the uploaded file will be stored.
-    String path = "D:/" + fileName;
+    String path = fileName;
 
     // This buffer will store the data read from 'uploadedFileRef'
     byte[] buffer = new byte[1000];
