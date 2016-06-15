@@ -61,12 +61,12 @@ public class UploadExcelController {
    
         e.printStackTrace();
     }finally{
-        try {
+        /*try {
             reader.close();
             writer.close();
         } catch (IOException e) {
             //e.printStackTrace();
-        }
+        }*/
     }
 
         return "File uploaded successfully! Total Bytes Read="+totalBytes;
