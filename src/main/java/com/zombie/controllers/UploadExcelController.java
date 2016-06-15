@@ -39,22 +39,25 @@ public class UploadExcelController {
     int totalBytes = 0;
     try {
         outputFile.createNewFile();
-
+        	System.out.println("Trying to read the file");
         // Create the input stream to uploaded file to read data from it.
         reader = (FileInputStream) uploadedFileRef.getInputStream();
-
+        System.out.println("after instantiating reader");
         // Create writer for 'outputFile' to write data read from
         // 'uploadedFileRef'
         writer = new FileOutputStream(outputFile);
-
+        System.out.println("after instantiating writer");
         // Iteratively read data from 'uploadedFileRef' and write to
         // 'outputFile';            
         int bytesRead = 0;
         while ((bytesRead = reader.read(buffer)) != -1) {
+        		
             writer.write(buffer);
             totalBytes += bytesRead;
         }
+        System.out.println("after writing to writer");
     } catch (IOException e) {
+   
         e.printStackTrace();
     }finally{
         try {
