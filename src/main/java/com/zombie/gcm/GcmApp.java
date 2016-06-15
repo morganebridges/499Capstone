@@ -12,14 +12,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zombie.gcm.MsgContent;
 
 public class GcmApp {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		System.out.println("Sending POST to GCM");
 
 		String apiKey = "AIzaSyBnyB-lod8OtE-Kr5tx5TOOYy0A4lxJKkU";
 		MsgContent content = createMsgContent();
 
 		POST2GCM.post(apiKey, content);
-	}
+	}*/
 
 	public static MsgContent createMsgContent() {
 
