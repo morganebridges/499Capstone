@@ -65,7 +65,7 @@ public class UploadExcelController {
             reader.close();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
