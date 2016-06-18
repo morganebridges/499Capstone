@@ -47,9 +47,10 @@ public class UserController {
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<LatLng[]>update(@RequestBody LatLng latLng, HttpServletRequest request, HttpServletResponse response){
-		LatLng pos1 = new LatLng(-95.0, 41.5);
-		LatLng pos2 = new LatLng(-95.2, 43.7);
-		LatLng pos3 = new LatLng(-95.4, 47.9);
+		LatLng pos1 = new LatLng(45.01, -93.25);
+		LatLng pos2 = new LatLng(45.11, -93.35);
+		LatLng pos3 = new LatLng(45.21, -93.15);
+
 		LatLng[] posArr = {pos1, pos2, pos3};
 		return new ResponseEntity<LatLng[]>(posArr, HttpStatus.OK);
 	}
