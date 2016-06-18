@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zombie.models.User;
 import com.zombie.repositories.UserRepository;
+import com.zombie.utility.LatLng;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +45,14 @@ public class UserController {
         }
         
     }
+	@RequestMapping(path="/update", method=RequestMethod.POST)
+	public ResponseEntity<LatLng[]>update(@RequestBody LatLng latLng, HttpServletRequest request, HttpServletResponse response){
+		LatLng pos1 = new LatLng(95.0, 45.5);
+		LatLng pos2 = new LatLng(95.2, 45.7);
+		LatLng pos3 = new LatLng(95.4, 45.9);
+		LatLng[] posArr = {pos1, pos2, pos3};
+		return new ResponseEntity<LatLng[]>(posArr, HttpStatus.OK);
+	}
 
 }
 

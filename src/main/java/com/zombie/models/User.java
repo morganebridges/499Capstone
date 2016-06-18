@@ -3,6 +3,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.zombie.utility.LatLng;
+
 import java.util.Date;
 
 /**
@@ -13,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
+    
     private String name;
     private int totalKills;
 	private int kills;
@@ -20,10 +24,17 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum;
-
+	
+	//lat and long individually to avoid mapping issue with db, update atomically with LatLng object
+	double latitude;
+	double longitude;
+	
     protected User(){}
-
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
+    public User(String name){
+    		this.name = name;
+    		
+    }
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, LatLng lastLocation) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -31,8 +42,19 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
+		this.latitude = lastLocation.getLatitude();
+		this.longitude = lastLocation.getLongitude();
 	}
-
+	
+	public void updateLocation(LatLng lastLocation){
+		this.latitude = lastLocation.getLatitude();
+		this.longitude = lastLocation.getLongitude();
+	}
+	public void updateLocation(double latitude, double longitude){
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	
 	@Override
     public String toString(){
        return name;
@@ -98,5 +120,8 @@ public class User {
 
 	public void setLastUsedSerum(Date lastUsedSerum) {
 		this.lastUsedSerum = lastUsedSerum;
+	}
+	public LatLng getLocation(){
+		return new LatLng(latitude, longitude);
 	}
 }
