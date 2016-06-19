@@ -1,76 +1,24 @@
 package com.zombie.controllers;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import javax.servlet.annotation.MultipartConfig;
-
+import com.zombie.services.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
-@RequestMapping(value = "/uploadservice")
-//Max uploaded file size (here it is 20 MB)
-@MultipartConfig(fileSizeThreshold = 20971520)
 public class UploadExcelController {
-
+    @Autowired
+    private AdminService adminService;
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String uploadFile(
             @RequestParam("uploadedFile") MultipartFile uploadedFileRef) {
-    // Get name of uploaded file.
-    	
-    String fileName = uploadedFileRef.getOriginalFilename();
-
-    // Path where the uploaded file will be stored.
-    String path = fileName;
-    System.out.println("Path: " + path);
-    // This buffer will store the data read from 'uploadedFileRef'
-    byte[] buffer = new byte[1000];
-
-    // Now create the output file on the server.
-    File outputFile = new File(path);
-
-    ByteArrayInputStream reader = null;
-    FileOutputStream writer = null;
-    int totalBytes = 0;
-    try {
-        outputFile.createNewFile();
-        	System.out.println("Trying to read the file");
-        // Create the input stream to uploaded file to read data from it.
-        reader = (ByteArrayInputStream) uploadedFileRef.getInputStream();
-        System.out.println("after instantiating reader");
-        // Create writer for 'outputFile' to write data read from
-        // 'uploadedFileRef'
-        writer = new FileOutputStream(outputFile);
-        System.out.println("after instantiating writer");
-        // Iteratively read data from 'uploadedFileRef' and write to
-        // 'outputFile';            
-        int bytesRead = 0;
-        while ((bytesRead = reader.read(buffer)) != -1) {
-        		
-            writer.write(buffer);
-            totalBytes += bytesRead;
-        }
-        System.out.println("after writing to writer");
-    } catch (IOException e) {
-   
-        e.printStackTrace();
-    }finally{
-        /*try {
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            //e.printStackTrace();
-        }*/
-    }
-
-        return "File uploaded successfully! Total Bytes Read="+totalBytes;
+	    try {
+		    int users = adminService.importUserData(uploadedFileRef);
+		    return users + " users were added.";
+	    } catch (IllegalArgumentException e) {
+		    return e.getMessage();
+	    }
     }
 
 }
