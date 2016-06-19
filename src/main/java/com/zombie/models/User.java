@@ -35,6 +35,10 @@ public class User {
 
 
 
+	//Google Cloud Messaging registration Id
+	private String gcmId;
+
+
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
 		this.name = name;
 		this.totalKills = totalKills;
@@ -43,6 +47,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
+
 	}
 	
 	public void updateLocation(LatLng lastLocation){
@@ -69,7 +74,12 @@ public class User {
 		// TODO Auto-generated method stub
 		return name;
 	}
-
+	public String getGcmRegId() {
+		return gcmId;
+	}
+	public void setGcmRegId(String regId){
+		this.gcmId = regId;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}

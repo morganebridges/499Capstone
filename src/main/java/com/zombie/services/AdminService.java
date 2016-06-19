@@ -3,6 +3,7 @@ package com.zombie.services;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class AdminService {
 			e.printStackTrace();
 			throw new IllegalArgumentException("Error reading document");
 		}
-		Sheet sheet = workbook.getSheetAt(0);
+		XSSFSheet sheet = workbook.getSheetAt(0);
 
 		Iterator<Row> rowIterator = sheet.rowIterator();
 

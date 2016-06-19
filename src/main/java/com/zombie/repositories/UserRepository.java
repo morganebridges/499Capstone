@@ -20,9 +20,12 @@ import com.zombie.models.Zombie;
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	
 	@Query("select p from User p where p.id=:id")
-	User findById(@Param("id") long id);
+	User findUserById(@Param("id") long id);
 	
 	@Query("select u from User u where UPPER(u.name) like UPPER(:name)")
 	User findByName(@Param("name")String name);
+
+	@Query("select u from User u where (u.name) like (:name)")
+	User findUserByGCMId(String gcmId);
 
 }

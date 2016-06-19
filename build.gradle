@@ -43,15 +43,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-rest:1.3.0.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-test:1.3.0.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-mail:1.3.0.RELEASE'
-<<<<<<< HEAD
-    compile 'org.apache.poi:poi:3.11'
-	compile 'org.apache.poi:poi-ooxml:3.11'
     
-    /* Testing */ 
-=======
 
     /* Testing */
->>>>>>> a16d452f9c1e798d4b08a6e0c8b1d40afbff8010
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
@@ -63,6 +57,9 @@ dependencies {
 
     /* Database */
     compile 'mysql:mysql-connector-java:5.1.31'
+    
+    /* Gcm Server */ 
+  	compile group: 'com.ganyo', name: 'gcm-server', version: '1.0.2'
 }
 
 task wrapper(type: Wrapper) {
