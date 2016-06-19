@@ -1,11 +1,10 @@
 package com.zombie.models;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import com.zombie.utility.LatLng;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -25,16 +24,18 @@ public class User {
 	private int serum;
 	private Date lastUsedSerum;
 	
-	//lat and long individually to avoid mapping issue with db, update atomically with LatLng object
-	double latitude;
-	double longitude;
+	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
+	private double latitude;
+	private double longitude;
 	
     protected User(){}
     public User(String name){
-    		this.name = name;
-    		
+        this.name = name;
     }
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, LatLng lastLocation) {
+
+
+
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -42,14 +43,13 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
-		this.latitude = lastLocation.getLatitude();
-		this.longitude = lastLocation.getLongitude();
 	}
 	
 	public void updateLocation(LatLng lastLocation){
 		this.latitude = lastLocation.getLatitude();
 		this.longitude = lastLocation.getLongitude();
 	}
+
 	public void updateLocation(double latitude, double longitude){
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -121,7 +121,18 @@ public class User {
 	public void setLastUsedSerum(Date lastUsedSerum) {
 		this.lastUsedSerum = lastUsedSerum;
 	}
+
 	public LatLng getLocation(){
 		return new LatLng(latitude, longitude);
+	}
+
+	public void setLocation(LatLng location) {
+		this.latitude = location.getLatitude();
+		this.longitude = location.getLongitude();
+	}
+
+	public void setLocation(long latitude, long longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 }
