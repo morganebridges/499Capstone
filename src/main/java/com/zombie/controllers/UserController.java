@@ -1,5 +1,4 @@
 package com.zombie.controllers;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zombie.models.User;
@@ -50,7 +49,7 @@ public class UserController {
 		LatLng pos1 = new LatLng(45.01, -93.25);
 		LatLng pos2 = new LatLng(45.11, -93.35);
 		LatLng pos3 = new LatLng(45.21, -93.15);
-
+		
 		LatLng[] posArr = {pos1, pos2, pos3};
 		return new ResponseEntity<LatLng[]>(posArr, HttpStatus.OK);
 	}

@@ -44,6 +44,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-rest:1.3.0.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-test:1.3.0.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-mail:1.3.0.RELEASE'
+    compile 'org.apache.poi:poi:3.11'
+	compile 'org.apache.poi:poi-ooxml:3.11'
     
     /* Testing */ 
     testCompile("junit:junit")
