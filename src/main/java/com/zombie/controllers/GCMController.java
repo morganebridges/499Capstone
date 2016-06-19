@@ -6,6 +6,7 @@ import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 import com.zombie.utility.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+@ComponentScan("com.fourninenine.zombie.services")
 @RequestMapping("/gcm")
 @RestController
 public class GCMController {
@@ -39,8 +40,11 @@ public class GCMController {
 
     @RequestMapping(path="/register", method=RequestMethod.POST)
     public ResponseEntity<User>update(@RequestParam String gcmId, @RequestParam int key, HttpServletRequest request, HttpServletResponse response){
-
+        System.out.println("User provided key: "  + key);
+        System.out.println("Whitespace");
         User user = userService.findUserById(key);
+        if(user == null)
+            user = new User("TestName");
         user.setGcmRegId(gcmId);
         userService.save(user);
 

@@ -23,7 +23,10 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum;
-	
+
+	//Google Cloud Messaging registration Id
+	private String gcmId;
+
 	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
 	private double latitude;
 	private double longitude;
@@ -35,8 +38,6 @@ public class User {
 
 
 
-	//Google Cloud Messaging registration Id
-	private String gcmId;
 
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {

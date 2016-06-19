@@ -25,7 +25,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 	@Query("select u from User u where UPPER(u.name) like UPPER(:name)")
 	User findByName(@Param("name")String name);
 
-	@Query("select u from User u where (u.name) like (:name)")
-	User findUserByGCMId(String gcmId);
+	@Query("select u from User u where (u.gcmId) like (:gcmId)")
+	User findUserByGCMId(@Param("gcmId")String gcmId);
 
 }

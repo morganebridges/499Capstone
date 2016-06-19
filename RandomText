@@ -1,0 +1,959 @@
+Last login: Sun Jun 19 01:29:20 on ttys000
+-bash: /Users/morganebridges/gradle-2.10/bin: is a directory
+Morgans-MacBook-Pro:~ morganebridges$ cd ~/gitProjects/
+Morgans-MacBook-Pro:gitProjects morganebridges$ ls
+499Capstone		ZombieGame		capstoneSpring
+JavaTechnicalPrimer	ammanngroup		laservision
+Morgans-MacBook-Pro:gitProjects morganebridges$ cd 499Capstone/
+Morgans-MacBook-Pro:499Capstone morganebridges$ ls
+499Capstone.eml			bin
+499Capstone.iml			build
+499Capstone.userlibraries	build.gradle
+README.md			out
+RemoteSystemsTempFiles		src
+ZombieGame.iml
+Morgans-MacBook-Pro:499Capstone morganebridges$ git branch
+* master
+Morgans-MacBook-Pro:499Capstone morganebridges$ git pul
+git: 'pul' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+	pull
+	push
+Morgans-MacBook-Pro:499Capstone morganebridges$ git pull
+remote: Counting objects: 15, done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 15 (delta 5), reused 15 (delta 5), pack-reused 0
+Unpacking objects: 100% (15/15), done.
+From https://github.com/morganebridges/499Capstone
+   d1163f7..a16d452  master     -> origin/master
+Updating d1163f7..a16d452
+error: Your local changes to the following files would be overwritten by merge:
+	build.gradle
+Please, commit your changes or stash them before you can merge.
+Aborting
+Morgans-MacBook-Pro:499Capstone morganebridges$ git status
+On branch master
+Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   .gradle/2.13/taskArtifacts/cache.properties.lock
+	modified:   .gradle/2.13/taskArtifacts/fileHashes.bin
+	modified:   .gradle/2.9/taskArtifacts/cache.properties.lock
+	modified:   .gradle/2.9/taskArtifacts/fileHashes.bin
+	modified:   .gradle/2.9/taskArtifacts/fileSnapshots.bin
+	modified:   .gradle/2.9/taskArtifacts/outputFileStates.bin
+	modified:   .gradle/2.9/taskArtifacts/taskArtifacts.bin
+	modified:   bin/.gitignore
+	modified:   build.gradle
+	modified:   src/main/java/com/zombie/controllers/UserController.java
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	src/main/java/com/zombie/utility/GlobalFields.java
+	src/main/java/com/zombie/utility/Globals.java
+	src/test/java/utilities/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Morgans-MacBook-Pro:499Capstone morganebridges$ ls
+499Capstone.eml			README.md			bin				out
+499Capstone.iml			RemoteSystemsTempFiles		build				src
+499Capstone.userlibraries	ZombieGame.iml			build.gradle
+Morgans-MacBook-Pro:499Capstone morganebridges$ git commit . -m 'global thoughts'
+[master f406146] global thoughts
+ Committer: Morgan Bridges <morganebridges@Morgans-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 10 files changed, 4 insertions(+), 2 deletions(-)
+Morgans-MacBook-Pro:499Capstone morganebridges$ git pull
+Auto-merging build.gradle
+CONFLICT (content): Merge conflict in build.gradle
+Automatic merge failed; fix conflicts and then commit the result.
+Morgans-MacBook-Pro:499Capstone morganebridges$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 1 different commit each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Changes to be committed:
+
+	new file:   src/main/java/com/zombie/controllers/DownloadExcelController.java
+	modified:   src/main/java/com/zombie/controllers/UploadExcelController.java
+	modified:   src/main/java/com/zombie/models/User.java
+	new file:   src/main/java/com/zombie/services/AdminService.java
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+	both modified:   build.gradle
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	src/main/java/com/zombie/utility/GlobalFields.java
+	src/main/java/com/zombie/utility/Globals.java
+	src/test/java/utilities/
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ git add src/main/java/com/zombie/utility/GlobalFields.java
+Morgans-MacBook-Pro:499Capstone morganebridges$ git add .
+Morgans-MacBook-Pro:499Capstone morganebridges$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 1 different commit each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	modified:   build.gradle
+	new file:   src/main/java/com/zombie/controllers/DownloadExcelController.java
+	modified:   src/main/java/com/zombie/controllers/UploadExcelController.java
+	modified:   src/main/java/com/zombie/models/User.java
+	new file:   src/main/java/com/zombie/services/AdminService.java
+	new file:   src/main/java/com/zombie/utility/GlobalFields.java
+	new file:   src/main/java/com/zombie/utility/Globals.java
+	new file:   src/test/java/utilities/GCMMessageTest.java
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ git commit . -m 'seriously?'
+fatal: cannot do a partial commit during a merge.
+Morgans-MacBook-Pro:499Capstone morganebridges$ git commit -R -m 'seriously'
+error: unknown switch `R'
+usage: git commit [<options>] [--] <pathspec>...
+
+    -q, --quiet           suppress summary after successful commit
+    -v, --verbose         show diff in commit message template
+
+Commit message options
+    -F, --file <file>     read message from file
+    --author <author>     override author for commit
+    --date <date>         override date for commit
+    -m, --message <message>
+                          commit message
+    -c, --reedit-message <commit>
+                          reuse and edit message from specified commit
+    -C, --reuse-message <commit>
+                          reuse message from specified commit
+    --fixup <commit>      use autosquash formatted message to fixup specified commit
+    --squash <commit>     use autosquash formatted message to squash specified commit
+    --reset-author        the commit is authored by me now (used with -C/-c/--amend)
+    -s, --signoff         add Signed-off-by:
+    -t, --template <file>
+                          use specified template file
+    -e, --edit            force edit of commit
+    --cleanup <default>   how to strip spaces and #comments from message
+    --status              include status in commit message template
+    -S, --gpg-sign[=<key-id>]
+                          GPG sign commit
+
+Commit contents options
+    -a, --all             commit all changed files
+    -i, --include         add specified files to index for commit
+    --interactive         interactively add files
+    -p, --patch           interactively add changes
+    -o, --only            commit only specified files
+    -n, --no-verify       bypass pre-commit hook
+    --dry-run             show what would be committed
+    --short               show status concisely
+    --branch              show branch information
+    --porcelain           machine-readable output
+    --long                show status in long format (default)
+    -z, --null            terminate entries with NUL
+    --amend               amend previous commit
+    --no-post-rewrite     bypass post-rewrite hook
+    -u, --untracked-files[=<mode>]
+                          show untracked files, optional modes: all, normal, no. (Default: all)
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ git commit . -m 'in conflict'
+fatal: cannot do a partial commit during a merge.
+Morgans-MacBook-Pro:499Capstone morganebridges$ ls
+499Capstone.eml			README.md			bin				out
+499Capstone.iml			RemoteSystemsTempFiles		build				src
+499Capstone.userlibraries	ZombieGame.iml			build.gradle
+Morgans-MacBook-Pro:499Capstone morganebridges$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 1 different commit each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	modified:   build.gradle
+	new file:   src/main/java/com/zombie/controllers/DownloadExcelController.java
+	modified:   src/main/java/com/zombie/controllers/UploadExcelController.java
+	modified:   src/main/java/com/zombie/models/User.java
+	new file:   src/main/java/com/zombie/services/AdminService.java
+	new file:   src/main/java/com/zombie/utility/GlobalFields.java
+	new file:   src/main/java/com/zombie/utility/Globals.java
+	new file:   src/test/java/utilities/GCMMessageTest.java
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ git commit . -i
+[master 5b0da7d] Merge branch 'master' of https://github.com/morganebridges/499Capstone
+ Committer: Morgan Bridges <morganebridges@Morgans-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ git pull
+Already up-to-date.
+Morgans-MacBook-Pro:499Capstone morganebridges$ ls
+499Capstone.eml			README.md			bin				out
+499Capstone.iml			RemoteSystemsTempFiles		build				src
+499Capstone.userlibraries	ZombieGame.iml			build.gradle
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/Users/morganebridges/gitProjects/499Capstone/build.gradle' line: 46
+
+* What went wrong:
+Could not compile build file '/Users/morganebridges/gitProjects/499Capstone/build.gradle'.
+> startup failed:
+  build file '/Users/morganebridges/gitProjects/499Capstone/build.gradle': 46: unexpected token: << @ line 46, column 1.
+     <<<<<<< HEAD
+     ^
+
+  1 error
+
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 6.398 secs
+Morgans-MacBook-Pro:499Capstone morganebridges$ echo GRADLE_HOME
+GRADLE_HOME
+Morgans-MacBook-Pro:499Capstone morganebridges$ alias
+alias avd='cd /Users/morganebridges/LibraryAndroid/sdk/tools; ./android avd'
+alias chromeSecurity='open -n -a "Google Chrome" --args --user-data-dir=/tmp/temp_chrome_user_data_dir_for_cordova http://localhost:8000/index.html --disable-web-security'
+alias myAws='ssh -i ~/.ssh/morgan-aws-development.pem ec2-user@ec2-52-39-83-97.us-west-2.compute.amazonaws.com'
+alias sshmetro='ssh ics499su160217@SP-CFSICS.METROSTATE.EDU'
+Morgans-MacBook-Pro:499Capstone morganebridges$ echo $GRADLE_HOME
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ vim ~/.bash_profile
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle -h
+
+USAGE: gradle [option...] [task...]
+
+-?, -h, --help          Shows this help message.
+-a, --no-rebuild        Do not rebuild project dependencies.
+-b, --build-file        Specifies the build file.
+-c, --settings-file     Specifies the settings file.
+--configure-on-demand   Only relevant projects are configured in this build run. This means faster build for large multi-project builds. [incubating]
+--console               Specifies which type of console output to generate. Values are 'plain', 'auto' (default) or 'rich'.
+--continue              Continues task execution after a task failure.
+-D, --system-prop       Set system property of the JVM (e.g. -Dmyprop=myvalue).
+-d, --debug             Log in debug mode (includes normal stacktrace).
+--daemon                Uses the Gradle daemon to run the build. Starts the daemon if not running.
+--foreground            Starts the Gradle daemon in the foreground. [incubating]
+-g, --gradle-user-home  Specifies the gradle user home directory.
+--gui                   Launches the Gradle GUI.
+-I, --init-script       Specifies an initialization script.
+-i, --info              Set log level to info.
+-m, --dry-run           Runs the builds with all task actions disabled.
+--max-workers           Configure the number of concurrent workers Gradle is allowed to use. [incubating]
+--no-color              Do not use color in the console output. [deprecated - use --console=plain instead]
+--no-daemon             Do not use the Gradle daemon to run the build.
+--offline               The build should operate without accessing network resources.
+-P, --project-prop      Set project property for the build script (e.g. -Pmyprop=myvalue).
+-p, --project-dir       Specifies the start directory for Gradle. Defaults to current directory.
+--parallel              Build projects in parallel. Gradle will attempt to determine the optimal number of executor threads to use. [incubating]
+--parallel-threads      Build projects in parallel, using the specified number of executor threads. [deprecated - Please use --parallel, optionally in conjunction with --max-workers.] [incubating]
+--profile               Profiles build execution time and generates a report in the <build_dir>/reports/profile directory.
+--project-cache-dir     Specifies the project-specific cache directory. Defaults to .gradle in the root project directory.
+-q, --quiet             Log errors only.
+--recompile-scripts     Force build script recompiling.
+--refresh-dependencies  Refresh the state of dependencies.
+--rerun-tasks           Ignore previously cached task results.
+-S, --full-stacktrace   Print out the full (very verbose) stacktrace for all exceptions.
+-s, --stacktrace        Print out the stacktrace for all exceptions.
+--stop                  Stops the Gradle daemon if it is running.
+-t, --continuous        Enables continuous build. Gradle does not exit and will re-execute tasks when task file inputs change. [incubating]
+-u, --no-search-upward  Don't search in parent folders for a settings.gradle file.
+-v, --version           Print version info.
+-x, --exclude-task      Specify a task to be excluded from execution.
+
+Morgans-MacBook-Pro:499Capstone morganebridges$ vim ~/.bash_profile
+Morgans-MacBook-Pro:499Capstone morganebridges$ ls
+499Capstone.eml			README.md			bin				out
+499Capstone.iml			RemoteSystemsTempFiles		build				src
+499Capstone.userlibraries	ZombieGame.iml			build.gradle
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean build
+:clean
+:compileJava
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:4: error: ';' expected
+	Message message
+	               ^
+1 error
+:compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 18.201 secs
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean build
+:clean
+:compileJava
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:2: error: package com.google.android.gcm does not exist
+import com.google.android.gcm.server;
+                             ^
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:4: error: cannot find symbol
+	Message msg = new Message.Builder().build();
+	^
+  symbol:   class Message
+  location: class GCMSendingTest
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:5: error: cannot find symbol
+	 Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+	 ^
+  symbol:   class Message
+  location: class GCMSendingTest
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:4: error: package Message does not exist
+	Message msg = new Message.Builder().build();
+	                         ^
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:5: error: package Message does not exist
+	 Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+	                           ^
+5 errors
+:compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 13.227 secs
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean build
+	:clean
+:compileJava
+Download https://repo1.maven.org/maven2/com/ganyo/gcm-server/1.0.2/gcm-server-1.0.2.pom
+Download https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.pom
+Download https://repo1.maven.org/maven2/com/ganyo/gcm-server/1.0.2/gcm-server-1.0.2.jar
+Download https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:2: error: package com.google.android.gcm does not exist
+import com.google.android.gcm.server;
+                             ^
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:4: error: cannot find symbol
+	Message msg = new Message.Builder().build();
+	^
+  symbol:   class Message
+  location: class GCMSendingTest
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:5: error: cannot find symbol
+	 Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+	 ^
+  symbol:   class Message
+  location: class GCMSendingTest
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:4: error: package Message does not exist
+	Message msg = new Message.Builder().build();
+	                         ^
+/Users/morganebridges/gitProjects/499Capstone/src/main/java/com/zombie/gcm/GCMSendingTest.java:5: error: package Message does not exist
+	 Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+	                           ^
+5 errors
+:compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 23.386 secs
+Morgans-MacBook-Pro:499Capstone morganebridges$ java --version
+Unrecognized option: --version
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+Morgans-MacBook-Pro:499Capstone morganebridges$ java -version
+java version "1.8.0_92"
+Java(TM) SE Runtime Environment (build 1.8.0_92-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.92-b14, mixed mode)
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean build
+:clean
+:compileJava
+:processResources
+:classes
+:findMainClass
+:jar
+:bootRepackage
+:assemble
+:compileTestJava
+/Users/morganebridges/gitProjects/499Capstone/src/test/java/utilities/GCMMessageTest.java:6: error: cannot find symbol
+		Message msg = new Message.Builder().build();
+		^
+  symbol:   class Message
+  location: class GCMMessageTest
+/Users/morganebridges/gitProjects/499Capstone/src/test/java/utilities/GCMMessageTest.java:6: error: package Message does not exist
+		Message msg = new Message.Builder().build();
+		                         ^
+/Users/morganebridges/gitProjects/499Capstone/src/test/java/utilities/GCMMessageTest.java:7: error: cannot find symbol
+		Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+		^
+  symbol:   class Message
+  location: class GCMMessageTest
+/Users/morganebridges/gitProjects/499Capstone/src/test/java/utilities/GCMMessageTest.java:7: error: package Message does not exist
+		Message msg2 = new Message.Builder().addData("message","Something New for You").build();
+		                          ^
+4 errors
+:compileTestJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileTestJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 25.619 secs
+Morgans-MacBook-Pro:499Capstone morganebridges$ gradle clean build
+:clean
+:compileJava
+:processResources
+:classes
+:findMainClass
+:jar
+:bootRepackage
+:assemble
+:compileTestJava
+:processTestResources UP-TO-DATE
+:testClasses
+:test
+2016-06-19 02:51:51.716  INFO 1222 --- [       Thread-4] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@5fcb7b9e: startup date [Sun Jun 19 02:51:50 CDT 2016]; root of context hierarchy
+:check
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 21.272 secs
+
+This build could be faster, please consider using the Gradle Daemon: https://docs.gradle.org/2.9/userguide/gradle_daemon.html
+Morgans-MacBook-Pro:499Capstone morganebridges$ /Users/morganebridges/.gradle/caches/modules-2/files-2.1/com.ganyo ls
+-bash: /Users/morganebridges/.gradle/caches/modules-2/files-2.1/com.ganyo: is a directory
+Morgans-MacBook-Pro:499Capstone morganebridges$ git branch
+* master
+Morgans-MacBook-Pro:499Capstone morganebridges$ myAws
+Last login: Sat Jun 18 21:53:46 2016 from 97-127-104-30.mpls.qwest.net
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2016.03-release-notes/
+No packages needed for security; 7 packages available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-172-31-19-11 ~]$ zombie
+[ec2-user@ip-172-31-19-11 499Capstone]$ ps -a
+  PID TTY          TIME CMD
+19043 pts/0    00:00:00 ps
+[ec2-user@ip-172-31-19-11 499Capstone]$ ls
+499Capstone.eml            bin             build.gradle  RemoteSystemsTempFiles  word_list.php
+499Capstone.iml            bingo_card.php  out           session_setup.php       ZombieGame.iml
+499Capstone.userlibraries  build           README.md     src
+[ec2-user@ip-172-31-19-11 499Capstone]$ git pull
+remote: Counting objects: 228, done.
+remote: Compressing objects: 100% (76/76), done.
+remote: Total 228 (delta 133), reused 222 (delta 128), pack-reused 0
+Receiving objects: 100% (228/228), 66.43 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (133/133), completed with 13 local objects.
+From https://github.com/morganebridges/499Capstone
+   d1163f7..ec62991  master     -> origin/master
+Removing src/main/java/com/zombie/gcm/GcmApp.java
+Merge made by the 'recursive' strategy.
+ .classpath                                                                       |    2 +
+ .gradle/2.13/taskArtifacts/cache.properties.lock                                 |  Bin 17 -> 17 bytes
+ .gradle/2.13/taskArtifacts/fileHashes.bin                                        |  Bin 28220 -> 28720 bytes
+ .gradle/2.9/taskArtifacts/cache.properties.lock                                  |  Bin 17 -> 17 bytes
+ .gradle/2.9/taskArtifacts/fileHashes.bin                                         |  Bin 27549 -> 29498 bytes
+ .gradle/2.9/taskArtifacts/fileSnapshots.bin                                      |  Bin 623322 -> 799994 bytes
+ .gradle/2.9/taskArtifacts/outputFileStates.bin                                   |  Bin 18752 -> 18752 bytes
+ .gradle/2.9/taskArtifacts/taskArtifacts.bin                                      |  Bin 38332 -> 38332 bytes
+ .idea/.name                                                                      |    1 +
+ .idea/compiler.xml                                                               |   23 +
+ .idea/copyright/profiles_settings.xml                                            |    3 +
+ .idea/encodings.xml                                                              |    6 +
+ .idea/gradle.xml                                                                 |   12 +
+ .idea/libraries/Gradle__antlr_antlr_2_7_7.xml                                    |    9 +
+ .idea/libraries/Gradle__aopalliance_aopalliance_1_0.xml                          |   12 +
+ .idea/libraries/Gradle__ch_qos_logback_logback_classic_1_1_7.xml                 |   11 +
+ .idea/libraries/Gradle__ch_qos_logback_logback_core_1_1_7.xml                    |   11 +
+ .idea/libraries/Gradle__com_fasterxml_classmate_1_1_0.xml                        |   11 +
+ .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_6_6.xml |   11 +
+ .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_6_6.xml        |   11 +
+ .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_6_6.xml    |   11 +
+ .idea/libraries/Gradle__com_github_fge_btf_1_2.xml                               |   11 +
+ .idea/libraries/Gradle__com_github_fge_jackson_coreutils_1_6.xml                 |   11 +
+ .idea/libraries/Gradle__com_github_fge_json_patch_1_7.xml                        |   11 +
+ .idea/libraries/Gradle__com_github_fge_msg_simple_1_1.xml                        |   11 +
+ .idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1.xml                |    9 +
+ .idea/libraries/Gradle__com_google_guava_guava_16_0_1.xml                        |   11 +
+ .idea/libraries/Gradle__com_sun_mail_javax_mail_1_5_5.xml                        |   11 +
+ .idea/libraries/Gradle__commons_codec_commons_codec_1_9.xml                      |   11 +
+ .idea/libraries/Gradle__dom4j_dom4j_1_6_1.xml                                    |   11 +
+ .idea/libraries/Gradle__javax_activation_activation_1_1.xml                      |   11 +
+ .idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2.xml            |   11 +
+ .idea/libraries/Gradle__javax_servlet_javax_servlet_api_3_1_0.xml                |   11 +
+ .idea/libraries/Gradle__javax_transaction_javax_transaction_api_1_2.xml          |   11 +
+ .idea/libraries/Gradle__javax_validation_validation_api_1_1_0_Final.xml          |   11 +
+ .idea/libraries/Gradle__javax_websocket_javax_websocket_api_1_0.xml              |   11 +
+ .idea/libraries/Gradle__junit_junit_4_12.xml                                     |   11 +
+ .idea/libraries/Gradle__mysql_mysql_connector_java_5_1_31.xml                    |   11 +
+ .idea/libraries/Gradle__org_apache_poi_poi_3_11.xml                              |   11 +
+ .idea/libraries/Gradle__org_apache_poi_poi_ooxml_3_11.xml                        |   11 +
+ .idea/libraries/Gradle__org_apache_poi_poi_ooxml_schemas_3_11.xml                |    9 +
+ .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_core_8_0_33.xml     |   11 +
+ .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_el_8_0_33.xml       |   11 +
+ .../Gradle__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_33.xml         |   11 +
+ .../libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_33.xml  |   11 +
+ .idea/libraries/Gradle__org_apache_tomcat_tomcat_jdbc_8_0_33.xml                 |   11 +
+ .idea/libraries/Gradle__org_apache_tomcat_tomcat_juli_8_0_33.xml                 |   11 +
+ .idea/libraries/Gradle__org_apache_xmlbeans_xmlbeans_2_6_0.xml                   |    9 +
+ .idea/libraries/Gradle__org_aspectj_aspectjweaver_1_8_9.xml                      |   11 +
+ .idea/libraries/Gradle__org_atteo_evo_inflector_1_2_1.xml                        |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_annotations_9_2_16_v20160414.xml |   11 +
+ .../libraries/Gradle__org_eclipse_jetty_jetty_continuation_9_2_16_v20160414.xml  |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_http_9_2_16_v20160414.xml        |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_io_9_2_16_v20160414.xml          |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_jndi_9_2_16_v20160414.xml        |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_plus_9_2_16_v20160414.xml        |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_security_9_2_16_v20160414.xml    |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_server_9_2_16_v20160414.xml      |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_servlet_9_2_16_v20160414.xml     |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_servlets_9_2_16_v20160414.xml    |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_util_9_2_16_v20160414.xml        |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_webapp_9_2_16_v20160414.xml      |   11 +
+ .idea/libraries/Gradle__org_eclipse_jetty_jetty_xml_9_2_16_v20160414.xml         |   11 +
+ ..._org_eclipse_jetty_websocket_javax_websocket_client_impl_9_2_16_v20160414.xml |   11 +
+ ..._org_eclipse_jetty_websocket_javax_websocket_server_impl_9_2_16_v20160414.xml |   11 +
+ .../Gradle__org_eclipse_jetty_websocket_websocket_api_9_2_16_v20160414.xml       |   11 +
+ .../Gradle__org_eclipse_jetty_websocket_websocket_client_9_2_16_v20160414.xml    |   11 +
+ .../Gradle__org_eclipse_jetty_websocket_websocket_common_9_2_16_v20160414.xml    |   11 +
+ .../Gradle__org_eclipse_jetty_websocket_websocket_server_9_2_16_v20160414.xml    |   11 +
+ .../Gradle__org_eclipse_jetty_websocket_websocket_servlet_9_2_16_v20160414.xml   |   11 +
+ .idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml                       |   11 +
+ .idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3.xml                    |   11 +
+ .../Gradle__org_hibernate_common_hibernate_commons_annotations_4_0_5_Final.xml   |   11 +
+ .idea/libraries/Gradle__org_hibernate_hibernate_core_4_3_11_Final.xml            |   11 +
+ .idea/libraries/Gradle__org_hibernate_hibernate_entitymanager_4_3_11_Final.xml   |   11 +
+ .idea/libraries/Gradle__org_hibernate_hibernate_validator_5_2_4_Final.xml        |   11 +
+ ...Gradle__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml |   11 +
+ .idea/libraries/Gradle__org_javassist_javassist_3_18_1_GA.xml                    |   11 +
+ .idea/libraries/Gradle__org_jboss_jandex_1_1_0_Final.xml                         |   11 +
+ .idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_3_0_Final.xml          |   11 +
+ .../Gradle__org_jboss_logging_jboss_logging_annotations_1_2_0_Beta1.xml          |   11 +
+ .idea/libraries/Gradle__org_mockito_mockito_core_1_10_19.xml                     |   11 +
+ .idea/libraries/Gradle__org_objenesis_objenesis_2_1.xml                          |   11 +
+ .idea/libraries/Gradle__org_ow2_asm_asm_5_0_1.xml                                |   11 +
+ .idea/libraries/Gradle__org_ow2_asm_asm_commons_5_0_1.xml                        |   11 +
+ .idea/libraries/Gradle__org_ow2_asm_asm_tree_5_0_1.xml                           |   11 +
+ .idea/libraries/Gradle__org_slf4j_jcl_over_slf4j_1_7_21.xml                      |   11 +
+ .idea/libraries/Gradle__org_slf4j_jul_to_slf4j_1_7_21.xml                        |   11 +
+ .idea/libraries/Gradle__org_slf4j_log4j_over_slf4j_1_7_21.xml                    |   11 +
+ .idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_21.xml                           |   11 +
+ .idea/libraries/Gradle__org_springframework_boot_spring_boot_1_3_5_RELEASE.xml   |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_autoconfigure_1_3_5_RELEASE.xml |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_1_3_5_RELEASE.xml       |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_aop_1_3_5_RELEASE.xml   |   11 +
+ ...adle__org_springframework_boot_spring_boot_starter_data_jpa_1_3_0_RELEASE.xml |   11 +
+ ...dle__org_springframework_boot_spring_boot_starter_data_rest_1_3_0_RELEASE.xml |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_jdbc_1_3_5_RELEASE.xml  |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_jetty_1_3_5_RELEASE.xml |   11 +
+ ...radle__org_springframework_boot_spring_boot_starter_logging_1_3_5_RELEASE.xml |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_mail_1_3_0_RELEASE.xml  |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_test_1_3_0_RELEASE.xml  |   11 +
+ ...Gradle__org_springframework_boot_spring_boot_starter_tomcat_1_3_5_RELEASE.xml |   11 +
+ ...le__org_springframework_boot_spring_boot_starter_validation_1_3_5_RELEASE.xml |   11 +
+ .../Gradle__org_springframework_boot_spring_boot_starter_web_1_3_5_RELEASE.xml   |   11 +
+ .../Gradle__org_springframework_data_spring_data_commons_1_11_4_RELEASE.xml      |   11 +
+ .../libraries/Gradle__org_springframework_data_spring_data_jpa_1_9_4_RELEASE.xml |   11 +
+ .../Gradle__org_springframework_data_spring_data_rest_core_2_4_4_RELEASE.xml     |   11 +
+ .../Gradle__org_springframework_data_spring_data_rest_webmvc_2_4_4_RELEASE.xml   |   11 +
+ .../Gradle__org_springframework_hateoas_spring_hateoas_0_19_0_RELEASE.xml        |   11 +
+ .../Gradle__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml      |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_aop_4_2_6_RELEASE.xml         |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_aspects_4_2_6_RELEASE.xml     |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_beans_4_2_6_RELEASE.xml       |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_context_4_2_6_RELEASE.xml     |   11 +
+ .../Gradle__org_springframework_spring_context_support_4_2_6_RELEASE.xml         |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_core_4_2_6_RELEASE.xml        |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_expression_4_2_6_RELEASE.xml  |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_jdbc_4_2_6_RELEASE.xml        |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_orm_4_2_6_RELEASE.xml         |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_test_4_2_6_RELEASE.xml        |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_tx_4_2_6_RELEASE.xml          |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_web_4_2_6_RELEASE.xml         |   11 +
+ .idea/libraries/Gradle__org_springframework_spring_webmvc_4_2_6_RELEASE.xml      |   11 +
+ .idea/libraries/Gradle__org_yaml_snakeyaml_1_16.xml                              |   11 +
+ .idea/libraries/Gradle__stax_stax_api_1_0_1.xml                                  |    9 +
+ .idea/libraries/Gradle__xml_apis_xml_apis_1_0_b2.xml                             |   11 +
+ .idea/misc.xml                                                                   |   57 ++
+ .idea/modules.xml                                                                |    8 +
+ .idea/vcs.xml                                                                    |    6 +
+ .idea/workspace.xml                                                              | 1675 ++++++++++++++++++++++++++++++++++++++
+ 499Capstone.iml                                                                  |  126 ++-
+ bin/.gitignore                                                                   |    1 +
+ build.gradle                                                                     |   23 +-
+ src/main/java/com/zombie/controllers/DownloadExcelController.java                |   17 +
+ src/main/java/com/zombie/controllers/GCMController.java                          |   52 ++
+ src/main/java/com/zombie/controllers/UploadExcelController.java                  |   72 +-
+ src/main/java/com/zombie/controllers/UserController.java                         |    3 +-
+ src/main/java/com/zombie/gcm/GCMSendingTest.java                                 |   31 +
+ src/main/java/com/zombie/gcm/GcmApp.java                                         |   34 -
+ src/main/java/com/zombie/models/User.java                                        |   47 +-
+ src/main/java/com/zombie/repositories/UserRepository.java                        |    5 +-
+ src/main/java/com/zombie/services/AdminService.java                              |  107 +++
+ src/main/java/com/zombie/services/NotificationService.java                       |  103 ++-
+ src/main/java/com/zombie/services/UserService.java                               |   28 +
+ src/main/java/com/zombie/utility/GlobalFields.java                               |   11 +
+ src/main/java/com/zombie/utility/Globals.java                                    |   12 +
+ src/test/java/services/AdminServiceTest.java                                     |    6 +
+ src/test/java/utilities/GCMMessageTest.java                                      |   10 +
+ 148 files changed, 3546 insertions(+), 169 deletions(-)
+ create mode 100644 .idea/.name
+ create mode 100644 .idea/compiler.xml
+ create mode 100644 .idea/copyright/profiles_settings.xml
+ create mode 100644 .idea/encodings.xml
+ create mode 100644 .idea/gradle.xml
+ create mode 100644 .idea/libraries/Gradle__antlr_antlr_2_7_7.xml
+ create mode 100644 .idea/libraries/Gradle__aopalliance_aopalliance_1_0.xml
+ create mode 100644 .idea/libraries/Gradle__ch_qos_logback_logback_classic_1_1_7.xml
+ create mode 100644 .idea/libraries/Gradle__ch_qos_logback_logback_core_1_1_7.xml
+ create mode 100644 .idea/libraries/Gradle__com_fasterxml_classmate_1_1_0.xml
+ create mode 100644 .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_6_6.xml
+ create mode 100644 .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_6_6.xml
+ create mode 100644 .idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_6_6.xml
+ create mode 100644 .idea/libraries/Gradle__com_github_fge_btf_1_2.xml
+ create mode 100644 .idea/libraries/Gradle__com_github_fge_jackson_coreutils_1_6.xml
+ create mode 100644 .idea/libraries/Gradle__com_github_fge_json_patch_1_7.xml
+ create mode 100644 .idea/libraries/Gradle__com_github_fge_msg_simple_1_1.xml
+ create mode 100644 .idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__com_google_guava_guava_16_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__com_sun_mail_javax_mail_1_5_5.xml
+ create mode 100644 .idea/libraries/Gradle__commons_codec_commons_codec_1_9.xml
+ create mode 100644 .idea/libraries/Gradle__dom4j_dom4j_1_6_1.xml
+ create mode 100644 .idea/libraries/Gradle__javax_activation_activation_1_1.xml
+ create mode 100644 .idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2.xml
+ create mode 100644 .idea/libraries/Gradle__javax_servlet_javax_servlet_api_3_1_0.xml
+ create mode 100644 .idea/libraries/Gradle__javax_transaction_javax_transaction_api_1_2.xml
+ create mode 100644 .idea/libraries/Gradle__javax_validation_validation_api_1_1_0_Final.xml
+ create mode 100644 .idea/libraries/Gradle__javax_websocket_javax_websocket_api_1_0.xml
+ create mode 100644 .idea/libraries/Gradle__junit_junit_4_12.xml
+ create mode 100644 .idea/libraries/Gradle__mysql_mysql_connector_java_5_1_31.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_poi_poi_3_11.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_poi_poi_ooxml_3_11.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_poi_poi_ooxml_schemas_3_11.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_core_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_el_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_tomcat_jdbc_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_tomcat_tomcat_juli_8_0_33.xml
+ create mode 100644 .idea/libraries/Gradle__org_apache_xmlbeans_xmlbeans_2_6_0.xml
+ create mode 100644 .idea/libraries/Gradle__org_aspectj_aspectjweaver_1_8_9.xml
+ create mode 100644 .idea/libraries/Gradle__org_atteo_evo_inflector_1_2_1.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_annotations_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_continuation_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_http_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_io_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_jndi_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_plus_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_security_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_server_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_servlet_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_servlets_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_util_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_webapp_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_jetty_xml_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_javax_websocket_client_impl_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_javax_websocket_server_impl_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_api_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_client_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_common_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_server_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_servlet_9_2_16_v20160414.xml
+ create mode 100644 .idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml
+ create mode 100644 .idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3.xml
+ create mode 100644 .idea/libraries/Gradle__org_hibernate_common_hibernate_commons_annotations_4_0_5_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_hibernate_hibernate_core_4_3_11_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_hibernate_hibernate_entitymanager_4_3_11_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_hibernate_hibernate_validator_5_2_4_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_javassist_javassist_3_18_1_GA.xml
+ create mode 100644 .idea/libraries/Gradle__org_jboss_jandex_1_1_0_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_3_0_Final.xml
+ create mode 100644 .idea/libraries/Gradle__org_jboss_logging_jboss_logging_annotations_1_2_0_Beta1.xml
+ create mode 100644 .idea/libraries/Gradle__org_mockito_mockito_core_1_10_19.xml
+ create mode 100644 .idea/libraries/Gradle__org_objenesis_objenesis_2_1.xml
+ create mode 100644 .idea/libraries/Gradle__org_ow2_asm_asm_5_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__org_ow2_asm_asm_commons_5_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__org_ow2_asm_asm_tree_5_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__org_slf4j_jcl_over_slf4j_1_7_21.xml
+ create mode 100644 .idea/libraries/Gradle__org_slf4j_jul_to_slf4j_1_7_21.xml
+ create mode 100644 .idea/libraries/Gradle__org_slf4j_log4j_over_slf4j_1_7_21.xml
+ create mode 100644 .idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_21.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_autoconfigure_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_aop_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_data_jpa_1_3_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_data_rest_1_3_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_jdbc_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_jetty_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_logging_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_mail_1_3_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_test_1_3_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_tomcat_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_validation_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_web_1_3_5_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_data_spring_data_commons_1_11_4_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_data_spring_data_jpa_1_9_4_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_data_spring_data_rest_core_2_4_4_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_data_spring_data_rest_webmvc_2_4_4_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_hateoas_spring_hateoas_0_19_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_aop_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_aspects_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_beans_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_context_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_context_support_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_core_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_expression_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_jdbc_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_orm_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_test_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_tx_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_web_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_springframework_spring_webmvc_4_2_6_RELEASE.xml
+ create mode 100644 .idea/libraries/Gradle__org_yaml_snakeyaml_1_16.xml
+ create mode 100644 .idea/libraries/Gradle__stax_stax_api_1_0_1.xml
+ create mode 100644 .idea/libraries/Gradle__xml_apis_xml_apis_1_0_b2.xml
+ create mode 100644 .idea/misc.xml
+ create mode 100644 .idea/modules.xml
+ create mode 100644 .idea/vcs.xml
+ create mode 100644 .idea/workspace.xml
+ create mode 100644 src/main/java/com/zombie/controllers/DownloadExcelController.java
+ create mode 100644 src/main/java/com/zombie/controllers/GCMController.java
+ create mode 100644 src/main/java/com/zombie/gcm/GCMSendingTest.java
+ delete mode 100644 src/main/java/com/zombie/gcm/GcmApp.java
+ create mode 100644 src/main/java/com/zombie/services/AdminService.java
+ create mode 100644 src/main/java/com/zombie/services/UserService.java
+ create mode 100644 src/main/java/com/zombie/utility/GlobalFields.java
+ create mode 100644 src/main/java/com/zombie/utility/Globals.java
+ create mode 100644 src/test/java/services/AdminServiceTest.java
+ create mode 100644 src/test/java/utilities/GCMMessageTest.java
+[ec2-user@ip-172-31-19-11 499Capstone]$ build
+:clean
+:compileJava
+Download https://repo1.maven.org/maven2/org/apache/poi/poi/3.11/poi-3.11.pom
+Download https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml/3.11/poi-ooxml-3.11.pom
+Download https://repo1.maven.org/maven2/com/ganyo/gcm-server/1.0.2/gcm-server-1.0.2.pom
+Download https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.pom
+Download https://repo1.maven.org/maven2/org/apache/commons/commons-parent/32/commons-parent-32.pom
+Download https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml-schemas/3.11/poi-ooxml-schemas-3.11.pom
+Download https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.pom
+Download https://repo1.maven.org/maven2/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.pom
+Download https://repo1.maven.org/maven2/stax/stax-api/1.0.1/stax-api-1.0.1.pom
+Download https://repo1.maven.org/maven2/org/apache/poi/poi/3.11/poi-3.11.jar
+Download https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml/3.11/poi-ooxml-3.11.jar
+Download https://repo1.maven.org/maven2/com/ganyo/gcm-server/1.0.2/gcm-server-1.0.2.jar
+Download https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+Download https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml-schemas/3.11/poi-ooxml-schemas-3.11.jar
+Download https://repo1.maven.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+Download https://repo1.maven.org/maven2/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar
+Download https://repo1.maven.org/maven2/stax/stax-api/1.0.1/stax-api-1.0.1.jar
+:processResources
+:classes
+:findMainClass
+:jar
+:bootRepackage
+:assemble
+:compileTestJava
+:processTestResources UP-TO-DATE
+:testClasses
+:test
+2016-06-19 11:35:56.754  INFO 19081 --- [       Thread-4] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7757fcc2: startup date [Sun Jun 19 11:35:55 UTC 2016]; root of context hierarchy
+:check
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 22.359 secs
+
+This build could be faster, please consider using the Gradle Daemon: http://gradle.org/docs/2.4/userguide/gradle_daemon.html
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.3.5.RELEASE)
+
+2016-06-19 11:35:59.438  INFO 19107 --- [           main] com.zombie.Application                   : Starting Application on ip-172-31-19-11 with PID 19107 (/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar started by ec2-user in /var/www/499Capstone)
+2016-06-19 11:35:59.448  INFO 19107 --- [           main] com.zombie.Application                   : No active profile set, falling back to default profiles: default
+2016-06-19 11:35:59.646  INFO 19107 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@112a2060: startup date [Sun Jun 19 11:35:59 UTC 2016]; root of context hierarchy
+2016-06-19 11:36:03.268  INFO 19107 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9e23ffa3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-06-19 11:36:04.215  INFO 19107 --- [           main] e.j.JettyEmbeddedServletContainerFactory : Server initialized with port: 8080
+2016-06-19 11:36:04.226  INFO 19107 --- [           main] org.eclipse.jetty.server.Server          : jetty-9.2.16.v20160414
+2016-06-19 11:36:04.490  INFO 19107 --- [           main] application                              : Initializing Spring embedded WebApplicationContext
+2016-06-19 11:36:04.490  INFO 19107 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4854 ms
+2016-06-19 11:36:05.576  INFO 19107 --- [           main] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-06-19 11:36:05.579  INFO 19107 --- [           main] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-06-19 11:36:05.582  INFO 19107 --- [           main] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-06-19 11:36:05.582  INFO 19107 --- [           main] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-06-19 11:36:05.582  INFO 19107 --- [           main] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-06-19 11:36:05.939  INFO 19107 --- [           main] o.e.jetty.server.handler.ContextHandler  : Started o.s.b.c.e.j.JettyEmbeddedWebAppContext@6ae86294{/,file:/tmp/jetty-docbase.8631030942518747550.8080/,AVAILABLE}
+2016-06-19 11:36:05.943  INFO 19107 --- [           main] org.eclipse.jetty.server.Server          : Started @8666ms
+2016-06-19 11:36:06.934  INFO 19107 --- [           main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-06-19 11:36:06.961  INFO 19107 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-06-19 11:36:07.136  INFO 19107 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate Core {4.3.11.Final}
+2016-06-19 11:36:07.140  INFO 19107 --- [           main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2016-06-19 11:36:07.144  INFO 19107 --- [           main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2016-06-19 11:36:07.555  INFO 19107 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-06-19 11:36:08.055  INFO 19107 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2016-06-19 11:36:08.210  INFO 19107 --- [           main] o.h.h.i.ast.ASTQueryTranslatorFactory    : HHH000397: Using ASTQueryTranslatorFactory
+2016-06-19 11:36:08.696  INFO 19107 --- [           main] org.hibernate.tool.hbm2ddl.SchemaExport  : HHH000227: Running hbm2ddl schema export
+Hibernate: drop table if exists lat_lng
+Hibernate: drop table if exists user
+Hibernate: drop table if exists zombie
+Hibernate: create table lat_lng (id integer not null auto_increment, latitude double precision not null, longitude double precision not null, primary key (id))
+Hibernate: create table user (id bigint not null auto_increment, active bit not null, ammo integer not null, gcm_id varchar(255), kills integer not null, last_used_serum datetime, latitude double precision not null, longitude double precision not null, name varchar(255), serum integer not null, total_kills integer not null, primary key (id))
+Hibernate: create table zombie (id bigint not null auto_increment, gamer_tag varchar(255), primary key (id))
+2016-06-19 11:36:08.742  INFO 19107 --- [           main] org.hibernate.tool.hbm2ddl.SchemaExport  : HHH000230: Schema export complete
+2016-06-19 11:36:09.676  WARN 19107 --- [           main] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notificationService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.zombie.services.UserService com.zombie.services.NotificationService.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2016-06-19 11:36:09.681  INFO 19107 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-06-19 11:36:09.694  INFO 19107 --- [           main] o.e.jetty.server.handler.ContextHandler  : Stopped o.s.b.c.e.j.JettyEmbeddedWebAppContext@6ae86294{/,file:/tmp/jetty-docbase.8631030942518747550.8080/,UNAVAILABLE}
+2016-06-19 11:36:09.704 ERROR 19107 --- [           main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notificationService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.zombie.services.UserService com.zombie.services.NotificationService.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839) ~[spring-context-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538) ~[spring-context-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) ~[spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.5.RELEASE.jar!/:1.3.5.RELEASE]
+	at com.zombie.Application.main(Application.java:43) [gs-spring-boot-0.1.0.jar!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_91]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_91]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_91]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_91]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:54) [gs-spring-boot-0.1.0.jar!/:na]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_91]
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.zombie.services.UserService com.zombie.services.NotificationService.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	... 23 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545) ~[spring-beans-4.2.6.RELEASE.jar!/:4.2.6.RELEASE]
+	... 25 common frames omitted
+
+2016-06-19 11:36:09.708  INFO 19107 --- [           main] .b.l.ClasspathLoggingApplicationListener : Application failed to start with classpath: [jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-web-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-jetty-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-data-jpa-1.3.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-data-rest-1.3.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-test-1.3.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-mail-1.3.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/poi-3.11.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/poi-ooxml-3.11.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/mysql-connector-java-5.1.31.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/gcm-server-1.0.2.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-validation-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jackson-databind-2.6.6.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-web-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-webmvc-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-servlets-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-webapp-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/websocket-server-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax-websocket-server-impl-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-aop-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-jdbc-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hibernate-entitymanager-4.3.11.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax.transaction-api-1.2.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-data-jpa-1.9.4.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-aspects-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jackson-annotations-2.6.6.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-data-rest-webmvc-2.4.4.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/junit-4.12.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/mockito-core-1.10.19.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hamcrest-core-1.3.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hamcrest-library-1.3.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-core-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-test-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-context-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-context-support-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax.mail-1.5.5.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/commons-codec-1.9.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/poi-ooxml-schemas-3.11.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/json-simple-1.1.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-autoconfigure-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-logging-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/snakeyaml-1.16.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-embed-el-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hibernate-validator-5.2.4.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jackson-core-2.6.6.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-aop-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-beans-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-expression-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-continuation-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-http-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-util-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-io-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-xml-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-servlet-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/websocket-common-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/websocket-client-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/websocket-servlet-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-annotations-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax-websocket-client-impl-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax.websocket-api-1.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/aspectjweaver-1.8.9.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-jdbc-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-jdbc-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jboss-logging-3.3.0.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jboss-logging-annotations-1.2.0.Beta1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hibernate-core-4.3.11.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/dom4j-1.6.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hibernate-commons-annotations-4.0.5.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javassist-3.18.1-GA.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-data-commons-1.11.4.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-orm-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-tx-4.2.6.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/slf4j-api-1.7.21.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jcl-over-slf4j-1.7.21.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-boot-starter-tomcat-1.3.5.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-data-rest-core-2.4.4.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/json-patch-1.7.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/objenesis-2.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/activation-1.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/xmlbeans-2.6.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/logback-classic-1.1.7.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jul-to-slf4j-1.7.21.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/log4j-over-slf4j-1.7.21.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/validation-api-1.1.0.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/classmate-1.1.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/aopalliance-1.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-security-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/websocket-api-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax.servlet-api-3.1.0.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-plus-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/javax.annotation-api-1.2.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/asm-5.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/asm-commons-5.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-juli-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/antlr-2.7.7.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jandex-1.1.0.Final.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/xml-apis-1.0.b2.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-embed-core-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-embed-logging-juli-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/tomcat-embed-websocket-8.0.33.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-hateoas-0.19.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/spring-plugin-core-1.2.0.RELEASE.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/evo-inflector-1.2.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jackson-coreutils-1.6.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jsr305-2.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/stax-api-1.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/logback-core-1.1.7.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-server-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/jetty-jndi-9.2.16.v20160414.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/asm-tree-5.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/msg-simple-1.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/guava-16.0.1.jar!/, jar:file:/var/www/499Capstone/build/libs/gs-spring-boot-0.1.0.jar!/lib/btf-1.2.jar!/]
+Exception in thread "main" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:62)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:54)
+	... 1 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'notificationService': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.zombie.services.UserService com.zombie.services.NotificationService.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766)
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at com.zombie.Application.main(Application.java:43)
+	... 6 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.zombie.services.UserService com.zombie.services.NotificationService.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 23 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.zombie.services.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
+	... 25 more
+[ec2-user@ip-172-31-19-11 499Capstone]$ /noteservice
+-bash: /noteservice: No such file or directory
+[ec2-user@ip-172-31-19-11 499Capstone]$

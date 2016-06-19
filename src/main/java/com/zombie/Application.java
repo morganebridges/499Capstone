@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 //frameworks
+import com.zombie.services.NotificationService;
+import com.zombie.services.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -29,10 +31,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
-@SpringBootApplication(scanBasePackages = {"com.zombie"})
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration(exclude = { RepositoryRestMvcAutoConfiguration.class })
+@SpringBootApplication(scanBasePackages = {"com.zombie.services", "com.zombie.repositories"})
 public class Application implements CommandLineRunner{
+    @Autowired
+    UserService userService;
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired

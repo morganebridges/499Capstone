@@ -6,6 +6,8 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,16 +17,21 @@ import java.io.IOException;
  * Created by vivex on 12/6/15.
  */
 @Service
+@ComponentScan("com.zombie")
+@EnableAutoConfiguration
 public class NotificationService {
-
+    public NotificationService(){}
     @Autowired
     UserService userService;
     /**
     * gcmRegId is the id which android app will give to server (one time)
     **/
-    public boolean      pushNotificationToGCM(String gcmRegId,String message){
+    public boolean pushNotificationToGCM(String gcmRegId,String message){
+        System.out.println(Globals.getGCMServerKey());
+        System.out.println("breakpoints");
         final String GCM_API_KEY = Globals.getGCMServerKey();
         final int retries = 3;
+
         Sender sender = new Sender(GCM_API_KEY);
         Message msg = new Message.Builder().addData("message",message).build();
 
