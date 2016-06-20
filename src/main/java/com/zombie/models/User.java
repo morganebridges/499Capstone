@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    
+    private long key = id;
     private String name;
     private int totalKills;
 	private int kills;
@@ -31,7 +31,9 @@ public class User {
 	private double latitude;
 	private double longitude;
 	
-    public User(){}
+    public User(){
+		this.key = id;
+	}
     public User(String name){
         this.name = name;
     }
@@ -145,5 +147,13 @@ public class User {
 	public void setLocation(long latitude, long longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+
+	public long getKey() {
+		return key;
+	}
+
+	public void setKey(long key) {
+		this.key = key;
 	}
 }
