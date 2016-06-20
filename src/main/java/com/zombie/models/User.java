@@ -31,7 +31,7 @@ public class User {
 	private double latitude;
 	private double longitude;
 	
-    protected User(){}
+    public User(){}
     public User(String name){
         this.name = name;
     }

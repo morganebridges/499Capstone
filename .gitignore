@@ -5,3 +5,7 @@
 /.gradle/
 /build/
 build/*
+.gradle
+.idea
+.IDEA
+

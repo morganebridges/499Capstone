@@ -48,7 +48,8 @@ public class GCMController {
         user.setGcmRegId(gcmId);
         userService.save(user);
 
-        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is geat");
+        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is g" +
+                "reat");
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
