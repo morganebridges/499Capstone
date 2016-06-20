@@ -71,6 +71,7 @@ public class UserController {
 			return theResponse;
 		} else{
 			User user = new User();
+			user.setKey(user.getId());
 			userService.save(user);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}

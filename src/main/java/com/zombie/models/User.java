@@ -32,7 +32,6 @@ public class User {
 	private double longitude;
 	
     public User(){
-		this.key = id;
 	}
     public User(String name){
         this.name = name;
