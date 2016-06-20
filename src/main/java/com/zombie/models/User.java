@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private long key = id;
+    private long key;
     private String name;
     private int totalKills;
 	private int kills;
@@ -31,8 +31,7 @@ public class User {
 	private double latitude;
 	private double longitude;
 	
-    public User(){
-	}
+    public User(){}
     public User(String name){
         this.name = name;
     }
