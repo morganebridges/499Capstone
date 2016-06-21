@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @ComponentScan("com.zombie")
@@ -53,7 +54,8 @@ public class UserController {
         	
         }
 		if(user.getLastUsedSerum() == null)
-			user.setLastUsedSerum(new Date(System.currentTimeMillis()));
+			user.setLastUsedSerum(new Date());
+		userService.save(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)

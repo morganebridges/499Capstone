@@ -23,7 +23,7 @@ public class User {
 	private boolean active;
 	private int ammo;
 	private int serum;
-	private Date lastUsedSerum = new Date(System.currentTimeMillis());
+	private Date lastUsedSerum = new Date();
 	private long clientKey;
 
 	//Google Cloud Messaging registration Id
