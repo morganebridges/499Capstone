@@ -36,6 +36,13 @@ public class ApplicationPrintTester {
 	    	testZombie = null;
 	    	testZombie = zombieRepo.findById(id);
 	    System.out.println("Test Zombie from id search\ngamerTag: " + testZombie.getGamerTag()
-		+ "\nId: " + testZombie.getId()); 
+		+ "\nId: " + testZombie.getId());
+
+		System.out.println("Testing logic for user key situation:");
+		user = new User();
+		userRepo.save(user);
+		user.setClientKey(user.getId());
+		System.out.println(user.getClientKey());
+
 	}
 }
