@@ -57,7 +57,7 @@ public class AdminService {
 			CreationHelper createHelper = wb.getCreationHelper();
 			CellStyle cellStyle = wb.createCellStyle();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("m/d/yy h:mm"));
-			
+
 			while (fieldIterator.hasNext()) {
 				Object field = fieldIterator.next();
 				System.out.println("before loop");
