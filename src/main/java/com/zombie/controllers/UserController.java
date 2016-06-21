@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 @RequestMapping("/user")
@@ -39,20 +41,20 @@ public class UserController {
         if(user != null)
         		System.out.println("User query to database produce user object with name: " + user.getName() + "\n with id: " + user.getId());
         ResponseEntity<User> theReturn = null;
-        
-        
-        
+
+
         if(user != null){
         		theReturn = new ResponseEntity<User>(user, HttpStatus.OK);
-        		return theReturn;
         }else{
         		System.out.println("User not found in database, creating new user");
         		user = new User(name);
         		userRepo.save(user);	
-        		return new ResponseEntity<User>(user, HttpStatus.OK);
+
         	
         }
-        
+		if(user.getLastUsedSerum() == null)
+			user.setLastUsedSerum(new Date(System.currentTimeMillis()));
+		return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<LatLng[]>update(@RequestBody LatLng latLng, HttpServletRequest request, HttpServletResponse response){

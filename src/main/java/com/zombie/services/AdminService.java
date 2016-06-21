@@ -145,7 +145,7 @@ public class AdminService {
 				Row row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
 				try {
-					
+
 					String name = cellIterator.next().getStringCellValue();
 					int totalKills = (int)(cellIterator.next().getNumericCellValue());
 					int kills = (int)(cellIterator.next().getNumericCellValue());
