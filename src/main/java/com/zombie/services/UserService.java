@@ -35,7 +35,15 @@ public class UserService {
         return userRepo.findAll();
     }
 
+    public long getUserCount() {
+        return userRepo.count();
+    }
+
     public void save(User user) {
         userRepo.save(user);
+    }
+
+    public void deleteUsers(Iterable<User> users) {
+        userRepo.delete(users);
     }
 }

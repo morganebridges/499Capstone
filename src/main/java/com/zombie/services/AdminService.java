@@ -148,18 +148,27 @@ public class AdminService {
 				Iterator<Cell> cellIterator = row.cellIterator();
 
 				try {
+					Cell nameCell = cellIterator.next();
 
-					String name = cellIterator.next().getStringCellValue();
+					// Allow numeric names but change to a string;
+					String name;
+					if (nameCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+						name = "" + nameCell.getNumericCellValue();
+					} else {
+						name = nameCell.getStringCellValue();
+					}
+
 					int totalKills = (int)(cellIterator.next().getNumericCellValue());
 					int kills = (int)(cellIterator.next().getNumericCellValue());
 					boolean active = cellIterator.next().getBooleanCellValue();
 					int ammo = (int)(cellIterator.next().getNumericCellValue());
 					int serum = (int)(cellIterator.next().getNumericCellValue());
-					Date lastUsedSerum = cellIterator.next().getDateCellValue();
 
-					if (name == null) {
-						throw new IllegalStateException("Column 1.");
-					}
+					// Blank dates default to today if there is not a date there
+					Cell dateCell = cellIterator.next();
+					Date lastUsedSerum = dateCell.getDateCellValue();
+					lastUsedSerum = lastUsedSerum == null ? new Date() : lastUsedSerum;
+
 					User newUser = new User(name, totalKills, kills, active, ammo, serum, lastUsedSerum);
 					userService.save(newUser);
 					numOfUsers++;
