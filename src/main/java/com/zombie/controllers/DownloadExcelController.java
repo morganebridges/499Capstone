@@ -37,6 +37,7 @@ public class DownloadExcelController {
 					.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 					.body(new InputStreamResource(in));
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}
