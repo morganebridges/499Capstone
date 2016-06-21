@@ -15,7 +15,6 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    private long key;
     private String name;
     private int totalKills;
 	private int kills;
@@ -23,7 +22,7 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum;
-
+	private long key;
 	//Google Cloud Messaging registration Id
 	private String gcmId;
 
@@ -35,12 +34,7 @@ public class User {
     public User(String name){
         this.name = name;
     }
-
-
-
-
-
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, long key) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -50,7 +44,7 @@ public class User {
 		this.lastUsedSerum = lastUsedSerum;
 
 	}
-	
+
 	public void updateLocation(LatLng lastLocation){
 		this.latitude = lastLocation.getLatitude();
 		this.longitude = lastLocation.getLongitude();
