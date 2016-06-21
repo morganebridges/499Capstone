@@ -22,7 +22,8 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum;
-	private long key;
+	private long clientKey;
+
 	//Google Cloud Messaging registration Id
 	private String gcmId;
 
@@ -34,7 +35,7 @@ public class User {
     public User(String name){
         this.name = name;
     }
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, long key) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, long clientKey) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -42,6 +43,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
+		this.clientKey = clientKey;
 
 	}
 
@@ -141,11 +143,11 @@ public class User {
 		this.longitude = longitude;
 	}
 
-	public long getKey() {
-		return key;
+	public long getClientKey() {
+		return clientKey;
 	}
 
-	public void setKey(long key) {
-		this.key = key;
+	public void setClientKey(long key) {
+		this.clientKey = key;
 	}
 }
