@@ -2,8 +2,9 @@ package com.zombie.services;
 
 import com.zombie.models.User;
 import com.zombie.utility.Globals;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,17 +54,17 @@ public class AdminService {
 			Iterator<Object> fieldIterator = user.getAllFields();
 
 			//Cell style for date
-			Workbook wb = new XSSFWorkbook();
-			CreationHelper createHelper = wb.getCreationHelper();
-			CellStyle cellStyle = wb.createCellStyle();
-			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("m/d/yy h:mm"));
+			CellStyle dateCellStyle = workbook.createCellStyle();
+			dateCellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat("m/d/yy h:mm"));
 
 			while (fieldIterator.hasNext()) {
 				Object field = fieldIterator.next();
 				System.out.println("before loop");
 				System.out.println("column");
 				Cell cell = row.createCell(column);
-				if (field instanceof String) {
+				if ((field == null || field.equals("")) && (column == 0 || column == 6)) {
+					cell.setCellValue("");
+				}else if (field instanceof String) {
 					cell.setCellValue((String)field);
 				} else if (field instanceof Integer) {
 					cell.setCellValue((Integer)field);
@@ -71,18 +72,11 @@ public class AdminService {
 					cell.setCellValue((Double)field);
 				} else if (field instanceof Date) {
 					cell.setCellValue((Date)field);
-					cell.setCellStyle(cellStyle);
+					cell.setCellStyle(dateCellStyle);
 				} else if (field instanceof Boolean) {
 					cell.setCellValue((Boolean)field);
 				} else {
-					if(column == 0) {
-
-						cell.setCellValue("");
-					}
-					else if(column == 6){
-						cell.setCellValue("");
-					}
-
+					throw new IllegalStateException("Can't identify type in user object");
 				}
 
 				column++;
