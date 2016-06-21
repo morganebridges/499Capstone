@@ -145,6 +145,7 @@ public class AdminService {
 				Row row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
 				try {
+					
 					String name = cellIterator.next().getStringCellValue();
 					int totalKills = (int)(cellIterator.next().getNumericCellValue());
 					int kills = (int)(cellIterator.next().getNumericCellValue());
@@ -160,6 +161,7 @@ public class AdminService {
 					userService.save(newUser);
 					numOfUsers++;
 				} catch (IllegalStateException e) {
+					e.printStackTrace();
 					throw new IllegalArgumentException("Invalid cell in row " + (numOfUsers + 2) + ", " + e.getMessage());
 				}
 			}
