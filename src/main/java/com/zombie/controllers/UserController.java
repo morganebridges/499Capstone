@@ -73,6 +73,10 @@ public class UserController {
 			User user = new User();
 			userService.save(user);
 			user.setClientKey(user.getId());
+			System.out.println("User being sent:");
+			System.out.println("ID: " + user.getId());
+			System.out.println("Client Key:" + user.getClientKey());
+
 			System.out.println("test");
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
