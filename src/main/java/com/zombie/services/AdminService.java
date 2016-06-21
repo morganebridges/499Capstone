@@ -53,7 +53,9 @@ public class AdminService {
 			Iterator<Object> fieldIterator = user.getAllFields();
 			while (fieldIterator.hasNext()) {
 				Object field = fieldIterator.next();
-
+				System.out.println("before loop");
+				System.out.println(field.getClass());
+				System.out.println(field.toString());
 				Cell cell = row.createCell(column);
 				if (field instanceof String) {
 					cell.setCellValue((String)field);
@@ -65,12 +67,12 @@ public class AdminService {
 					cell.setCellValue((Date)field);
 				} else if (field instanceof Boolean) {
 					cell.setCellValue((Boolean)field);
-
 				} else {
+					System.out.println(column);
 					System.out.println("Field info:");
 					System.out.println(field.getClass());
 					System.out.println(field.toString());
-					
+
 
 					throw new IllegalStateException("Can't identify type in user object");
 
