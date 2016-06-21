@@ -17,7 +17,6 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    
     private String name;
     private int totalKills;
 	private int kills;
@@ -25,6 +24,7 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum;
+	private long clientKey;
 
 	//Google Cloud Messaging registration Id
 	private String gcmId;
@@ -34,11 +34,12 @@ public class User {
 	private double longitude;
 	
     public User(){}
+
     public User(String name){
         this.name = name;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum, long clientKey) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -46,6 +47,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
+		this.clientKey = clientKey;
 	}
 
 	public Iterator<Object> getAllFields() {
@@ -155,5 +157,13 @@ public class User {
 	public void setLocation(long latitude, long longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+
+	public long getClientKey() {
+		return clientKey;
+	}
+
+	public void setClientKey(long key) {
+		this.clientKey = key;
 	}
 }
