@@ -54,8 +54,7 @@ public class AdminService {
 			while (fieldIterator.hasNext()) {
 				Object field = fieldIterator.next();
 				System.out.println("before loop");
-				System.out.println(field.getClass());
-				System.out.println(field.toString());
+				System.out.println("column");
 				Cell cell = row.createCell(column);
 				if (field instanceof String) {
 					cell.setCellValue((String)field);
