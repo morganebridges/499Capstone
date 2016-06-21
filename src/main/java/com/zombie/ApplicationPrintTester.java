@@ -1,5 +1,6 @@
 package com.zombie;
 
+import com.zombie.controllers.DownloadExcelController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,6 +44,8 @@ public class ApplicationPrintTester {
 		userRepo.save(user);
 		user.setClientKey(user.getId());
 		System.out.println(user.getClientKey());
+		DownloadExcelController downloadController = new DownloadExcelController();
+		downloadController.downloadFile();
 
 	}
 }
