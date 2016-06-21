@@ -42,15 +42,12 @@ public class GCMController {
     public ResponseEntity<User>update(@RequestParam String gcmId, @RequestParam int key, HttpServletRequest request, HttpServletResponse response){
         System.out.println("User provided clientKey: "  + key);
         System.out.println("User provided gcmId:" + gcmId);
-        System.out.println("Whitespace");
         User user = userService.findUserById(key);
-        if(user == null)
-            user = new User("TestName");
         user.setGcmRegId(gcmId);
         userService.save(user);
 
-        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is g" +
-                "reat", user);
+        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is great", user);
+        
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
