@@ -39,17 +39,20 @@ public class GCMController {
     NotificationService noteService;
 
     @RequestMapping(path="/register", method=RequestMethod.POST)
-    public ResponseEntity<User>register(@RequestParam String gcmId, @RequestParam int key, HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<User>register(@RequestParam String gcmId, @RequestParam long key, HttpServletRequest request, HttpServletResponse response){
         System.out.println("User provided key: "  + key);
-        System.out.println("Whitespace");
         User user = userService.findUserById(key);
-        if(user == null)
-            user = new User("TestName");
         user.setGcmRegId(gcmId);
         userService.save(user);
-        System.out.println("Navigating the register congtroller");
-        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is g" +
-                "reat");
+
+        System.out.println("user specs:");
+        System.out.println("clientKey: " + user.getClientKey());
+        System.out.println("gcmKey:");
+
+        user.setGcmRegId(gcmId);
+        userService.save(user);
+        System.out.println("Calling gcm service");
+        noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is great", user);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
