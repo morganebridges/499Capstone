@@ -14,6 +14,7 @@ import java.util.List;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 import com.zombie.utility.TestDataPrep;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -44,21 +45,20 @@ public class Application implements CommandLineRunner{
     UserRepository userRepo;
     @PersistenceContext
 
-    @Autowired
-    TestDataPrep testDataPrep;
 	private EntityManager entityManager;
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
         System.out.println("Zombie Application is online.");
-       
+
        
     }
     @Override
     public void run(String ...args){
     		System.out.println("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-    		printTester.loadReferenceData(zombieRepo, userRepo, testDataPrep);
+            TestDataPrep prep = new TestDataPrep(userService);
+            prep.populate(100);
     		
     }
 

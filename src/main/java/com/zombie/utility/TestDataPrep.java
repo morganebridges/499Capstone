@@ -15,20 +15,17 @@ import java.util.Random;
  * Created by morganebridges on 6/21/16.
  */
 
-@Service
-@ComponentScan("com.zombie")
-@EnableAutoConfiguration
+
 public class TestDataPrep {
-    @Autowired
-    UserService userService;
 
 
+    private UserService userService;
     String[] names = {"James", "Helen", "Frank", "Corin", "Morgan", "Jacob", "Siva", "Fred", "Pickle", "Jenny",
             "Samantha", "Randy", "Jimbo", "Rashen", "Khoa", "Chee", "Sandy", "Lawerence", "Mai", "Sketch"};
     private Random randomGenerator;
-    public TestDataPrep(){
+    public TestDataPrep(UserService service){
         this.randomGenerator = new Random();
-
+        this.userService = service;
     }
 
     public void populate(int numRecords){
