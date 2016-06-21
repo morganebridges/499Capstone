@@ -5,7 +5,9 @@ import com.zombie.utility.LatLng;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by morganebridges on 5/25/16.
@@ -36,10 +38,6 @@ public class User {
         this.name = name;
     }
 
-
-
-
-
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
 		this.name = name;
 		this.totalKills = totalKills;
@@ -48,9 +46,21 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
-
 	}
-	
+
+	public Iterator<Object> getAllFields() {
+		ArrayList<Object> list = new ArrayList<>();
+		list.add(this.name);
+		list.add(this.totalKills);
+		list.add(this.kills);
+		list.add(this.active);
+		list.add(this.ammo);
+		list.add(this.serum);
+		list.add(this.lastUsedSerum);
+		//leaving location out of import/export for now
+		return list.iterator();
+	}
+
 	public void updateLocation(LatLng lastLocation){
 		this.latitude = lastLocation.getLatitude();
 		this.longitude = lastLocation.getLongitude();

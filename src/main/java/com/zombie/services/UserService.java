@@ -31,6 +31,10 @@ public class UserService {
         return userRepo.findUserById(id);
     }
 
+    public Iterable<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
     public void save(User user) {
         userRepo.save(user);
     }

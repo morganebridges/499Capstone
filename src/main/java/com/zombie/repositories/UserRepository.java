@@ -1,13 +1,10 @@
 package com.zombie.repositories;
-import com.zombie.models.*;
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+
+import com.zombie.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-
-import com.zombie.models.Zombie;
+import org.springframework.stereotype.Repository;
 /**
  * A repository class for keeping instances of the Users
  * 
@@ -27,5 +24,4 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	@Query("select u from User u where (u.gcmId) like (:gcmId)")
 	User findUserByGCMId(@Param("gcmId")String gcmId);
-
 }

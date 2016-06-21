@@ -1,6 +1,7 @@
 package com.zombie.utility;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Globals {
@@ -12,5 +13,17 @@ public class Globals {
 	
 	public static String getGCMServerKey(){
 		return GCMServerKey;
+	}
+
+	public static List<String> getOrderedUserFields() {
+		ArrayList<String> list = new ArrayList<>();
+		list.add("name");
+		list.add("total kills");
+		list.add("kills");
+		list.add("active");
+		list.add("ammo");
+		list.add("serum");
+		list.add("last used serum");
+		return list;
 	}
 }
