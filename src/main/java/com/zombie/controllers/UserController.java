@@ -1,4 +1,5 @@
 package com.zombie.controllers;
+import com.zombie.models.ResponseModels.UserResponse;
 import com.zombie.services.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -64,16 +65,17 @@ public class UserController {
 		return new ResponseEntity<LatLng[]>(posArr, HttpStatus.OK);
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
-	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
-		ResponseEntity<User> theResponse = null;
+	public ResponseEntity<UserResponse>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
+		ResponseEntity<UserResponse> theResponse = null;
 		if(userService.findUserById(uid) != null){
-			theResponse = new ResponseEntity<User>(userService.findUserById(uid), HttpStatus.OK);
+			theResponse = new ResponseEntity<>(new UserResponse(userService.findUserById(uid)), HttpStatus.OK);
 			return theResponse;
 		} else{
 			User user = new User();
 			userService.save(user);
 			user.setClientKey(user.getId());
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			System.out.println(user.getClientKey());
+			return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
 		}
 	}
 
