@@ -16,7 +16,7 @@ public class ApplicationPrintTester {
 	//@Autowired
 	//private ZombieRepository zombieRepo;
 	
-	public void loadReferenceData(ZombieRepository zombieRepo, UserRepository userRepo){
+	public void loadReferenceData(ZombieRepository zombieRepo, UserRepository userRepo, TestDataPrep testDataPrep){
 		System.out.println("Load Reference Data");
 	    /*
 	     * Tests for zombie 	
@@ -45,8 +45,7 @@ public class ApplicationPrintTester {
 		userRepo.save(user);
 		user.setClientKey(user.getId());
 		System.out.println(user.getClientKey());
-		TestDataPrep prep = new TestDataPrep();
-		prep.populate(100);
+		testDataPrep.populate(100);
 
 	}
 }

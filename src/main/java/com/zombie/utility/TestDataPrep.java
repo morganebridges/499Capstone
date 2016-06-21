@@ -5,6 +5,7 @@ import com.zombie.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Random;
  * Created by morganebridges on 6/21/16.
  */
 
+@Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 public class TestDataPrep {

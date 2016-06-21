@@ -13,6 +13,7 @@ import java.util.List;
 //frameworks
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
+import com.zombie.utility.TestDataPrep;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -42,6 +43,9 @@ public class Application implements CommandLineRunner{
     @Autowired
     UserRepository userRepo;
     @PersistenceContext
+
+    @Autowired
+    TestDataPrep testDataPrep;
 	private EntityManager entityManager;
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
@@ -54,7 +58,7 @@ public class Application implements CommandLineRunner{
     public void run(String ...args){
     		System.out.println("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-    		printTester.loadReferenceData(zombieRepo, userRepo);
+    		printTester.loadReferenceData(zombieRepo, userRepo, testDataPrep);
     		
     }
 
