@@ -64,6 +64,7 @@ public class AdminService {
 					cell.setCellValue((Date)field);
 				} else if (field instanceof Boolean) {
 					cell.setCellValue((Boolean)field);
+
 				} else {
 					throw new IllegalStateException("Can't identify type in user object");
 				}
