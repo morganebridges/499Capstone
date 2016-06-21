@@ -53,7 +53,7 @@ public class AdminService {
 			Iterator<Object> fieldIterator = user.getAllFields();
 
 			//Cell style for date
-			Workbook wb = new HSSFWorkbook();
+			Workbook wb = new XSSFWorkbook();
 			CreationHelper createHelper = wb.getCreationHelper();
 			CellStyle cellStyle = wb.createCellStyle();
 			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("m/d/yy h:mm"));
