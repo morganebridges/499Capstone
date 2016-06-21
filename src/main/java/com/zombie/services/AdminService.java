@@ -2,8 +2,8 @@ package com.zombie.services;
 
 import com.zombie.models.User;
 import com.zombie.utility.Globals;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +51,13 @@ public class AdminService {
 			Row row = sheet.createRow(rowNum);
 			User user = userIterator.next();
 			Iterator<Object> fieldIterator = user.getAllFields();
+
+			//Cell style for date
+			Workbook wb = new HSSFWorkbook();
+			CreationHelper createHelper = wb.getCreationHelper();
+			CellStyle cellStyle = wb.createCellStyle();
+			cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("m/d/yy h:mm"));
+			
 			while (fieldIterator.hasNext()) {
 				Object field = fieldIterator.next();
 				System.out.println("before loop");
@@ -64,6 +71,7 @@ public class AdminService {
 					cell.setCellValue((Double)field);
 				} else if (field instanceof Date) {
 					cell.setCellValue((Date)field);
+					cell.setCellStyle(cellStyle);
 				} else if (field instanceof Boolean) {
 					cell.setCellValue((Boolean)field);
 				} else {
@@ -144,6 +152,7 @@ public class AdminService {
 			while(rowIterator.hasNext()) {
 				Row row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
+
 				try {
 
 					String name = cellIterator.next().getStringCellValue();
