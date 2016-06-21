@@ -40,7 +40,8 @@ public class GCMController {
 
     @RequestMapping(path="/register", method=RequestMethod.POST)
     public ResponseEntity<User>update(@RequestParam String gcmId, @RequestParam int key, HttpServletRequest request, HttpServletResponse response){
-        System.out.println("User provided key: "  + key);
+        System.out.println("User provided clientKey: "  + key);
+        System.out.println("User provided gcmId:" + gcmId);
         System.out.println("Whitespace");
         User user = userService.findUserById(key);
         if(user == null)

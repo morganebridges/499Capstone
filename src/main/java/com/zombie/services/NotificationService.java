@@ -27,16 +27,17 @@ public class NotificationService {
     * gcmRegId is the id which android app will give to server (one time)
     **/
     public boolean pushNotificationToGCM(String gcmRegId,String message){
-        System.out.println(Globals.getGCMServerKey());
+        System.out.println("GCM server key" + Globals.getGCMServerKey());
         System.out.println("breakpoints");
         final String GCM_API_KEY = Globals.getGCMServerKey();
         final int retries = 3;
-
+        System.out.println("Push notification service entry");
         Sender sender = new Sender(GCM_API_KEY);
         Message msg = new Message.Builder().addData("message",message).build();
 
         try {
             if(userService.findUserByGCMId(gcmRegId) != null) {
+                System.out.println("foundUser with gcmRegId");
                 Result result = sender.send(msg, gcmRegId, retries);
                 /**
                 * if you want to send to multiple then use below method
