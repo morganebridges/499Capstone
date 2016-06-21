@@ -68,13 +68,14 @@ public class AdminService {
 				} else if (field instanceof Boolean) {
 					cell.setCellValue((Boolean)field);
 				} else {
-					System.out.println(column);
-					System.out.println("Field info:");
-					System.out.println(field.getClass());
-					System.out.println(field.toString());
-
-
-					throw new IllegalStateException("Can't identify type in user object");
+					if(column == 0) {
+						String noName = null;
+						cell.setCellValue(noName);
+					}
+					else if(column == 6){
+						Date noDate = null;
+						cell.setCellValue(noDate);
+					}
 
 				}
 
