@@ -55,11 +55,11 @@ public class AdminService {
 				Object field = fieldIterator.next();
 				Cell cell = row.createCell(column);
 				if (field instanceof String) {
-					cell.setCellValue((String)fieldIterator.next());
+					cell.setCellValue((String)field);
 				} else if (field instanceof Integer) {
-					cell.setCellValue((Integer)fieldIterator.next());
+					cell.setCellValue((Integer)field);
 				} else if (field instanceof Double) {
-					cell.setCellValue((Double)fieldIterator.next());
+					cell.setCellValue((Double)field);
 				} else if (field instanceof Date) {
 					cell.setCellValue((Date)fieldIterator.next());
 				} else if (field instanceof Boolean) {
