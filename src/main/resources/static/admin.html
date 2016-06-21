@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin tool</title>
+
+    <!-- Bootstrap -->
+    <link href="upload.css" rel="stylesheet">
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-sm-9">
+        <h1><strong>Welcome to the Zed Reckoning Database Admin Page</strong></h1>
+    </div>
+</div>
+
+    <form method="POST" enctype="multipart/form-data"
+          action="http://52.39.83.97:8080/upload">
+        <br><br>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-6 col-sm-6 col-12">
+                <h4>Upload User Spreadsheet</h4>
+                <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse&hellip; <input type="file" name="uploadedFile" style="display: none;">
+                        </span>
+                    </label>
+                    <input type="text" class="form-control" readonly />
+                </div>
+                <span class="help-block">
+                    Our service currently accepts xlsx files with the proper formatting.
+                </span>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3">
+                <input type="submit" class="btn btn-primary" value="&nbsp;&nbsp;Upload&nbsp;&nbsp;" />
+
+            </div>
+        </div>
+        <br><br>
+
+
+    </form>
+    <div class="row">
+        <div class="col-lg-1"></div>
+
+        <div class="col-lg-3">
+            <h4>Download User Spreadsheet</h4>
+
+            <form method="GET" enctype="multipart/form-data"
+                  action="http://52.39.83.97:8080/downloadservice/download">
+
+                <input type="submit" class="btn btn-primary" value="Download">
+
+
+            </form>
+
+
+        </div>
+    </div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="upload.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap.min.js"></script>
+</body>
+</html>
