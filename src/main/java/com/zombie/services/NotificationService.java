@@ -4,6 +4,7 @@ import com.google.android.gcm.server.InvalidRequestException;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
+import com.zombie.models.User;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -26,7 +27,7 @@ public class NotificationService {
     /**
     * gcmRegId is the id which android app will give to server (one time)
     **/
-    public boolean pushNotificationToGCM(String gcmRegId,String message){
+    public boolean pushNotificationToGCM(String gcmRegId,String message, User user){
         System.out.println("GCM server key" + Globals.getGCMServerKey());
         System.out.println("breakpoints");
         final String GCM_API_KEY = Globals.getGCMServerKey();
@@ -36,8 +37,9 @@ public class NotificationService {
         Message msg = new Message.Builder().addData("message",message).build();
 
         try {
-            if(userService.findUserByGCMId(gcmRegId) != null) {
-                System.out.println("foundUser with gcmRegId");
+            if(user.getGcmRegId() != null) {
+                System.out.println("foundUser with gcmRegId: " + user.getGcmRegId());
+
                 Result result = sender.send(msg, gcmRegId, retries);
                 /**
                 * if you want to send to multiple then use below method
