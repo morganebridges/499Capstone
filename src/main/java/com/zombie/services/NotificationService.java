@@ -58,8 +58,10 @@ public class NotificationService {
                 System.out.println("No token could be associated with this account!");
             }
         } catch (InvalidRequestException e) {
+            e.printStackTrace();
             System.out.println("Invalid Request");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("IO Exception");
         }
         return false;
