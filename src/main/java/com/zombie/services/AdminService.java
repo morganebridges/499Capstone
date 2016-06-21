@@ -68,12 +68,11 @@ public class AdminService {
 					cell.setCellValue((Boolean)field);
 				} else {
 					if(column == 0) {
-						String noName = null;
-						cell.setCellValue(noName);
+
+						cell.setCellValue("");
 					}
 					else if(column == 6){
-						Date noDate = null;
-						cell.setCellValue(noDate);
+						cell.setCellValue("");
 					}
 
 				}
