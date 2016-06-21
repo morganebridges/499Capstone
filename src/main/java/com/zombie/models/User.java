@@ -52,11 +52,11 @@ public class User {
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();
 		list.add(this.name);
-		list.add(this.totalKills);
-		list.add(this.kills);
-		list.add(this.active);
-		list.add(this.ammo);
-		list.add(this.serum);
+		list.add(new Integer(this.totalKills));
+		list.add(new Integer(this.kills));
+		list.add(new Boolean(this.active));
+		list.add(new Integer(this.ammo));
+		list.add(new Integer(this.serum));
 		list.add(this.lastUsedSerum);
 		//leaving location out of import/export for now
 		return list.iterator();
