@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by morganebridges on 6/19/16.
  */
@@ -58,5 +60,12 @@ public class UserService {
 
     public Iterable<Zombie> update(long clientKey){
         return zombieRepo.findByClientKey(clientKey);
+    }
+
+    public void login(User user){
+        user.setActive(true);
+        user.setLastUsedSerum(new Date());
+        user.setLastAttacked(System.currentTimeMillis());
+        dangerManager.registerUser(user);
     }
 }

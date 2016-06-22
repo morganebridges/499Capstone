@@ -30,6 +30,8 @@ public class PlayerDangerManager {
     NotificationService noteService;
     private long lastCheck;
 
+    volatile boolean here = false;
+
     Thread privateThread;
     ArrayList<User> userList;
     public PlayerDangerManager(){
@@ -53,26 +55,31 @@ public class PlayerDangerManager {
         privateThread = new Thread(r);
         privateThread.start();
     }
-    public void runWork() throws InterruptedException {
+    public synchronized void runWork() throws InterruptedException {
+
         while(true){
-            while(System.currentTimeMillis() - lastCheck < 4000){
+            System.out.println("User Danger Worker in outer loop");
+            while(System.currentTimeMillis() - lastCheck < 4000)
                 wait();
+                System.out.println("Danger worker done waiting");
                 Iterator<User> userIt = userList.iterator();
                 while(userIt.hasNext()){
                     User user = userIt.next();
+                    System.out.println("Danger Worker processing for: " + user.getName());
+
                     Iterator<Zombie> zombIt = checkForEnemies(user);
                     if(zombIt.hasNext())
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                 }
 
 
-            }
+
         }
     }
     public Iterator<Zombie> checkForEnemies(User user){
         ArrayList<Zombie> list = new ArrayList<Zombie>();
-        if(System.currentTimeMillis() - user.getLastAttacked() > 10000){
-
+        if(System.currentTimeMillis() - user.getLastAttacked() > 5000){
+            System.out.println("checking for enemies for: " + user.getName());
             LatLng latLng = new LatLng(user.getLocation().getLatitude() + .1, user.getLocation().getLongitude() -.2);
             Zombie zomb = new Zombie(user.getClientKey(), latLng);
             zombieRepo.save(zomb);

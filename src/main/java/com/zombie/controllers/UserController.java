@@ -81,14 +81,20 @@ public class UserController {
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
 		ResponseEntity<User> theResponse = null;
-		if(userService.findUserById(uid) != null){
-			theResponse = new ResponseEntity<User>(userService.findUserById(uid), HttpStatus.OK);
+		User user = userService.findUserById(uid);
+		if(user != null){
+			userService.save(user);
+			userService.login(user);
+			theResponse = new ResponseEntity<User>(user, HttpStatus.OK);
 			return theResponse;
+
 		} else{
-			User user = new User();
+			user = new User();
 			userService.save(user);
 			user.setClientKey(user.getId());
 			userService.save(user);
+
+			userService.login(user);
 
 			System.out.println("User being sent:");
 			System.out.println("ID: " + user.getId());
