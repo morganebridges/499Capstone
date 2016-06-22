@@ -31,7 +31,6 @@ public class TestDataPrep {
     public void populate(int numRecords){
         for(int i = 0; i < numRecords; i++){
             User user = new User(returnName());
-            user.setClientKey(user.getId());
             user.setAmmo(randomGenerator.nextInt(500));
             user.setKills(randomGenerator.nextInt(60));
             user.setTotalKills(randomGenerator.nextInt(130));
@@ -39,6 +38,7 @@ public class TestDataPrep {
             user.setSerum(randomGenerator.nextInt(5));
             user.setLastUsedSerum(new Date());
             userService.save(user);
+            user.setClientKey(user.getId());
         }
     }
 
