@@ -30,15 +30,17 @@ public class TestDataPrep {
 
     public void populate(int numRecords){
         for(int i = 0; i < numRecords; i++){
+
             User user = new User(returnName());
+            userService.save(user);
             user.setAmmo(randomGenerator.nextInt(500));
             user.setKills(randomGenerator.nextInt(60));
             user.setTotalKills(randomGenerator.nextInt(130));
             user.setActive(randomGenerator.nextBoolean());
             user.setSerum(randomGenerator.nextInt(5));
             user.setLastUsedSerum(new Date());
-            userService.save(user);
             user.setClientKey(user.getId());
+            userService.save(user);
         }
     }
 
