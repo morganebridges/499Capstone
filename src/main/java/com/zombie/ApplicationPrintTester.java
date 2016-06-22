@@ -21,7 +21,7 @@ public class ApplicationPrintTester {
 	    /*
 	     * Tests for zombie 	
 	     */
-		Zombie zombie = new Zombie("testTag");
+		Zombie zombie = new Zombie(0, -95.2, 45);
 		zombieRepo.save(zombie);
 		
 		User user = new User("testTag");
@@ -30,15 +30,11 @@ public class ApplicationPrintTester {
 	    System.out.println(user.getId());
 	    System.out.println("Testing Zombie Repository Methods");
 	    Zombie testZombie = zombieRepo.findByGamerTag("testTag");
-	    System.out.println("Test Zombie from gamerTag search\ngamerTag: " + testZombie.getGamerTag()
-	    		+ "\nId: " + testZombie.getId()); 
-	    
+
 	    long id = testZombie.getId();
 	    System.out.println("Test zombie id from getter: " + id);
 	    	testZombie = null;
 	    	testZombie = zombieRepo.findById(id);
-	    System.out.println("Test Zombie from id search\ngamerTag: " + testZombie.getGamerTag()
-		+ "\nId: " + testZombie.getId());
 
 		System.out.println("Testing logic for user key situation:");
 		user = new User();
