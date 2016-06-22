@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -67,11 +69,12 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<Iterable<Zombie>>update(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
+	public ResponseEntity<Iterator<Zombie>>update(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
 		userService.save(user);
 		Iterable<Zombie> list = userService.update(user.getClientKey());
+		Iterator<Zombie> it = list.iterator();
 
-		return new ResponseEntity<Iterable<Zombie>>(list, HttpStatus.OK);
+		return new ResponseEntity<Iterator<Zombie>>(it, HttpStatus.OK);
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){

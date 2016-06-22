@@ -30,9 +30,11 @@ public class PlayerDangerManager {
     NotificationService noteService;
     private long lastCheck;
 
+    Thread privateThread;
     ArrayList<User> userList;
     public PlayerDangerManager(){
         userList = new ArrayList<>();
+
 
         lastCheck = System.currentTimeMillis();
         Runnable r = new Runnable(){
@@ -44,8 +46,12 @@ public class PlayerDangerManager {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+
+
             }
         };
+        privateThread = new Thread(r);
+        privateThread.start();
     }
     public void runWork() throws InterruptedException {
         while(true){
