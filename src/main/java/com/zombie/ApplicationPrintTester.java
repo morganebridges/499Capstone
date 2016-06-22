@@ -29,7 +29,7 @@ public class ApplicationPrintTester {
 		System.out.println("Testing to see if user id is updated on save:");
 	    System.out.println(user.getId());
 	    System.out.println("Testing Zombie Repository Methods");
-	    Zombie testZombie = zombieRepo.findByGamerTag("testTag");
+	    Zombie testZombie = zombieRepo.findByClientKey(user.getClientKey()).iterator().next();
 
 	    long id = testZombie.getId();
 	    System.out.println("Test zombie id from getter: " + id);

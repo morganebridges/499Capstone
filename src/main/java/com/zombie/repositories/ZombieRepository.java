@@ -26,6 +26,6 @@ public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Lon
 
 	@Query("select p from Zombie p where p.clientKey=:clientKey")
 	Iterable<Zombie> findByClientKey(@Param("clientKey") long clientKey);
-	
+
 
 }
