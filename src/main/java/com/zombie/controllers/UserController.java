@@ -68,6 +68,7 @@ public class UserController {
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<Iterable<Zombie>>update(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
+		userService.save(user);
 		Iterable<Zombie> list = userService.update(user.getClientKey());
 
 		return new ResponseEntity<Iterable<Zombie>>(list, HttpStatus.OK);

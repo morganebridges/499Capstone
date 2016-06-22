@@ -27,7 +27,5 @@ public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Lon
 	@Query("select p from Zombie p where p.clientKey=:clientKey")
 	Iterable<Zombie> findByClientKey(@Param("clientKey") long clientKey);
 	
-	@Query("select u from Zombie u where UPPER(u.gamerTag) like UPPER(:gamerTag)")
-	Zombie findByGamerTag(@Param("gamerTag")String gamerTag);
 
 }
