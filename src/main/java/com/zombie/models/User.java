@@ -26,6 +26,8 @@ public class User {
 	private Date lastUsedSerum = new Date();
 	private long clientKey;
 
+	private long lastAttack;
+
 	//Google Cloud Messaging registration Id
 	private String gcmId;
 
@@ -37,6 +39,7 @@ public class User {
 
     public User(String name){
         this.name = name;
+		this.lastAttack = 0;
     }
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
@@ -47,17 +50,18 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = lastUsedSerum;
+		this.lastAttack = 0;
 	}
 
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();
-		list.add(this.name);
-		list.add(new Integer(this.totalKills));
-		list.add(new Integer(this.kills));
-		list.add(new Boolean(this.active));
-		list.add(new Integer(this.ammo));
-		list.add(new Integer(this.serum));
-		list.add(this.lastUsedSerum);
+		list.add(name);
+		list.add(totalKills);
+		list.add(kills);
+		list.add(active);
+		list.add(ammo);
+		list.add(serum);
+		list.add(lastUsedSerum);
 		//leaving location out of import/export for now
 		return list.iterator();
 	}
@@ -164,5 +168,13 @@ public class User {
 
 	public void setClientKey(long key) {
 		this.clientKey = key;
+	}
+
+	public long getLastAttacked() {
+		return lastAttack;
+	}
+
+	public void setLastAttacked(long lastAttack) {
+		this.lastAttack = lastAttack;
 	}
 }

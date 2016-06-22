@@ -1,7 +1,10 @@
 package com.zombie.services;
 
+import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
+import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
+import com.zombie.repositories.ZombieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +19,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UserRepository userRepo;
+
+    @Autowired
+    PlayerDangerManager dangerManager;
+
+    @Autowired
+    ZombieRepository zombieRepo;
 
 
     public User findUserByName(String name){
@@ -45,5 +54,9 @@ public class UserService {
 
     public void deleteUsers(Iterable<User> users) {
         userRepo.delete(users);
+    }
+
+    public Iterable<Zombie> update(long clientKey){
+        return zombieRepo.findByClientKey(clientKey);
     }
 }

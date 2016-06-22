@@ -1,4 +1,5 @@
 package com.zombie.repositories;
+import com.google.common.collect.Iterables;
 import com.zombie.models.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +23,9 @@ public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Lon
 	
 	@Query("select p from Zombie p where p.id=:id")
 	Zombie findById(@Param("id") long id);
+
+	@Query("select p from Zombie p where p.clientKey=:clientKey")
+	Iterable<Zombie> findByClientKey(@Param("clientKey") long clientKey);
 	
 	@Query("select u from Zombie u where UPPER(u.gamerTag) like UPPER(:gamerTag)")
 	Zombie findByGamerTag(@Param("gamerTag")String gamerTag);

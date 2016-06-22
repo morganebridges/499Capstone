@@ -1,4 +1,6 @@
 package com.zombie.controllers;
+import com.zombie.models.Zombie;
+import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -32,7 +34,13 @@ public class UserController {
 	UserRepository userRepo;
 
 	@Autowired
+	ZombieRepository zombieRepo;
+
+	@Autowired
 	UserService userService;
+
+
+
     
 	@RequestMapping(path="/getuser", method=RequestMethod.POST)
     public ResponseEntity<User> getUser(@RequestParam(required=true) String name, HttpServletRequest request, HttpServletResponse response) {
@@ -59,13 +67,10 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<LatLng[]>update(@RequestBody LatLng latLng, HttpServletRequest request, HttpServletResponse response){
-		LatLng pos1 = new LatLng(45.01, -93.25);
-		LatLng pos2 = new LatLng(45.11, -93.35);
-		LatLng pos3 = new LatLng(45.21, -93.15);
-		
-		LatLng[] posArr = {pos1, pos2, pos3};
-		return new ResponseEntity<LatLng[]>(posArr, HttpStatus.OK);
+	public ResponseEntity<Iterable<Zombie>>update(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
+		Iterable<Zombie> list = userService.update(user.getClientKey());
+
+		return new ResponseEntity<Iterable<Zombie>>(list, HttpStatus.OK);
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
