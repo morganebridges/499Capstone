@@ -5,12 +5,15 @@ import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
+import com.zombie.utility.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by morganebridges on 6/19/16.
@@ -67,5 +70,22 @@ public class UserService {
         user.setLastUsedSerum(new Date());
         user.setLastAttacked(System.currentTimeMillis());
         dangerManager.registerUser(user);
+    }
+    public ArrayList<Zombie> generateTestZombies(User user, int count){
+        ArrayList<Zombie> zomList = new ArrayList<>();
+        Random randomizer = new Random();
+        double posNeg;
+        if(randomizer.nextBoolean())
+                posNeg = .13;
+        else posNeg = -.12;
+
+        for(int i = 0; i < count; i++) {
+            LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLocation().getLongitude() + (posNeg * -1));
+            Zombie zom = new Zombie(user.getClientKey(), zombLoc);
+            zomList.add(zom);
+
+        }
+        return zomList;
+
     }
 }

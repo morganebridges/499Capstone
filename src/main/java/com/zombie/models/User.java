@@ -161,6 +161,12 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+	public double getLatitude(){
+		return latitude;
+	}
+	public double getLongitude(){
+		return longitude;
+	}
 
 	public long getClientKey() {
 		return clientKey;

@@ -71,11 +71,13 @@ public class UserController {
 		Iterable<Zombie> list = userService.update(user.getClientKey());
 		Iterator<Zombie> it = list.iterator();
 
+		//generate some test zombies so we can ensure we always get some
+		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 3);
 		ArrayList<Zombie> zombList= new ArrayList<Zombie>();
 		while(it.hasNext())
 			zombList.add(it.next());
 
-
+		zombList.addAll(testZoms);
 		return new ResponseEntity<ArrayList<Zombie>>(zombList, HttpStatus.OK);
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
@@ -83,6 +85,8 @@ public class UserController {
 		ResponseEntity<User> theResponse = null;
 		User user = userService.findUserById(uid);
 		if(user != null){
+			if(user.getName() == null)
+				user.setName("Generic Jerk");
 			userService.save(user);
 			userService.login(user);
 			theResponse = new ResponseEntity<User>(user, HttpStatus.OK);
@@ -91,6 +95,8 @@ public class UserController {
 		} else{
 			user = new User();
 			userService.save(user);
+			if(user.getName() == null)
+				user.setName("Generic Jerk");
 			user.setClientKey(user.getId());
 			userService.save(user);
 

@@ -21,6 +21,8 @@ import java.io.IOException;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 public class NotificationService {
+    //Collapse keys for identifying the type of notification. Max 4 for android.
+    private static String mapUpdateKey = "mapUpdateKey";
     public NotificationService(){}
     @Autowired
     UserService userService;
@@ -34,7 +36,7 @@ public class NotificationService {
         final int retries = 3;
 
         Sender sender = new Sender(GCM_API_KEY);
-        Message msg = new Message.Builder().addData("message",message).build();
+        Message msg = new Message.Builder().addData("message",message).collapseKey(mapUpdateKey).build();
 
         try {
             if(gcmRegId != null) {
