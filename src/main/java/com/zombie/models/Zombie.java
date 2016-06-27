@@ -56,7 +56,9 @@ public class Zombie {
                 id, clientKey
         );
     }
-
+    public long getClientKey(){
+        return clientKey;
+    }
     public boolean isAlive(){
         return(this.hp > 0 && System.currentTimeMillis() - timeToLive > 0);
     }

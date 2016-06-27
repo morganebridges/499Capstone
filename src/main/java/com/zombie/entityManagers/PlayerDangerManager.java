@@ -36,14 +36,14 @@ public class PlayerDangerManager {
     ArrayList<User> userList;
     public PlayerDangerManager(){
         userList = new ArrayList<>();
-
+        System.out.println("initializing danger manager");
 
         lastCheck = System.currentTimeMillis();
         Runnable r = new Runnable(){
 
             public void run(){
                 try{
-
+                    System.out.println("inside the run method of danger worker");
                     runWork();
                 }catch(Exception e){
                     e.printStackTrace();
@@ -55,7 +55,8 @@ public class PlayerDangerManager {
         privateThread = new Thread(r);
         privateThread.start();
     }
-    public synchronized void runWork() throws InterruptedException {
+
+    private synchronized void runWork() throws InterruptedException {
 
         while(true){
             System.out.println("User Danger Worker in outer loop");
@@ -82,13 +83,18 @@ public class PlayerDangerManager {
             System.out.println("checking for enemies for: " + user.getName());
             LatLng latLng = new LatLng(user.getLocation().getLatitude() + .1, user.getLocation().getLongitude() -.2);
             Zombie zomb = new Zombie(user.getClientKey(), latLng);
+
+            list.add(zomb);
             zombieRepo.save(zomb);
 
         }
         return list.iterator();
     }
     public void registerUser(User user){
+        if(userList.contains(user))
+            return;
         this.userList.add(user);
+
     }
     public void deRegister(User user){
         this.userList.remove(user);

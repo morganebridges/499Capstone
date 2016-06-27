@@ -1,5 +1,6 @@
 package com.zombie.controllers;
 import com.zombie.models.Zombie;
+import com.zombie.models.dto.UserActionDto;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -66,7 +67,11 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
+	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
+		User user = userService.findUserById(userActionDto.getId());
+		if(user == null)
+			throw new IllegalStateException("User does not exist in the system!");
+
 		userService.save(user);
 		Iterable<Zombie> list = userService.update(user.getClientKey());
 		Iterator<Zombie> it = list.iterator();
