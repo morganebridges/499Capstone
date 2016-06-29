@@ -101,7 +101,7 @@ public class UserController {
 			user = new User();
 			userService.save(user);
 			if(user.getName() == null)
-				user.setName("Generic Jerk");
+				user.setName("Generic Jell");
 			user.setClientKey(user.getId());
 			userService.save(user);
 
