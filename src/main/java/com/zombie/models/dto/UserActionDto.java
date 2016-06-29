@@ -1,11 +1,9 @@
 package com.zombie.models.dto;
 
-import javax.persistence.Entity;
 
 /**
  * Represents a user update to server side.
  */
-@Entity
 public class UserActionDto {
     long id;
     double latitude;
