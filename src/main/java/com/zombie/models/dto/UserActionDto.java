@@ -17,8 +17,8 @@ public class UserActionDto {
     double latitude;
     double longitude;
     int action;
-    long targetId = -1;
-    Object additionalParam = null;
+    long targetId;
+    Object additionalParam;
 
     public double getLatitude() {
         return latitude;
