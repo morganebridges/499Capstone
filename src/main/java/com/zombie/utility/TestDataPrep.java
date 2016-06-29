@@ -39,7 +39,6 @@ public class TestDataPrep {
             user.setActive(randomGenerator.nextBoolean());
             user.setSerum(randomGenerator.nextInt(5));
             user.setLastUsedSerum(new Date());
-            user.setClientKey(user.getId());
             userService.save(user);
         }
     }

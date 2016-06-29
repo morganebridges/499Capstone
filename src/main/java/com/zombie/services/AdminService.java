@@ -169,7 +169,7 @@ public class AdminService {
 					Date lastUsedSerum = dateCell.getDateCellValue();
 					lastUsedSerum = lastUsedSerum == null ? new Date() : lastUsedSerum;
 
-					User newUser = new User(name, totalKills, kills, active, ammo, serum, lastUsedSerum);
+					User newUser = new User(name, totalKills, kills, active, ammo, serum);
 					userService.save(newUser);
 					numOfUsers++;
 				} catch (IllegalStateException e) {

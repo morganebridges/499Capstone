@@ -46,7 +46,7 @@ public class GCMController {
         userService.save(user);
 
         System.out.println("user specs:");
-        System.out.println("clientKey: " + user.getClientKey());
+        System.out.println("clientKey: " + user.getId());
         System.out.println("gcmId:" + gcmId);
 
         user.setGcmRegId(gcmId);

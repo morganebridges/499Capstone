@@ -29,7 +29,7 @@ public class ApplicationPrintTester {
 		System.out.println("Testing to see if user id is updated on save:");
 	    System.out.println(user.getId());
 	    System.out.println("Testing Zombie Repository Methods");
-	    Zombie testZombie = zombieRepo.findByClientKey(user.getClientKey()).iterator().next();
+	    Zombie testZombie = zombieRepo.findByClientKey(user.getId()).iterator().next();
 
 	    long id = testZombie.getId();
 	    System.out.println("Test zombie id from getter: " + id);
@@ -39,8 +39,6 @@ public class ApplicationPrintTester {
 		System.out.println("Testing logic for user key situation:");
 		user = new User();
 		userRepo.save(user);
-		user.setClientKey(user.getId());
-		System.out.println(user.getClientKey());
 
 	}
 }
