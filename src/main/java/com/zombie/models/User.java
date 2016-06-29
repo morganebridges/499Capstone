@@ -24,7 +24,6 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum = new Date();
-	private long clientKey;
 
 	private long lastAttack;
 
@@ -38,18 +37,24 @@ public class User {
     public User(){}
 
     public User(String name){
-        this.name = name;
-		this.lastAttack = 0;
+	    this.name = name;
+	    this.totalKills = 0;
+	    this.kills = 0;
+	    this.active = true;
+	    this.ammo = 5;
+	    this.serum = 5;
+	    this.lastUsedSerum = new Date();
+	    this.lastAttack = 0;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, Date lastUsedSerum) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
 		this.active = active;
 		this.ammo = ammo;
 		this.serum = serum;
-		this.lastUsedSerum = lastUsedSerum;
+		this.lastUsedSerum = new Date();
 		this.lastAttack = 0;
 	}
 
@@ -168,14 +173,6 @@ public class User {
 		return longitude;
 	}
 
-	public long getClientKey() {
-		return clientKey;
-	}
-
-	public void setClientKey(long key) {
-		this.clientKey = key;
-	}
-
 	public long getLastAttacked() {
 		return lastAttack;
 	}
@@ -183,4 +180,5 @@ public class User {
 	public void setLastAttacked(long lastAttack) {
 		this.lastAttack = lastAttack;
 	}
+
 }

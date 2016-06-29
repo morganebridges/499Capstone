@@ -39,6 +39,7 @@ public class UserService {
     public User findUserByGCMId(String gcmId){
         return userRepo.findUserByGCMId(gcmId);
     }
+
     public User findUserById(long id){
         System.out.println("USER REPO");
         System.out.println(userRepo);
@@ -73,6 +74,7 @@ public class UserService {
         user.setLastAttacked(System.currentTimeMillis());
         dangerManager.registerUser(user);
     }
+
     public ArrayList<Zombie> generateTestZombies(User user, int count){
         ArrayList<Zombie> zomList = new ArrayList<>();
         Random randomizer = new Random();
@@ -83,7 +85,7 @@ public class UserService {
 
         for(int i = 0; i < count; i++) {
             LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLocation().getLongitude() + (posNeg * -1));
-            Zombie zom = new Zombie(user.getClientKey(), zombLoc);
+            Zombie zom = new Zombie(user.getId(), zombLoc);
             zomList.add(zom);
 
         }
