@@ -45,7 +45,7 @@ public class UserActionDto {
         this.longitude = longitude;
         this.action = action.getCode();
     }
-
+    public UserActionDto(){};
     public void setTarget(long targetId) {
         this.targetId = targetId;
     }
