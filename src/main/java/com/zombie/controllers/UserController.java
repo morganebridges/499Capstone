@@ -64,7 +64,7 @@ public class UserController {
 		userService.save(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
     }
-	/*@RequestMapping(path="/update", method=RequestMethod.POST)
+	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
@@ -82,27 +82,7 @@ public class UserController {
 
 		zombList.addAll(testZoms);
 		return new ResponseEntity<>(zombList, HttpStatus.OK);
-	}*/
-	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<ArrayList<Zombie>>update(@RequestParam long userId, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
-		User user = userService.findUserById(userId);
-		if(user == null)
-			throw new IllegalStateException("User does not exist in the system!");
-
-		userService.save(user);
-		Iterable<Zombie> list = userService.update(user.getId());
-		Iterator<Zombie> it = list.iterator();
-
-		//generate some test zombies so we can ensure we always get some
-		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 3);
-		ArrayList<Zombie> zombList= new ArrayList<>();
-		while(it.hasNext())
-			zombList.add(it.next());
-
-		zombList.addAll(testZoms);
-		return new ResponseEntity<>(zombList, HttpStatus.OK);
-	}
-
+	}	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
 		ResponseEntity<User> theResponse = null;
