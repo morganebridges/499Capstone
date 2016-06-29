@@ -82,7 +82,7 @@ public class UserController {
 
 		zombList.addAll(testZoms);
 		return new ResponseEntity<>(zombList, HttpStatus.OK);
-	}	
+	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
 		ResponseEntity<User> theResponse = null;
