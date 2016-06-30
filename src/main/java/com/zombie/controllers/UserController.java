@@ -74,13 +74,17 @@ public class UserController {
 		Iterable<Zombie> list = userService.update(user.getId());
 		Iterator<Zombie> it = list.iterator();
 
+		System.out.println("Zombies generated");
+		System.out.println(list);
 		//generate some test zombies so we can ensure we always get some
 		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 3);
+		System.out.println("Test zombies list: " + testZoms.size());
 		ArrayList<Zombie> zombList= new ArrayList<>();
 		while(it.hasNext())
 			zombList.add(it.next());
 
 		zombList.addAll(testZoms);
+		System.out.println("Total zombie list length:" + zombList.size());
 		return new ResponseEntity<>(zombList, HttpStatus.OK);
 	}
 	@RequestMapping(path="/login", method=RequestMethod.POST)
