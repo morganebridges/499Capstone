@@ -73,7 +73,7 @@ public class UserController {
 		//update location of user from the DTO
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
-		
+
 		Iterable<Zombie> list = userService.update(user.getId());
 		Iterator<Zombie> it = list.iterator();
 
@@ -119,6 +119,7 @@ public class UserController {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 	}
+
 
 }
 
