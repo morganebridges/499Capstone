@@ -79,14 +79,12 @@ public class UserService {
         ArrayList<Zombie> zomList = new ArrayList<>();
         Random randomizer = new Random();
         double posNeg;
-        if(randomizer.nextBoolean())
-                posNeg = .23;
-        else posNeg = -.22;
+
 
         for(int i = 0; i < count; i++) {
             if(randomizer.nextBoolean())
-                posNeg = .13;
-            else posNeg = -.12;
+                posNeg = .04;
+            else posNeg = -.02;
             System.out.println(user.toString());
             System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
             LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLongitude() + (.05 * i));
