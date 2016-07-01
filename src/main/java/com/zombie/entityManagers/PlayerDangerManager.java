@@ -83,6 +83,8 @@ public class PlayerDangerManager {
             System.out.println("checking for enemies for: " + user.getName());
             LatLng latLng = new LatLng(user.getLocation().getLatitude() + .1, user.getLocation().getLongitude() -.2);
             Zombie zomb = new Zombie(user.getId(), latLng);
+            System.out.println(user.toString());
+            System.out.println(zombieRepo.toString());
             zombieRepo.save(zomb);
 
         }
