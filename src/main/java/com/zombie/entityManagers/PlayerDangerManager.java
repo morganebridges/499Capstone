@@ -79,7 +79,7 @@ public class PlayerDangerManager {
     }
     public Iterator<Zombie> checkForEnemies(User user){
         ArrayList<Zombie> list = new ArrayList<>();
-        if(System.currentTimeMillis() - user.getLastAttacked() > 5000){
+        if(System.currentTimeMillis() - user.getLastAttacked() > 10000){
             System.out.println("checking for enemies for: " + user.getName());
             LatLng latLng = new LatLng(user.getLocation().getLatitude() + .1, user.getLocation().getLongitude() -.2);
             Zombie zomb = new Zombie(user.getId(), latLng);

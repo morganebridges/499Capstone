@@ -87,13 +87,16 @@ public class UserService {
             else posNeg = -.008;
             System.out.println(user.toString());
             System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
-            LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLongitude() + (.0005 * (randomizer.nextInt()%5)));
+            LatLng zombLoc = new LatLng(user.getLatitude() + (.0007 * (randomizer.nextInt()%5)), user.getLongitude() + (.0007 * (randomizer.nextInt()%5)));
             Zombie zom = new Zombie(user.getId(), zombLoc);
             zomList.add(zom);
             System.out.println("Adding Zombie:" + zom.toString());
             System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
 
         }
+        PlayerDangerManager dangerManager = new PlayerDangerManager();
+        dangerManager.registerUser(user);
+        dangerManager.checkForEnemies(user);
         return zomList;
 
     }
