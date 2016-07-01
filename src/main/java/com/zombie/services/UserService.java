@@ -94,7 +94,6 @@ public class UserService {
             System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
 
         }
-        PlayerDangerManager dangerManager = new PlayerDangerManager();
         dangerManager.registerUser(user);
         dangerManager.checkForEnemies(user);
         return zomList;
