@@ -83,8 +83,8 @@ public class UserService {
 
         for(int i = 0; i < count; i++) {
             if(randomizer.nextBoolean())
-                posNeg = .04;
-            else posNeg = -.02;
+                posNeg = .005;
+            else posNeg = -.008;
             System.out.println(user.toString());
             System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
             LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLongitude() + (.0005 * (randomizer.nextInt()%5)));
