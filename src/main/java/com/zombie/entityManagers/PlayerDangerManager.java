@@ -85,7 +85,11 @@ public class PlayerDangerManager {
             Zombie zomb = new Zombie(user.getId(), latLng);
             System.out.println(user.toString());
             System.out.println(zombieRepo.toString());
-            zombieRepo.save(zomb);
+            try{
+                zombieRepo.save(zomb);
+            }catch(Exception e){
+                System.out.println(e.toString());
+            }
 
         }
         return list.iterator();
