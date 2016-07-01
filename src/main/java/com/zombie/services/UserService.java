@@ -80,12 +80,13 @@ public class UserService {
         Random randomizer = new Random();
         double posNeg;
         if(randomizer.nextBoolean())
-                posNeg = .13;
-        else posNeg = -.12;
+                posNeg = .23;
+        else posNeg = -.22;
 
         for(int i = 0; i < count; i++) {
             System.out.println(user.toString());
-            LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLocation().getLongitude() + (.2 * i));
+            System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
+            LatLng zombLoc = new LatLng(user.getLatitude() + posNeg, user.getLongitude() + (.2 * i));
             Zombie zom = new Zombie(user.getId(), zombLoc);
             zomList.add(zom);
             System.out.println("Adding Zombie:" + zom.toString());

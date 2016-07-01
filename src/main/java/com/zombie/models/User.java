@@ -162,7 +162,7 @@ public class User {
 		this.longitude = location.getLongitude();
 	}
 
-	public void setLocation(long latitude, long longitude) {
+	public void setLocation(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}

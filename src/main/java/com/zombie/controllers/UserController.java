@@ -70,7 +70,10 @@ public class UserController {
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
 
+		//update location of user from the DTO
+		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
+		
 		Iterable<Zombie> list = userService.update(user.getId());
 		Iterator<Zombie> it = list.iterator();
 

@@ -52,7 +52,7 @@ public class Zombie {
     @Override
     public String toString(){
         return String.format(
-          "GamerTag[id=%d, clientKey='%s]",
+          "ZombieId[id=%d, clientKey='%s]",
                 id, clientKey
         );
     }
