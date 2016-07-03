@@ -73,18 +73,21 @@ public class UserController {
 		//update location of user from the DTO
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
+		//TODO: fix up the way we are generating / getting zombies for the backend - right now only provide 4 test zombies.
+		//Iterable<Zombie> list = userService.update(user.getId());
+		//Iterator<Zombie> it = list.iterator();
 
-		Iterable<Zombie> list = userService.update(user.getId());
-		Iterator<Zombie> it = list.iterator();
-
-		System.out.println("Zombies generated");
-		System.out.println(list);
+		//System.out.println("Zombies generated");
+		//System.out.println(list);
 		//generate some test zombies so we can ensure we always get some
-		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 3);
+		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 4);
 		System.out.println("Test zombies list: " + testZoms.size());
 		ArrayList<Zombie> zombList= new ArrayList<>();
-		while(it.hasNext())
-			zombList.add(it.next());
+
+
+
+		/*while(it.hasNext())
+			zombList.add(it.next());*/
 
 		zombList.addAll(testZoms);
 		System.out.println("Total zombie list length:" + zombList.size());

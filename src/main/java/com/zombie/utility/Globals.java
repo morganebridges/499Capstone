@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Globals {
+	public static final long ZOMBIE_LOOP_TIME = 5000;
+
+
 	//global constants must be defined as static final
 	static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
 
@@ -26,4 +29,5 @@ public class Globals {
 		list.add("last used serum");
 		return list;
 	}
+
 }

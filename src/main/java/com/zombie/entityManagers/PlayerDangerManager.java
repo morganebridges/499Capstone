@@ -5,6 +5,7 @@ import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
+import com.zombie.utility.Globals;
 import com.zombie.utility.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by morganebridges on 6/21/16.
@@ -59,40 +62,32 @@ public class PlayerDangerManager {
     private synchronized void runWork() throws InterruptedException {
 
         while(true){
+            lastCheck = System.currentTimeMillis();
             System.out.println("User Danger Worker in outer loop");
-            while(System.currentTimeMillis() - lastCheck < 4000)
-                wait();
-                System.out.println("Danger worker done waiting");
                 Iterator<User> userIt = userList.iterator();
                 while(userIt.hasNext()){
                     User user = userIt.next();
                     System.out.println("Danger Worker processing for: " + user.getName());
-
                     Iterator<Zombie> zombIt = checkForEnemies(user);
                     if(zombIt.hasNext())
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                 }
+            long sleepTime = Globals.ZOMBIE_LOOP_TIME - (System.currentTimeMillis() - lastCheck);
+            if(sleepTime > 0){
+                Thread.sleep(sleepTime);
+            }
+
+
 
 
 
         }
     }
-    public Iterator<Zombie> checkForEnemies(User user){
+    public boolean checkForEnemies(User user){
+        //Checks to see if any Zombies are within the range of perception
         ArrayList<Zombie> list = new ArrayList<>();
-        if(System.currentTimeMillis() - user.getLastAttacked() > 10000){
-            System.out.println("checking for enemies for: " + user.getName());
-            LatLng latLng = new LatLng(user.getLocation().getLatitude() + .1, user.getLocation().getLongitude() -.2);
-            Zombie zomb = new Zombie(user.getId(), latLng);
-            System.out.println(user.toString());
-            System.out.println(zombieRepo.toString());
-            try{
-                zombieRepo.save(zomb);
-            }catch(Exception e){
-                System.out.println(e.toString());
-            }
 
-        }
-        return list.iterator();
+        return false;
     }
     public void registerUser(User user){
         if(userList.contains(user))
