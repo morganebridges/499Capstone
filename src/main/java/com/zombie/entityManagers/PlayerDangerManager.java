@@ -31,6 +31,9 @@ public class PlayerDangerManager {
     UserRepository userRepo;
     @Autowired
     NotificationService noteService;
+    @Autowired
+    ZombieProximetyManager zombieProximetyManager;
+
     private long lastCheck;
 
     volatile boolean here = false;
@@ -68,7 +71,7 @@ public class PlayerDangerManager {
                 while(userIt.hasNext()){
                     User user = userIt.next();
                     System.out.println("Danger Worker processing for: " + user.getName());
-                    Iterator<Zombie> zombIt = checkForEnemies(user);
+                    Iterator<Zombie> zombIt = zombieProximetyManager.findZombiesInRange(user);
                     if(zombIt.hasNext())
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                 }
