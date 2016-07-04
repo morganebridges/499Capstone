@@ -36,7 +36,10 @@ public class NotificationService {
         final int retries = 3;
 
         Sender sender = new Sender(GCM_API_KEY);
-        Message msg = new Message.Builder().addData("message",message).collapseKey(mapUpdateKey).build();
+        Message msg = new Message.Builder()
+                .addData("message",message)
+                .collapseKey(mapUpdateKey)
+                .build();
 
         try {
             if(gcmRegId != null) {

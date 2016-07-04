@@ -72,7 +72,7 @@ public class UserService {
         user.setActive(true);
         user.setLastUsedSerum(new Date());
         user.setLastAttacked(System.currentTimeMillis());
-        dangerManager.registerUser(user);
+        //dangerManager.registerUser(user);
     }
 
     public ArrayList<Zombie> generateTestZombies(User user, int count){
@@ -94,8 +94,8 @@ public class UserService {
             System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
 
         }
-        dangerManager.registerUser(user);
-        dangerManager.checkForEnemies(user);
+        //dangerManager.registerUser(user);
+        //dangerManager.checkForEnemies(user);
         return zomList;
 
     }
