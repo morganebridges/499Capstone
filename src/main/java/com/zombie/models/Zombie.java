@@ -36,7 +36,12 @@ public class Zombie {
     protected Zombie(){}
 
     public Zombie(long clientKey, LatLng location) {
-        new Zombie(clientKey, location.getLatitude(), location.getLongitude());
+        this.clientKey = clientKey;
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
+        this.alive = true;
+        this.freshStamp = System.currentTimeMillis();
+        this.hp = defaultHp;
     }
     public Zombie(long clientKey, double latitude, double longitude){
         this.clientKey = clientKey;
