@@ -50,7 +50,7 @@ public class PlayerDangerManager {
             public void run(){
                 try{
                     System.out.println("inside the run method of danger worker");
-                    runWork();
+                    //runWork();
                 }catch(Exception e){
                     e.printStackTrace();
                 }

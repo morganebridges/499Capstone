@@ -89,6 +89,7 @@ public class UserService {
             System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
             LatLng zombLoc = new LatLng(user.getLatitude() + (.0007 * (randomizer.nextInt()%5)), user.getLongitude() + (.0007 * (randomizer.nextInt()%5)));
             Zombie zom = new Zombie(user.getId(), zombLoc);
+            zombieRepo.save(zom);
             zomList.add(zom);
             System.out.println("Adding Zombie:" + zom.toString());
             System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
@@ -98,5 +99,11 @@ public class UserService {
         //dangerManager.checkForEnemies(user);
         return zomList;
 
+    }
+    public Zombie attackZombie(User user, long zombieId){
+        Zombie zombie = zombieRepo.findById(zombieId);
+        zombie.dealDamage(2);
+        zombieRepo.save(zombie);
+        return zombie;
     }
 }

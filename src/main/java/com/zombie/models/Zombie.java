@@ -28,18 +28,15 @@ public class Zombie {
     private long freshStamp;
 
     //Fields relating to the zombie's game logic state
-    private int hp;
+
     private static int defaultHp = 5;
+    private int hp;
     private boolean alive;
 
     protected Zombie(){}
 
     public Zombie(long clientKey, LatLng location) {
-        this.clientKey = clientKey;
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
-        this.alive = true;
-        this.freshStamp = System.currentTimeMillis();
+        new Zombie(clientKey, location.getLatitude(), location.getLongitude());
     }
     public Zombie(long clientKey, double latitude, double longitude){
         this.clientKey = clientKey;
@@ -47,6 +44,7 @@ public class Zombie {
         this.longitude = longitude;
         this.alive = true;
         this.freshStamp = System.currentTimeMillis();
+        this.hp = defaultHp;
     }
 
     @Override
@@ -78,6 +76,19 @@ public class Zombie {
     }
     public double getLongitude(){
         return longitude;
+    }
+
+    /**
+     * A method for dealing damage to a zombie.
+     * @param damageDealt
+     * @return - true if the zombie is still alive, false if it has been destroyed.
+     */
+    public boolean dealDamage(int damageDealt){
+        hp -= damageDealt;
+        if(hp < 0)
+            alive = false;
+
+        return alive;
     }
 
 }
