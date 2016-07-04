@@ -122,6 +122,23 @@ public class UserController {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 	}
-
+	@RequestMapping(path="/attack", method=RequestMethod.POST)
+	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
+		ResponseEntity<Zombie> theReturn = null;
+		Zombie attackedZombie = null;
+		User user = userService.findUserById(userActionDto.getId());
+		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
+		if(userActionDto.action == UserActionDto.Action.ATTACK){
+			System.out.println("Attack condition passed");
+			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+		}
+		if(attackedZombie != null){
+			theReturn = new ResponseEntity<Zombie>(attackedZombie, HttpStatus.OK);
+		}else{
+			System.out.println("The attacked zombie was null in the user controller");
+			theReturn = new ResponseEntity<Zombie>(attackedZombie, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return theReturn;
+	}
 }
 

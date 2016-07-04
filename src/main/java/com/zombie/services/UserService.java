@@ -95,15 +95,20 @@ public class UserService {
             System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
 
         }
-        //dangerManager.registerUser(user);
         //dangerManager.checkForEnemies(user);
         return zomList;
 
     }
     public Zombie attackZombie(User user, long zombieId){
         Zombie zombie = zombieRepo.findById(zombieId);
-        zombie.dealDamage(2);
-        zombieRepo.save(zombie);
+        //For now we just assume a one-hit kill
+        if(zombie != null){
+            zombie.dealDamage(5);
+            zombieRepo.save(zombie);
+        }else{
+            System.out.println("Query for attacked zombie by id was null");
+        }
+
         return zombie;
     }
 }

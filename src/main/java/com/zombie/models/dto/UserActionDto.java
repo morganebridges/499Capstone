@@ -16,7 +16,7 @@ public class UserActionDto {
 
     double latitude;
     double longitude;
-    int action;
+    public Action action;
     long targetId;
     //Object additionalParam;
 
@@ -51,7 +51,7 @@ public class UserActionDto {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.action = action.getCode();
+        this.action = action;
     }
     public UserActionDto(){}
     public void setTarget(long targetId) {
@@ -75,5 +75,11 @@ public class UserActionDto {
         private int getCode() {
             return this.code;
         }
+    }
+    public long getTargetId(){
+        return targetId;
+    }
+    public int getAction(){
+        return 0;
     }
 }
