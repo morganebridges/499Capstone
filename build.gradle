@@ -62,6 +62,10 @@ dependencies {
   	compile group: 'com.ganyo', name: 'gcm-server', version: '1.0.2'
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    /* logging */
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+
 }
 
 task wrapper(type: Wrapper) {
