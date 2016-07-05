@@ -76,25 +76,23 @@ public class PlayerDangerManager {
             if(sleepTime > 0){
                 Thread.sleep(sleepTime);
             }
-
-
-
-
-
         }
     }
+
     public boolean checkForEnemies(User user){
         //Checks to see if any Zombies are within the range of perception
         ArrayList<Zombie> list = new ArrayList<>();
 
         return false;
     }
+
     public void registerUser(User user){
         if(userList.contains(user))
             return;
         this.userList.add(user);
 
     }
+
     public void deRegister(User user){
         this.userList.remove(user);
     }
