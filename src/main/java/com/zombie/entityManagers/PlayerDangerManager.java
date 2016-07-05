@@ -6,7 +6,6 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.utility.Globals;
-import com.zombie.utility.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by morganebridges on 6/21/16.
@@ -32,7 +29,7 @@ public class PlayerDangerManager {
     @Autowired
     NotificationService noteService;
     @Autowired
-    ZombieProximetyManager zombieProximetyManager;
+    ZombieProximityManager zombieProximityManager;
 
     private long lastCheck;
 
@@ -71,7 +68,7 @@ public class PlayerDangerManager {
                 while(userIt.hasNext()){
                     User user = userIt.next();
                     System.out.println("Danger Worker processing for: " + user.getName());
-                    Iterator<Zombie> zombIt = zombieProximetyManager.findZombiesInRange(user);
+                    Iterator<Zombie> zombIt = zombieProximityManager.findZombiesInRange(user);
                     if(zombIt.hasNext())
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                 }

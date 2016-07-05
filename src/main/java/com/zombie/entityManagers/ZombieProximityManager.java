@@ -19,7 +19,7 @@ import java.util.Iterator;
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-public class ZombieProximetyManager {
+public class ZombieProximityManager {
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired
