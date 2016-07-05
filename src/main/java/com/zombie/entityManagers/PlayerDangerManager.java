@@ -62,6 +62,8 @@ public class PlayerDangerManager {
                     user -> {
                         log.trace("Danger Worker processing for user = {}", user.getId());
                         if (zombieService.areZombiesInRange(user)) {
+                            // TODO: we need some way to ensure we don't keep telling the same user there are zombies over and over, maybe deregister?
+                            // Another way could be to somehow put found zombies in a list so that ZombieService.areZombiesInRange() doesn't find those zombies
                             log.info("Zombies near user = {}", user.getId());
                             noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                         }
