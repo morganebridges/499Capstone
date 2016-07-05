@@ -1,10 +1,9 @@
-package com.zombie.entityManagers;
+package com.zombie.services;
 
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
-import com.zombie.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +18,7 @@ import java.util.Iterator;
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-public class ZombieProximityManager {
+public class ZombieService {
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired
@@ -30,5 +29,10 @@ public class ZombieProximityManager {
     //TODO: make this thing actually check a range.
     public Iterator<Zombie> findZombiesInRange(User user) {
         return zombieRepo.findByClientKey(user.getId()).iterator();
+    }
+
+    //TODO: make this more efficient in the great someday or if it is a performance issue
+    public boolean areZombiesInRange(User user) {
+        return findZombiesInRange(user).hasNext();
     }
 }

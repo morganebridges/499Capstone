@@ -1,18 +1,19 @@
 package com.zombie.entityManagers;
 
 import com.zombie.models.User;
-import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
+import com.zombie.services.ZombieService;
 import com.zombie.utility.Globals;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by morganebridges on 6/21/16.
@@ -29,61 +30,48 @@ public class PlayerDangerManager {
     @Autowired
     NotificationService noteService;
     @Autowired
-    ZombieProximityManager zombieProximityManager;
+    ZombieService zombieService;
 
-    private long lastCheck;
+    private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
 
-    volatile boolean here = false;
-
-    Thread privateThread;
-    ArrayList<User> userList;
+    private ArrayList<User> userList;
     public PlayerDangerManager(){
         userList = new ArrayList<>();
-        System.out.println("initializing danger manager");
 
-        lastCheck = System.currentTimeMillis();
-        Runnable r = new Runnable(){
+        log.debug("initializing danger manager");
 
-            public void run(){
+        Runnable r = () -> {
                 try{
-                    System.out.println("inside the run method of danger worker");
-                    //runWork();
+                    log.trace("inside the run method of danger worker");
+                    runWork();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-
-
-            }
         };
-        privateThread = new Thread(r);
+        Thread privateThread = new Thread(r);
         privateThread.start();
     }
 
     private synchronized void runWork() throws InterruptedException {
 
         while(true){
-            lastCheck = System.currentTimeMillis();
-            System.out.println("User Danger Worker in outer loop");
-                Iterator<User> userIt = userList.iterator();
-                while(userIt.hasNext()){
-                    User user = userIt.next();
-                    System.out.println("Danger Worker processing for: " + user.getName());
-                    Iterator<Zombie> zombIt = zombieProximityManager.findZombiesInRange(user);
-                    if(zombIt.hasNext())
-                        noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
-                }
+            long lastCheck = System.currentTimeMillis();
+            log.trace("User Danger Worker in outer loop");
+            userList.stream()
+                .forEach(
+                    user -> {
+                        log.trace("Danger Worker processing for user = {}", user.getId());
+                        if (zombieService.areZombiesInRange(user)) {
+                            log.info("Zombies near user = {}", user.getId());
+                            noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
+                        }
+                    }
+                );
             long sleepTime = Globals.ZOMBIE_LOOP_TIME - (System.currentTimeMillis() - lastCheck);
             if(sleepTime > 0){
                 Thread.sleep(sleepTime);
             }
         }
-    }
-
-    public boolean checkForEnemies(User user){
-        //Checks to see if any Zombies are within the range of perception
-        ArrayList<Zombie> list = new ArrayList<>();
-
-        return false;
     }
 
     public void registerUser(User user){
