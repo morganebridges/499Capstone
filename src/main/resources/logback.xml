@@ -1,0 +1,21 @@
+<configuration debug="true">
+	<contextName>zedReckoning</contextName>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %contextName [%thread][%logger{0}] %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>zedReckoning.log</file>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="trace">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
