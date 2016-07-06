@@ -6,6 +6,8 @@ import com.zombie.models.dto.UserActionDto;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -37,35 +38,39 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-
+	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     
 	@RequestMapping(path="/getuser", method=RequestMethod.POST)
     public ResponseEntity<User> getUser(@RequestParam(required=true) String name, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("User controller hit, requesting user Object for name: " + name);
+
+		//TODO: I don't like that this endpoint is used for both getting a user and creating a new one.  What if thinks they are creating a new user but instead gets a current one?
+		//TODO: Why aren't we getting users by id?
+		log.debug("User controller hit, requesting user Object for name={}", name);
     		
-        User user = userRepo.findByName(name);
-        if(user != null)
-        		System.out.println("User query to database produce user object with name: " + user.getName() + "\n with id: " + user.getId());
-        ResponseEntity<User> theReturn = null;
-
-
-        if(user != null){
-        		theReturn = new ResponseEntity<>(user, HttpStatus.OK);
+        User user = userService.findUserByName(name);
+        if(user != null) {
+	        log.debug("User query to database produced user object with name={} id={}", user.getName(), user.getId());
         }else{
-        		System.out.println("User not found in database, creating new user");
-        		user = new User(name);
-        		userRepo.save(user);	
-
-        	
+            user = new User(name);
+	        userService.save(user);
+	        log.info("Requested User not found in database, created new user with name={} userid={}", name, user.getId());
         }
-		if(user.getLastUsedSerum() == null)
+
+		if(user.getLastUsedSerum() == null) {
 			user.setLastUsedSerum(new Date());
-		userService.save(user);
+			userService.save(user);
+			log.warn("Encountered a userId={} with no lastusedSerum property, setting to lastUsedSerum={}",
+					user.getId(), user.getLastUsedSerum());
+		}
 		return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
+		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
+				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
+				userActionDto.getLongitude(), userActionDto.getTargetId());
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
@@ -81,7 +86,7 @@ public class UserController {
 		//System.out.println(list);
 		//generate some test zombies so we can ensure we always get some
 		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 4);
-		System.out.println("Test zombies list: " + testZoms.size());
+		log.trace("generating test zombies size={}", testZoms.size());
 		ArrayList<Zombie> zombList= new ArrayList<>();
 
 
@@ -90,53 +95,73 @@ public class UserController {
 			zombList.add(it.next());*/
 
 		zombList.addAll(testZoms);
-		System.out.println("Total zombie list length:" + zombList.size());
+		log.trace("Returning zombies. Total zombie list length={}", zombList.size());
 		return new ResponseEntity<>(zombList, HttpStatus.OK);
 	}
+
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
-		ResponseEntity<User> theResponse = null;
+		//TODO: again, we shouldnt be creating new users in the login endpoint
+		log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
 		if(user != null){
 			if(user.getName() == null) {
-				user.setName("Generic Jerk");
+				String defaultName = "Generic Jerk";
+				log.warn("userId={} found without a name.  Setting name to name={}", user.getId(), defaultName);
+				user.setName(defaultName);
 				userService.save(user);
 			}
 			userService.login(user);
-			theResponse = new ResponseEntity<>(user, HttpStatus.OK);
-			return theResponse;
+			return new ResponseEntity<>(user, HttpStatus.OK);
 
 		} else{
 			user = new User();
 			userService.save(user);
-			if(user.getName() == null)
-				user.setName("Generic Jell");
-			userService.save(user);
+			if(user.getName() == null) {
+				String defaultName = "Generic Jell";
+				log.warn("New userId={} found without a name.  Setting default to name={}", user.getId(), defaultName);
+				user.setName(defaultName);
+				userService.save(user);
+			}
 
 			userService.login(user);
 
-			System.out.println("User being sent:");
-			System.out.println("ID: " + user.getId());
+			log.info("New user being sent: userId={}", user.getId());
 
-			System.out.println("test");
+			log.trace("test"); //TODO: What purpose does this line serve?  Could it be more descriptive?
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 	}
+
 	@RequestMapping(path="/attack", method=RequestMethod.POST)
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
-		ResponseEntity<Zombie> theReturn = null;
+		//TODO: What is the point of having the action field if we are hitting action specific endpoints?
+
+		log.debug("In user attack endpoint userId={} actionId={} latitude={} longitude={} targetId={}",
+				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
+				userActionDto.getLongitude(), userActionDto.getTargetId());
+
+		ResponseEntity<Zombie> theReturn;
 		Zombie attackedZombie = null;
 		User user = userService.findUserById(userActionDto.getId());
+
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
+
 		if(userActionDto.action == UserActionDto.Action.ATTACK){
-			System.out.println("Attack condition passed");
+			log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+		} else {
+			log.error("Attack endpoint hit without attack action set userId={} actionId={}",
+					userActionDto.getId(), userActionDto.getAction());
 		}
+
 		if(attackedZombie != null){
-			theReturn = new ResponseEntity<Zombie>(attackedZombie, HttpStatus.OK);
+			log.info("userId={} attacking zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
+			theReturn = new ResponseEntity<>(attackedZombie, HttpStatus.OK);
 		}else{
-			System.out.println("The attacked zombie was null in the user controller");
-			theReturn = new ResponseEntity<Zombie>(attackedZombie, HttpStatus.INTERNAL_SERVER_ERROR);
+			log.warn("The attacked zombieId={} from userId={} was null in the user controller. Was it already dead?",
+					userActionDto.getTargetId(), userActionDto.getId());
+			theReturn = new ResponseEntity<>(attackedZombie, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return theReturn;
 	}
