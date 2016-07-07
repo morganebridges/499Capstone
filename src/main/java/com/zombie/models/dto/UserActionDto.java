@@ -18,7 +18,30 @@ public class UserActionDto {
     double longitude;
     public Action action;
     long targetId;
+
     //Object additionalParam;
+
+    /**
+     * Generate received from the client.  If the update includes an action that
+     * requires a target, setTarget() should be called after construction.  If the
+     * action requires an additional parameter, setAdditionParameter() should be called.
+     * @param id The id of the user making the update
+     * @param latitude The latitude of the user
+     * @param longitude The longitude of the user
+     * @param action An inner enum representing the action the user is taking.
+     */
+    public UserActionDto(long id, long latitude, long longitude, Action action){
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.action = action;
+    }
+
+    public UserActionDto(){}
+
+    public long getId(){
+        return id;
+    }
 
     public double getLatitude() {
         return latitude;
@@ -35,25 +58,7 @@ public class UserActionDto {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public long getId(){
-        return id;
-    }
-    /**
-     * Generate received from the client.  If the update includes an action that
-     * requires a target, setTarget() should be called after construction.  If the
-     * action requires an additional parameter, setAdditionParameter() should be called.
-     * @param id The id of the user making the update
-     * @param latitude The latitude of the user
-     * @param longitude The longitude of the user
-     * @param action An inner enum representing the action the user is taking.
-     */
-    public UserActionDto(long id, long latitude, long longitude, Action action){
-        this.id = id;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.action = action;
-    }
-    public UserActionDto(){}
+
     public void setTarget(long targetId) {
         this.targetId = targetId;
     }
@@ -76,9 +81,11 @@ public class UserActionDto {
             return this.code;
         }
     }
+
     public long getTargetId(){
         return targetId;
     }
+
     public int getAction(){
         return 0;
     }

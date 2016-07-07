@@ -6,6 +6,8 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.zombie.models.User;
 import com.zombie.utility.Globals;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,12 +28,15 @@ public class NotificationService {
     public NotificationService(){}
     @Autowired
     UserService userService;
+
+    Logger log = LoggerFactory.getLogger(NotificationService.class);
+
     /**
     * gcmRegId is the id which android app will give to server (one time)
     **/
     public boolean pushNotificationToGCM(String gcmRegId,String message, User user){
-        System.out.println(Globals.getGCMServerKey());
-        System.out.println("breakpoints");
+        log.trace("In pushNotificationToGCM. gcmRegId={} message={} userId={} gcmServerKey={}",
+                gcmRegId, message, user, Globals.getGCMServerKey());
         final String GCM_API_KEY = Globals.getGCMServerKey();
         final int retries = 3;
 
@@ -43,7 +48,7 @@ public class NotificationService {
 
         try {
             if(gcmRegId != null) {
-                System.out.println("In try block of gcm service");
+                log.trace("In try block of gcm service");
                 Result result = sender.send(msg, gcmRegId, retries);
                 /**
                 * if you want to send to multiple then use below method
@@ -52,23 +57,20 @@ public class NotificationService {
 
 
                 if (StringUtils.isEmpty(result.getErrorCodeName())) {
-                    System.out.println("GCM Notification is sent successfully" + result.toString());
+                    log.info("GCM Notification is sent successfully to userId={} result={}", user, result.toString());
                     return true;
                 }
 
-                System.out.println("Error occurred while sending push notification :" + result.getErrorCodeName());
+                log.error("Error occurred while sending push notification errorCode={}:", result.getErrorCodeName());
 
             }else {
-                System.out.println("No token could be associated with this account!");
+                log.warn("No token could be associated with this account! userId={}", user);
             }
         } catch (InvalidRequestException e) {
-            System.out.println("Invalid Request");
-            e.printStackTrace();
+            log.error("Invalid Request", e);
         } catch (IOException e) {
-            System.out.println("IO Exception");
-            e.printStackTrace();
+            log.error("IO Exception", e);
         }
         return false;
-
     }
 }

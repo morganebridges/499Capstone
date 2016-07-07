@@ -7,6 +7,8 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,10 @@ public class AdminService {
 	@Autowired
 	private UserService userService;
 
+	Logger log = LoggerFactory.getLogger(AdminService.class);
+
 	public byte[] exportUserData() {
+		log.trace("In exportuserData");
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 		Iterator<User> userIterator = userService.getAllUsers().iterator();
@@ -91,11 +96,12 @@ public class AdminService {
 			workbook.write(out);
 			byte[] bytes = out.toByteArray();
 			out.close();
+			log.trace("exportUserData returning data");
 			return bytes;
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			log.error("Error exporting user data", e);
 			return new byte[0];
 		}
 	}
@@ -108,6 +114,8 @@ public class AdminService {
 	 * @throws IllegalArgumentException If the source is not an Excel document or the data is invalid for a user
 	 */
 	public int importUserData(InputStreamSource input) throws IllegalArgumentException{
+		log.trace("in importUserData");
+
 		int numOfUsers = 0;
 
 		// Get the workbook and sheet
@@ -173,13 +181,14 @@ public class AdminService {
 					userService.save(newUser);
 					numOfUsers++;
 				} catch (IllegalStateException e) {
-					e.printStackTrace();
+					log.error("Error importing user data", e);
 					throw new IllegalArgumentException("Invalid cell in row " + (numOfUsers + 2) + ", " + e.getMessage());
 				}
 			}
 		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException("Not enough columns");
 		}
+		log.trace("finishing importUserData numberOfUsers={}", numOfUsers);
 		return numOfUsers;
 	}
 }

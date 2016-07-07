@@ -1,4 +1,9 @@
 package com.zombie.gcm;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -6,12 +11,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
- import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zombie.gcm.MsgContent;
 
 public class POST2GCM {
 
     public static void post(String apiKey, MsgContent content){
+
+        //TODO: What does this do exactly?  And why does it just log the response?
+        Logger log = LoggerFactory.getLogger(POST2GCM.class);
 
         try{
 
@@ -49,8 +55,7 @@ public class POST2GCM {
 
             // 6. Get the response
             int responseCode = conn.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
+            log.debug("Sending 'POST' request to URL={} responseCode={}", url, responseCode);
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()));
@@ -63,7 +68,7 @@ public class POST2GCM {
             in.close();
 
             // 7. Print result
-            System.out.println(response.toString());
+            log.info("response={}", response.toString());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

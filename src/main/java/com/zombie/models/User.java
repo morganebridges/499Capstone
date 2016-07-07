@@ -80,11 +80,6 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-	
-	@Override
-    public String toString(){
-       return name;
-    }
 
 	public long getId() {
 		// TODO Auto-generated method stub
@@ -179,6 +174,11 @@ public class User {
 
 	public void setLastAttacked(long lastAttack) {
 		this.lastAttack = lastAttack;
+	}
+
+	@Override
+	public String toString() {
+		return "" + this.getId();
 	}
 
 }
