@@ -36,8 +36,8 @@ public class NotificationService {
     **/
     public boolean pushNotificationToGCM(String gcmRegId,String message, User user){
         log.trace("In pushNotificationToGCM. gcmRegId={} message={} userId={} gcmServerKey={}",
-                gcmRegId, message, user, Globals.getGCMServerKey());
-        final String GCM_API_KEY = Globals.getGCMServerKey();
+                gcmRegId, message, user, Globals.GCMServerKey);
+        final String GCM_API_KEY = Globals.GCMServerKey;
         final int retries = 3;
 
         Sender sender = new Sender(GCM_API_KEY);

@@ -2,12 +2,9 @@ package com.zombie.utility;
 
 import com.zombie.models.User;
 import com.zombie.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -18,19 +15,21 @@ import java.util.Random;
 
 public class TestDataPrep {
 
+    private Logger log = LoggerFactory.getLogger(TestDataPrep.class);
 
     private UserService userService;
-    String[] names = {"James", "Helen", "Frank", "Corin", "Morgan", "Jacob", "Siva", "Fred", "Pickle", "Jenny",
+    private String[] names = {"James", "Helen", "Frank", "Corin", "Morgan", "Jacob", "Ben", "Siva", "Fred", "Pickle", "Jenny",
             "Samantha", "Randy", "Jimbo", "Rashen", "Khoa", "Chee", "Sandy", "Lawerence", "Mai", "Sketch"};
     private Random randomGenerator;
+
     public TestDataPrep(UserService service){
         this.randomGenerator = new Random();
         this.userService = service;
     }
 
     public void populate(int numRecords){
+        log.trace("Generating numberOfUsers={} test users", numRecords);
         for(int i = 0; i < numRecords; i++){
-
             User user = new User(returnName());
             userService.save(user);
             user.setAmmo(randomGenerator.nextInt(500));
@@ -43,10 +42,8 @@ public class TestDataPrep {
         }
     }
 
-    public String returnName() {
-
+    private String returnName() {
         int index = randomGenerator.nextInt(names.length);
         return names[index];
-
     }
 }

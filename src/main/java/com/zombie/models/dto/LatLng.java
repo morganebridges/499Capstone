@@ -1,4 +1,4 @@
-package com.zombie.utility;
+package com.zombie.models.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

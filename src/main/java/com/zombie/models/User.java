@@ -1,6 +1,6 @@
 package com.zombie.models;
 
-import com.zombie.utility.LatLng;
+import com.zombie.models.dto.LatLng;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

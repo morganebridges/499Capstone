@@ -3,9 +3,11 @@ package com.zombie.services;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
+import com.zombie.models.dto.LatLng;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
-import com.zombie.utility.LatLng;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -31,6 +33,7 @@ public class UserService {
     @Autowired
     ZombieRepository zombieRepo;
 
+    Logger log = LoggerFactory.getLogger(UserService.class);
 
     public User findUserByName(String name){
         return userRepo.findByName(name);
@@ -41,8 +44,7 @@ public class UserService {
     }
 
     public User findUserById(long id){
-        System.out.println("USER REPO");
-        System.out.println(userRepo);
+        log.trace("In findUserById userRepo={}", userRepo);
         return userRepo.findUserById(id);
     }
 
@@ -69,44 +71,47 @@ public class UserService {
     }
 
     public void login(User user){
+        //TODO: is this for registration or login?  If login why setting lastUsedSerum?
         user.setActive(true);
         user.setLastUsedSerum(new Date());
         user.setLastAttacked(System.currentTimeMillis());
-        //dangerManager.registerUser(user);
+        //dangerManager.registerUser(user); TODO: uncomment this when we get danger manager working
     }
 
     public ArrayList<Zombie> generateTestZombies(User user, int count){
         ArrayList<Zombie> zomList = new ArrayList<>();
         Random randomizer = new Random();
-        double posNeg;
+        double latPosNeg = 1;
+        double longPosNeg = 1;
 
-
+        log.debug("generating zombieCount={} zombies for userId={}", count, user);
         for(int i = 0; i < count; i++) {
             if(randomizer.nextBoolean())
-                posNeg = .005;
-            else posNeg = -.008;
-            System.out.println(user.toString());
-            System.out.println("User Location=> Lat: " + user.getLatitude() + " : Long: " + user.getLongitude());
-            LatLng zombLoc = new LatLng(user.getLatitude() + (.0007 * (randomizer.nextInt()%5)), user.getLongitude() + (.0007 * (randomizer.nextInt()%5)));
+                latPosNeg = -1;
+            if(randomizer.nextBoolean())
+                longPosNeg = -1;
+            log.trace("User Location is Lat={} : Long={} ", user.getLatitude(), user.getLongitude());
+            LatLng zombLoc = new LatLng(user.getLatitude() + (.0007 * (randomizer.nextInt()%5) * latPosNeg)
+                    , user.getLongitude() + (.0007 * (randomizer.nextInt()%5) * longPosNeg));
             Zombie zom = new Zombie(user.getId(), zombLoc);
             zombieRepo.save(zom);
             zomList.add(zom);
-            System.out.println("Adding Zombie:" + zom.toString());
-            System.out.println("lat:" + zom.getLatitude() + ", long: " + zom.getLongitude());
-
+            log.debug("New Zombie Location is Lat={} : Long={} zombieId={}",
+                    zom.getLatitude(), zom.getLongitude(), zom.getId());
         }
-        //dangerManager.checkForEnemies(user);
         return zomList;
 
     }
+
     public Zombie attackZombie(User user, long zombieId){
         Zombie zombie = zombieRepo.findById(zombieId);
         //For now we just assume a one-hit kill
         if(zombie != null){
             zombie.dealDamage(5);
             zombieRepo.save(zombie);
+            log.debug("ZombieId={} killed by userId={}", zombieId, user);
         }else{
-            System.out.println("Query for attacked zombie by id was null");
+            log.warn("UserId={} trying to kill a zombieId={} that could not be found", user, zombieId);
         }
 
         return zombie;

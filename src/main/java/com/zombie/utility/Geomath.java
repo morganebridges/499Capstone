@@ -1,5 +1,7 @@
 package com.zombie.utility;
 
+import com.zombie.models.dto.LatLng;
+
 /**
  * Created by morganebridges on 6/21/16.
  * This utility class is here to provide static methods to the services layer in order to make useful calculations.

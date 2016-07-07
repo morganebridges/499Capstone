@@ -9,14 +9,9 @@ public class Globals {
 
 
 	//global constants must be defined as static final
-	static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
-
+	public static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
 
 	public static List<String> gcmIdStore;
-	
-	public static String getGCMServerKey(){
-		return GCMServerKey;
-	}
 
 	public static List<String> getOrderedUserFields() {
 		ArrayList<String> list = new ArrayList<>();

@@ -1,11 +1,9 @@
 package com.zombie.models;
-import com.zombie.utility.LatLng;
+import com.zombie.models.dto.LatLng;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * Created by morganebridges on 5/25/16.
