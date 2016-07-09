@@ -39,7 +39,7 @@ public class ZombieGenerationManager {
     @Autowired
     PlayerDangerManager dangerManager;
 
-    private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
+    private final Logger log = LoggerFactory.getLogger(ZombieGenerationManager.class);
 
     private HashMap<Long, User> userMap;
     public ZombieGenerationManager(){
