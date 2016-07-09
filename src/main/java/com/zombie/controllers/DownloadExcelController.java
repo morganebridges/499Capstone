@@ -29,7 +29,7 @@ public class DownloadExcelController {
 			produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 	public ResponseEntity<InputStreamResource> downloadFile() {
 		try {
-			//log.trace("User export being requested");
+			log.trace("User export being requested");
 			byte[] out = adminService.exportUserData();
 			ByteArrayInputStream in = new ByteArrayInputStream(out);
 
@@ -43,12 +43,12 @@ public class DownloadExcelController {
 					.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 					.body(new InputStreamResource(in));
 			String statusCode = response.getStatusCode().name();
-			//log.info("User export being sent statusCode={}", statusCode);
+			log.info("User export being sent statusCode={}", statusCode);
 			return response;
 
 
 		} catch (Exception e) {
-			//log.error("Error exporting user data", e);
+			log.error("Error exporting user data", e);
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}

@@ -40,11 +40,11 @@ public class PlayerDangerManager {
     public PlayerDangerManager(){
         userMap = new HashMap<>();
 
-        //log.debug("initializing danger manager");
+        log.debug("initializing danger manager");
 
         Runnable r = () -> {
                 try{
-                    //log.trace("inside the run method of danger worker");
+                    log.trace("inside the run method of danger worker");
                     runWork();
                 }catch(Exception e){
                     e.printStackTrace();
@@ -58,16 +58,16 @@ public class PlayerDangerManager {
 
         while(true){
             long lastCheck = System.currentTimeMillis();
-            //log.trace("User Danger Worker in outer loop");
+            log.trace("User Danger Worker in outer loop");
             userMap.entrySet().stream()
                 .forEach(
                     mapEntry -> {
                         User user = mapEntry.getValue();
-                        //log.trace("Danger Worker processing for user = {}", user.getId());
+                        log.trace("Danger Worker processing for user = {}", user.getId());
                         if (zombieService.areZombiesInRange(user)) {
                             // TODO: we need some way to ensure we don't keep telling the same user there are zombies over and over, maybe deregister?
                             // Another way could be to somehow put found zombies in a list so that ZombieService.areZombiesInRange() doesn't find those zombies
-                            //log.info("Zombies near user = {}", user.getId());
+                            log.info("Zombies near user = {}", user.getId());
                             noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                         }
                     }
@@ -90,7 +90,7 @@ public class PlayerDangerManager {
         if(userMap.containsKey(user.getId())){
             userMap.remove(user.getId(), userMap.get(user.getId()));
         } else{
-            //log.debug("Attempt to deregister user from danger manager failed - user not registered.");
+            log.debug("Attempt to deregister user from danger manager failed - user not registered.");
         }
     }
     public void deRegister(long uid){

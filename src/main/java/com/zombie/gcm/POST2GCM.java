@@ -55,7 +55,7 @@ public class POST2GCM {
 
             // 6. Get the response
             int responseCode = conn.getResponseCode();
-            //log.debug("Sending 'POST' request to URL={} responseCode={}", url, responseCode);
+            log.debug("Sending 'POST' request to URL={} responseCode={}", url, responseCode);
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()));
@@ -68,7 +68,7 @@ public class POST2GCM {
             in.close();
 
             // 7. Print result
-            //log.info("response={}", response.toString());
+            log.info("response={}", response.toString());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

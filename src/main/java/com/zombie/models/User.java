@@ -57,7 +57,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
-		this.range = 100;
+		this.range = range;
 	}
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();

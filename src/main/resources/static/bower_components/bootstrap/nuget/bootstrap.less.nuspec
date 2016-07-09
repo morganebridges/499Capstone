@@ -7,7 +7,7 @@
     <authors>Twitter, Inc.</authors>
     <owners>bootstrap</owners>
 	<description>The most popular front-end framework for developing responsive, mobile first projects on the web.</description>
-    <releaseNotes>http://b//log.getbootstrap.com</releaseNotes>
+    <releaseNotes>http://blog.getbootstrap.com</releaseNotes>
 	<summary>Bootstrap framework in Less. Includes fonts and JavaScript</summary>
 	<language>en-us</language>
 	<projectUrl>http://getbootstrap.com</projectUrl>

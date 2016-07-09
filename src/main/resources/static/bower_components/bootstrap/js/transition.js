@@ -32,7 +32,7 @@
     return false // explicit for ie8 (  ._.)
   }
 
-  // http://b//log.alexmaccaw.com/css-transitions
+  // http://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
     var called = false
     var $el = this

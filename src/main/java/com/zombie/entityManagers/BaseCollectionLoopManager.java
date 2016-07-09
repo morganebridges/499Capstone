@@ -43,11 +43,11 @@ public class BaseCollectionLoopManager {
     public BaseCollectionLoopManager(){
         userList = new ArrayList<>();
 
-        //log.debug("initializing danger manager");
+        log.debug("initializing danger manager");
 
         Runnable r = () -> {
             try{
-                //log.trace("inside the run method of danger worker");
+                log.trace("inside the run method of danger worker");
                 runWork();
             }catch(Exception e){
                 e.printStackTrace();
@@ -61,15 +61,15 @@ public class BaseCollectionLoopManager {
 
         while(true){
             long lastCheck = System.currentTimeMillis();
-            //log.trace("User Danger Worker in outer loop");
+            log.trace("User Danger Worker in outer loop");
             userList.stream()
                     .forEach(
                             user -> {
-                                //log.trace("Danger Worker processing for user = {}", user.getId());
+                                log.trace("Danger Worker processing for user = {}", user.getId());
                                 if (zombieService.areZombiesInRange(user)) {
                                     // TODO: we need some way to ensure we don't keep telling the same user there are zombies over and over, maybe deregister?
                                     // Another way could be to somehow put found zombies in a list so that ZombieService.areZombiesInRange() doesn't find those zombies
-                                    //log.info("Zombies near user = {}", user.getId());
+                                    log.info("Zombies near user = {}", user.getId());
                                     noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                                 }
                             }

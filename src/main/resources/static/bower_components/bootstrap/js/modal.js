@@ -67,7 +67,7 @@
 
     this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
-    this.$dia//log.on('mousedown.dismiss.bs.modal', function () {
+    this.$dialog.on('mousedown.dismiss.bs.modal', function () {
       that.$element.one('mouseup.dismiss.bs.modal', function (e) {
         if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
       })
@@ -127,7 +127,7 @@
       .off('click.dismiss.bs.modal')
       .off('mouseup.dismiss.bs.modal')
 
-    this.$dia//log.off('mousedown.dismiss.bs.modal')
+    this.$dialog.off('mousedown.dismiss.bs.modal')
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
