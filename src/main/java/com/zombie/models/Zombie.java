@@ -4,6 +4,9 @@ import com.zombie.models.dto.LatLng;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Created by morganebridges on 5/25/16.
@@ -30,6 +33,8 @@ public class Zombie {
     private static int defaultHp = 5;
     private int hp;
     private boolean alive;
+
+
 
     protected Zombie(){}
 

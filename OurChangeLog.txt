@@ -7,13 +7,17 @@ from the server side.
 
 2. I refactored our zombie repository to return a Stream (cOoL) instead of an Interable.
 
-3. I'm refactoring the ArrayList<> implementations of our Zombie return collection into a hash table. The reasons for this
+3. I'm refactoring the ArrayList<> implementations of our Zombie return collection into a HashMap<Long, Zombie>. The reasons for this
 are as follows:
     i. We can't get an ArrayList directly from hibernate anyway, so we need to process it to get it in that form.
-    ii. If we are gonna index, lets do it by something reliable, such as a UID, (doyy)
+    ii. If we are gonna index, lets do it by something reliable with system semantics, such as a UID, (doyy)
     iii. Why not?
+    iv. We can call stream and process map entries, which rules.
 
+4. Implemented .equals method on user so that we can determine object equality if multiple hibernate sessions are responsible for
+creating user objects, in which case we might get weird behavior.
 
+5. Added a method to find a random location within a radius based on LatLng in our geomath class.
 
 
 Android adjustments that need to be made due to server changes (7.9.16)
@@ -21,3 +25,6 @@ Android adjustments that need to be made due to server changes (7.9.16)
 Make my Update API take a ClientUpdateDto instead of an arraylist of zombies, duh.
 
 Instead of ArrayList, take a Hashtable.
+
+### Active user Global Object HashTable ###
+We have talked before about keeping

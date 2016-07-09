@@ -2,6 +2,8 @@ package com.zombie.utility;
 
 import com.zombie.models.dto.LatLng;
 
+import java.util.Random;
+
 /**
  * Created by morganebridges on 6/21/16.
  * This utility class is here to provide static methods to the services layer in order to make useful calculations.
@@ -47,4 +49,27 @@ public class Geomath {
     }
     public static double feetToMiles(double feet){ return feet * .000189;}
     public static double milesToFeet(double miles){ return (miles / .000189);}
+
+    public static LatLng getRandomLocationWithin(double lat, double lng, double radius) {
+        Random random = new Random();
+
+        // Convert radius from meters to degrees
+        double radiusInDegrees = radius / 111000f;
+
+        double u = random.nextDouble();
+        double v = random.nextDouble();
+        double w = radiusInDegrees * Math.sqrt(u);
+        double t = 2 * Math.PI * v;
+        double x = w * Math.cos(t);
+        double y = w * Math.sin(t);
+
+        // Adjust the x-coordinate for the shrinking of the east-west distances
+        double new_x = x / Math.cos(lng);
+
+        double foundLongitude = new_x + lat;
+        double foundLatitude = y + lng;
+        System.out.println("Longitude: " + foundLongitude + "  Latitude: " + foundLatitude );
+        return new LatLng(foundLatitude, foundLongitude);
+    }
 }
+

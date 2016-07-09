@@ -5,9 +5,8 @@ import com.zombie.models.dto.LatLng;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import javax.persistence.Transient;
+import java.util.*;
 
 /**
  * Created by morganebridges on 5/25/16.
@@ -24,8 +23,10 @@ public class User {
 	private int ammo;
 	private int serum;
 	private Date lastUsedSerum = new Date();
+	private Date lastModified = new Date();
 
-	private long lastAttack;
+	//A value that represents the lsaat time zombies were spawned
+	private long lastEnemySpawned;
 
 	//range in feet
 	private double range;
@@ -36,7 +37,10 @@ public class User {
 	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
 	private double latitude;
 	private double longitude;
-	
+
+	@Transient
+	List<Zombie> zombiesFound;
+
     public User(){}
 
     public User(String name){
@@ -48,7 +52,6 @@ public class User {
 	    this.ammo = 5;
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
-	    this.lastAttack = 0;
     }
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
@@ -59,7 +62,6 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
-		this.lastAttack = 0;
 		this.range = range;
 	}
 
@@ -173,12 +175,12 @@ public class User {
 		return longitude;
 	}
 
-	public long getLastAttacked() {
-		return lastAttack;
+	public long getlastEnemySpawneded() {
+		return lastEnemySpawned;
 	}
 
-	public void setLastAttacked(long lastAttack) {
-		this.lastAttack = lastAttack;
+	public void setlastEnemySpawneded(long lastEnemySpawned) {
+		this.lastEnemySpawned = lastEnemySpawned;
 	}
 
 	@Override
@@ -188,5 +190,45 @@ public class User {
 
 	public double getRange() {
 		return range;
+	}
+	public List<Zombie> getZombiesFound(){
+		return zombiesFound;
+	}
+
+
+	public boolean isZombiesFound(){
+		return(zombiesFound.size() > 0);
+	}
+	public List<Zombie> addFoundZombie(Zombie zombie){
+		if(zombiesFound == null)
+			zombiesFound = new ArrayList<>();
+		zombiesFound.add(zombie);
+		return zombiesFound;
+	}
+	public List<Zombie> addFoundZombieList(List<Zombie> newList){
+		if(zombiesFound == null)
+			zombiesFound = new ArrayList<>();
+		zombiesFound.addAll(newList);
+		return zombiesFound;
+	}
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+	@Override
+	public boolean equals(Object otherObject){
+		try{
+			User otherUser = (User)otherObject;
+		}catch(ClassCastException e){
+			e.printStackTrace();
+		}
+		if(id == ((User)otherObject).getId())
+			return true;
+
+		return false;
 	}
 }
