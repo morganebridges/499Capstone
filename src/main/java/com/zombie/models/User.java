@@ -28,8 +28,8 @@ public class User {
 	//A value that represents the lsaat time zombies were spawned
 	private long lastEnemySpawned;
 
-	//range in feet
-	private double range;
+	//range in feet (default)
+	private double range = 100;
 
 	//Google Cloud Messaging registration Id
 
@@ -44,7 +44,7 @@ public class User {
     public User(){}
 
     public User(String name){
-		this.range = 20;
+		this.range = 100;
 	    this.name = name;
 	    this.totalKills = 0;
 	    this.kills = 0;
@@ -54,7 +54,7 @@ public class User {
 	    this.lastUsedSerum = new Date();
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -62,7 +62,6 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
-		this.range = range;
 	}
 
 	public Iterator<Object> getAllFields() {
@@ -74,6 +73,7 @@ public class User {
 		list.add(ammo);
 		list.add(serum);
 		list.add(lastUsedSerum);
+		list.add(range);
 		//leaving location out of import/export for now
 		return list.iterator();
 	}
