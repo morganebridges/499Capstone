@@ -65,6 +65,10 @@ dependencies {
 
     /* logging */
     compile 'ch.qos.logback:logback-classic:1.0.13'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.13'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+
+
 
 }
 
