@@ -94,14 +94,14 @@ public class UserController {
 
 
 	@RequestMapping(path="/new", method=RequestMethod.POST)
-	public ResponseEntity<User>createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
-		if(user.getName() == null || user.getName().length() < 1)
-			return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<User>createUser(@RequestBody String userName, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
+		if(userName == null || userName.length() < 1)
+			return new ResponseEntity<>(new User(null), HttpStatus.BAD_REQUEST);
 
-		User newUser = new User(user.getName());
+		User newUser = new User(userName);
 		userService.save(newUser);
 		userService.login(newUser);
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
 	@RequestMapping(path="/attack", method=RequestMethod.POST)
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
