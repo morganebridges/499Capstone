@@ -26,5 +26,5 @@ module.exports = function generateCommonJSModule(grunt, srcFiles, destFilepath) 
   } catch (err) {
     grunt.fail.warn(err);
   }
-  grunt.log.writeln('File ' + destFilepath.cyan + ' created.');
+  grunt.//log.writeln('File ' + destFilepath.cyan + ' created.');
 };

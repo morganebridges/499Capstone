@@ -17,7 +17,7 @@ public class ApplicationPrintTester {
 	Logger log = LoggerFactory.getLogger(ApplicationPrintTester.class);
 	
 	public void loadReferenceData(ZombieRepository zombieRepo, UserRepository userRepo){
-		log.trace("in loadReferenceData");
+		//log.trace("in loadReferenceData");
 	    /*
 	     * Tests for zombie 	
 	     */
@@ -26,16 +26,16 @@ public class ApplicationPrintTester {
 		
 		User user = new User("testTag");
 	    userRepo.save(user);
-		log.debug("Testing to see if user is updated on save. userId={}", user.getId());
+		//log.debug("Testing to see if user is updated on save. userId={}", user.getId());
 	    Zombie testZombie = zombieRepo.findByClientKey(user.getId()).iterator().next();
 		long id = testZombie.getId();
-		log.debug("Testing Zombie find by user. Found zombieId={}", id);
+		//log.debug("Testing Zombie find by user. Found zombieId={}", id);
 
-		log.debug("Testing Zombie find by id. Found zombieId={}", zombieRepo.findById(id).getId());
+		//log.debug("Testing Zombie find by id. Found zombieId={}", zombieRepo.findById(id).getId());
 
 		user = new User();
 		userRepo.save(user);
-		log.debug("Testing logic for user key situation: userId={}", user.getId());
+		//log.debug("Testing logic for user key situation: userId={}", user.getId());
 
 	}
 }

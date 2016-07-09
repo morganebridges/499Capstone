@@ -45,11 +45,11 @@ public class ZombieGenerationManager {
     public ZombieGenerationManager(){
         userMap = new HashMap<>();
 
-        log.debug("initializing danger manager");
+        //log.debug("initializing danger manager");
 
         Runnable r = () -> {
             try{
-                log.trace("inside the run method of danger worker");
+                //log.trace("inside the run method of danger worker");
                 runWork();
             }catch(Exception e){
                 e.printStackTrace();
@@ -63,7 +63,7 @@ public class ZombieGenerationManager {
 
         while(true){
             long lastCheck = System.currentTimeMillis();
-            log.trace("ZombieGenerationManager.runWork()");
+            //log.trace("ZombieGenerationManager.runWork()");
             userMap.entrySet().stream()
                     .forEach(
                             mapEntry -> {
@@ -81,12 +81,12 @@ public class ZombieGenerationManager {
     }
 
     private void spawnZombies(User user) {
-        log.debug("ZombieGenerationManager.spawnZombies()");
+        //log.debug("ZombieGenerationManager.spawnZombies()");
         Random rnd = new Random();
         int numZoms = rnd.nextInt(3);
         for(int i = 0; i < numZoms; i++){
             LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getRange()));
-            log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
+            //log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
             zombieService.save(newZombie);
         }
@@ -103,7 +103,7 @@ public class ZombieGenerationManager {
         if(userMap.containsKey(user.getId())){
             userMap.remove(user.getId(), userMap.get(user.getId()));
         } else{
-            log.debug("Attempt to deregister user from danger manager failed - user not registered.");
+            //log.debug("Attempt to deregister user from danger manager failed - user not registered.");
         }
     }
     public void deRegister(long uid){

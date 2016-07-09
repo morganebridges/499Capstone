@@ -29,23 +29,23 @@ public class GCMController {
 
     @RequestMapping(path="/register", method=RequestMethod.POST)
     public ResponseEntity<User>register(@RequestParam String gcmId, @RequestParam long key, HttpServletRequest request, HttpServletResponse response){
-        log.trace("In GCMController.register() endpoint gcmToken={} userId={}", gcmId, key);
+        //log.trace("In GCMController.register() endpoint gcmToken={} userId={}", gcmId, key);
         User user = userService.findUserById(key);
         if(user != null){
             user.setGcmRegId(gcmId);
             userService.save(user);
 
-            log.info("Registering gcm userId={} cgmId={}", user.getId(), gcmId);
+            //log.info("Registering gcm userId={} cgmId={}", user.getId(), gcmId);
 
             user.setGcmRegId(gcmId);
             userService.save(user);
-            log.debug("Calling gcm service");
+            //log.debug("Calling gcm service");
             noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is great", user);
             return new ResponseEntity<>(user, HttpStatus.OK);
         }else{
             if(key == -1)
-                log.warn("Key was not found correctly on client device");
-            else log.error("Key={} sent but no corresponding user found in the database.", key);
+                //log.warn("Key was not found correctly on client device");
+            else //log.error("Key={} sent but no corresponding user found in the database.", key);
 
             return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
         }

@@ -46,7 +46,7 @@ public class Application implements CommandLineRunner{
     }
     @Override
     public void run(String ...args){
-    		//log.trace("Inside @Override CommandLineRunner.run method");
+    		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
             TestDataPrep prep = new TestDataPrep(userService);
             prep.populate(100);

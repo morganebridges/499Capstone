@@ -49,7 +49,7 @@ public class UserController {
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
 		ArrayList<Zombie> returnData;
-		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
+		//log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
 				userActionDto.getLongitude(), userActionDto.getTargetId());
 		User user = userService.findUserById(userActionDto.getId());
@@ -68,11 +68,11 @@ public class UserController {
 		List<Zombie> zombieList = zombieService.findZombiesInRange(user);
 		if(!(zombieList.size() > 0))
 			zombieList = userService.generateTestZombies(user, 4);
-		log.trace("generating test zombies size={}", zombieList.size());
+		//log.trace("generating test zombies size={}", zombieList.size());
 
 
 
-		log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
+		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		ArrayList<Zombie> zombieArrList = zombieService.listToArrayList(zombieList);
 		return new ResponseEntity<>(zombieArrList, HttpStatus.OK);
 	}
@@ -80,7 +80,7 @@ public class UserController {
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
 		//TODO: again, we shouldnt be creating new users in the login endpoint
-		log.trace("In user login endpoint userId={}", uid);
+		//log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
 
 		if(user != null){
@@ -107,7 +107,7 @@ public class UserController {
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
 		//TODO: What is the point of having the action field if we are hitting action specific endpoints?
 
-		log.debug("In user attack endpoint userId={} actionId={} latitude={} longitude={} targetId={}",
+		//log.debug("In user attack endpoint userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
 				userActionDto.getLongitude(), userActionDto.getTargetId());
 
@@ -118,18 +118,18 @@ public class UserController {
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 
 		if(userActionDto.action == UserActionDto.Action.ATTACK){
-			log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
+			//log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
 		} else {
-			log.error("Attack endpoint hit without attack action set userId={} actionId={}",
+			//log.error("Attack endpoint hit without attack action set userId={} actionId={}",
 					userActionDto.getId(), userActionDto.getAction());
 		}
 
 		if(attackedZombie != null){
-			log.info("userId={} attacking zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
+			//log.info("userId={} attacking zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			theReturn = new ResponseEntity<>(attackedZombie, HttpStatus.OK);
 		}else{
-			log.warn("The attacked zombieId={} from userId={} was null in the user controller. Was it already dead?",
+			//log.warn("The attacked zombieId={} from userId={} was null in the user controller. Was it already dead?",
 					userActionDto.getTargetId(), userActionDto.getId());
 			theReturn = new ResponseEntity<>(attackedZombie, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -28,7 +28,7 @@ public class TestDataPrep {
     }
 
     public void populate(int numRecords){
-        log.trace("Generating numberOfUsers={} test users", numRecords);
+        //log.trace("Generating numberOfUsers={} test users", numRecords);
         for(int i = 0; i < numRecords; i++){
             User user = new User(returnName());
             user.setAmmo(randomGenerator.nextInt(500));
