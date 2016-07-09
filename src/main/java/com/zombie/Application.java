@@ -35,7 +35,7 @@ public class Application implements CommandLineRunner{
     UserRepository userRepo;
     @PersistenceContext
 
-    Logger log = LoggerFactory.getLogger(Application.class);
+    //Logger log = LoggerFactory.getLogger(Application.class);
 
 	private EntityManager entityManager;
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Application implements CommandLineRunner{
     }
     @Override
     public void run(String ...args){
-    		log.trace("Inside @Override CommandLineRunner.run method");
+    		//log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
             TestDataPrep prep = new TestDataPrep(userService);
             prep.populate(100);
