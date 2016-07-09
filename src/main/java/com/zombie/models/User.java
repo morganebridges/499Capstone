@@ -34,6 +34,17 @@ public class User {
 	private double latitude;
 	private double longitude;
 
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double range, Date date) {
+		this.totalKills = totalKills;
+		this.kills = kills;
+		this.active = active;
+		this.ammo = ammo;
+		this.serum = serum;
+		this.lastEnemySpawned = l;
+		this.range = range;
+		this.lastModified = date;
+	}
+
 	public String getGcmId() {
 		return gcmId;
 	}
