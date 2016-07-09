@@ -34,6 +34,23 @@ public class User {
 	private double latitude;
 	private double longitude;
 
+	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double range, int serum, int totalKills) {
+		this.active = active;
+		this.ammo = ammo;
+		this.gcmId = gcmId;
+		this.id = id;
+		this.kills = kills;
+		this.lastEnemySpawned = lastEnemySpawned;
+		this.lastModified = lastModified;
+		this.lastUsedSerum = lastUsedSerum;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.name = name;
+		this.range = range;
+		this.serum = serum;
+		this.totalKills = totalKills;
+	}
+
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double range, Date date) {
 		this.totalKills = totalKills;
 		this.kills = kills;
