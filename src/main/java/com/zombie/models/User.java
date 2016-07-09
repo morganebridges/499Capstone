@@ -21,6 +21,18 @@ public class User {
 	private int serum;
 	private Date lastUsedSerum = new Date();
 	private Date lastModified = new Date();
+	//A value that represents the lsaat time zombies were spawned
+	private long lastEnemySpawned;
+
+	//range in feet (default)
+	private double range;
+
+	//Google Cloud Messaging registration Id
+
+	private String gcmId;
+	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
+	private double latitude;
+	private double longitude;
 
 	public String getGcmId() {
 		return gcmId;
@@ -50,18 +62,6 @@ public class User {
 		this.longitude = longitude;
 	}
 
-	//A value that represents the lsaat time zombies were spawned
-	private long lastEnemySpawned;
-
-	//range in feet (default)
-	private double range;
-
-	//Google Cloud Messaging registration Id
-
-	private String gcmId;
-	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
-	private double latitude;
-	private double longitude;
 
 
     public User(){}
@@ -76,6 +76,7 @@ public class User {
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
 		this.range = 100;
+		this.lastEnemySpawned = System.currentTimeMillis();
     }
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified) {
@@ -112,14 +113,11 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-	@OneToMany
 	public long getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 	public String getGcmRegId() {
