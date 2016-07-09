@@ -38,7 +38,7 @@ public class ZombieService {
         userZombies.forEach(
                 zombie -> {
                     if(Geomath.getDistance(user.getLocation(), zombie.getLocation(), "M")
-                                    <= Geomath.feetToMiles(user.getRange())){
+                                    <= Geomath.feetToMiles(user.getattackRange())){
                         zombiesInRange.add(zombie);
                     }
                 }

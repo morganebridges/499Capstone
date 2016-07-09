@@ -24,8 +24,8 @@ public class User {
 	//A value that represents the lsaat time zombies were spawned
 	private long lastEnemySpawned;
 
-	//range in feet (default)
-	private double range;
+	//attackRange in feet (default)
+	private double attackRange;
 
 	//Google Cloud Messaging registration Id
 
@@ -34,7 +34,7 @@ public class User {
 	private double latitude;
 	private double longitude;
 
-	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double range, int serum, int totalKills) {
+	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills) {
 		this.active = active;
 		this.ammo = ammo;
 		this.gcmId = gcmId;
@@ -46,19 +46,19 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
-		this.range = range;
+		this.attackRange = attackRange;
 		this.serum = serum;
 		this.totalKills = totalKills;
 	}
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double range, Date date) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double attackRange, Date date) {
 		this.totalKills = totalKills;
 		this.kills = kills;
 		this.active = active;
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastEnemySpawned = l;
-		this.range = range;
+		this.attackRange = attackRange;
 		this.lastModified = date;
 	}
 
@@ -96,7 +96,7 @@ public class User {
 
     public User(String name){
 		this.lastModified = new Date();
-		this.range = 100;
+		this.attackRange = 100;
 	    this.name = name;
 	    this.totalKills = 0;
 	    this.kills = 0;
@@ -104,12 +104,12 @@ public class User {
 	    this.ammo = 5;
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
-		this.range = 100;
+		this.attackRange = 100;
 		this.lastEnemySpawned = System.currentTimeMillis();
 
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified, double latitude, double longitude) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double attackRange, Date lastModified, double latitude, double longitude) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -117,7 +117,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
-		this.range = range;
+		this.attackRange = attackRange;
 		this.lastEnemySpawned = lastEnemySpawned;
 		this.lastModified = lastModified;
 		this.latitude = latitude;
@@ -243,8 +243,8 @@ public class User {
 		return "" + this.getId();
 	}
 
-	public double getRange() {
-		return range;
+	public double getattackRange() {
+		return attackRange;
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class User {
 		return false;
 	}
 
-	public void setRange(double range) {
-		this.range = range;
+	public void setattackRange(double attackRange) {
+		this.attackRange = attackRange;
 	}
 }

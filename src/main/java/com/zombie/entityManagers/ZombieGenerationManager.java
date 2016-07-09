@@ -85,7 +85,7 @@ public class ZombieGenerationManager {
         Random rnd = new Random();
         int numZoms = rnd.nextInt(3);
         for(int i = 0; i < numZoms; i++){
-            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getRange()));
+            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getattackRange()));
             log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
             zombieService.save(newZombie);
