@@ -6,18 +6,19 @@ import com.zombie.models.Zombie;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Hashtable;
 
 /**
  * This class is a data transfer object that will update the client
  * Created by morganebridges on 7/9/16.
  */
-@Entity
 public class ClientUpdateDTO {
-    @Id
-    @GeneratedValue
+
     long id;
+
     Zombie attackedZombie;
+
     Hashtable<Long, Zombie> zombies;
     User user;
     Action action;

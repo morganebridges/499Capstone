@@ -38,7 +38,7 @@ public  class ApplicationActiveUsers {
     ZombieGenerationManager zombieGenerationManager;
 
     Date lastObjectRefresh;
-    private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
+    private final Logger log = LoggerFactory.getLogger(ApplicationActiveUsers.class);
 
     public ApplicationActiveUsers(){activeUsers = new HashMap<Long, User>();}
     public ApplicationActiveUsers(HashMap<Long, User> userList){activeUsers = userList;};
