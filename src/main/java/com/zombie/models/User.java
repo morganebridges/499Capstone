@@ -95,6 +95,7 @@ public class User {
     public User(){}
 
     public User(String name){
+		this.lastModified = new Date();
 		this.range = 100;
 	    this.name = name;
 	    this.totalKills = 0;
@@ -105,6 +106,7 @@ public class User {
 	    this.lastUsedSerum = new Date();
 		this.range = 100;
 		this.lastEnemySpawned = System.currentTimeMillis();
+
     }
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified, double latitude, double longitude) {
