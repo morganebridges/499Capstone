@@ -11,7 +11,6 @@ public class Geomath {
 
     /**::  This routine calculates the distance between two points (given the
     /*::  latitude/longitude of those points). It is being used to calculate
-    /*::  the distance between two locations using GeoDataSource (TM) prodducts
     /*::
     /*::  Definitions:
     /*    South latitudes are negative, east longitudes are positive
@@ -46,4 +45,6 @@ public class Geomath {
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
     }
+    public static double feetToMiles(double feet){ return feet * .000189;}
+    public static double milesToFeet(double miles){ return (miles / .000189);}
 }

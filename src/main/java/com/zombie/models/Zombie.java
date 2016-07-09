@@ -71,7 +71,7 @@ public class Zombie {
 		// TODO Auto-generated method stub
 		return id;
 	}
-    public LatLng getLatLng(){
+    public LatLng getLocation(){
         return new LatLng(latitude, longitude);
     }
     public double getLatitude(){
@@ -80,7 +80,6 @@ public class Zombie {
     public double getLongitude(){
         return longitude;
     }
-
     /**
      * A method for dealing damage to a zombie.
      * @param damageDealt

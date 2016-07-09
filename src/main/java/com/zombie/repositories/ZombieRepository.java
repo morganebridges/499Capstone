@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.zombie.models.Zombie;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 /**
  * A repository class for keeping instances of the Zombie
  * 
@@ -25,7 +28,10 @@ public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Lon
 	Zombie findById(@Param("id") long id);
 
 	@Query("select p from Zombie p where p.clientKey=:clientKey")
-	Iterable<Zombie> findByClientKey(@Param("clientKey") long clientKey);
+	List<Zombie> findByClientKey(@Param("clientKey") long clientKey);
+
+	@Query("select p from Zombie p where p.clientKey=:clientKey")
+	Stream<Zombie> streamByUserId(@Param("clientKey") long clientKey);
 
 
 }
