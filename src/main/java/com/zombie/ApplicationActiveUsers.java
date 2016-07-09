@@ -22,7 +22,7 @@ import java.util.Hashtable;
  * Created by morganebridges on 7/9/16.
  */
 @ComponentScan("com.zombie")
-@EnableAutoConfiguration(exclude = { RepositoryRestMvcAutoConfiguration.class })
+@EnableAutoConfiguration
 @Service
 public  class ApplicationActiveUsers {
     private static HashMap<Long, User> activeUsers;

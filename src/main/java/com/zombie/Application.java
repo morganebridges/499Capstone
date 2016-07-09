@@ -41,7 +41,7 @@ public class Application implements CommandLineRunner{
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
-        //LoggerFactory.getLogger(Application.class).info("Zombie Application is online.");
+        LoggerFactory.getLogger(Application.class).info("Zombie Application is online.");
 
     }
     @Override
