@@ -34,14 +34,14 @@ public class Application implements CommandLineRunner{
     @Autowired
     UserRepository userRepo;
     @PersistenceContext
+    private EntityManager entityManager;
+    Logger log = LoggerFactory.getLogger(Application.class);
 
-    //Logger log = LoggerFactory.getLogger(Application.class);
 
-	private EntityManager entityManager;
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
-        LoggerFactory.getLogger(Application.class).info("Zombie Application is online.");
+        //LoggerFactory.getLogger(Application.class).info("Zombie Application is online.");
 
     }
     @Override
