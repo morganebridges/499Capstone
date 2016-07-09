@@ -28,7 +28,7 @@ public class User {
 	private long lastAttack;
 
 	//range in feet
-	private double range;
+	private double range=50;
 
 	//Google Cloud Messaging registration Id
 
@@ -51,7 +51,7 @@ public class User {
 	    this.lastAttack = 0;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -60,7 +60,7 @@ public class User {
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
 		this.lastAttack = 0;
-		this.range = range;
+
 	}
 
 	public Iterator<Object> getAllFields() {
