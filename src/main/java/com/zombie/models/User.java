@@ -19,8 +19,8 @@ public class User {
 	private boolean active;
 	private int ammo;
 	private int serum;
-	private Date lastUsedSerum = new Date();
-	private Date lastModified = new Date();
+	private Date lastUsedSerum;
+	private Date lastModified;
 	//A value that represents the lsaat time zombies were spawned
 	private long lastEnemySpawned;
 
@@ -79,7 +79,7 @@ public class User {
 		this.lastEnemySpawned = System.currentTimeMillis();
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified, double latitude, double longitude) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -90,6 +90,8 @@ public class User {
 		this.range = range;
 		this.lastEnemySpawned = lastEnemySpawned;
 		this.lastModified = lastModified;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();

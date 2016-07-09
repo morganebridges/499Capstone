@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -56,6 +58,7 @@ public class UserService {
         return userRepo.count();
     }
 
+    @OneToOne(cascade = {CascadeType.ALL})
     public void save(User user) {
         userRepo.save(user);
     }
