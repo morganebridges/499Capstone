@@ -22,6 +22,34 @@ public class User {
 	private Date lastUsedSerum = new Date();
 	private Date lastModified = new Date();
 
+	public String getGcmId() {
+		return gcmId;
+	}
+
+	public void setGcmId(String gcmId) {
+		this.gcmId = gcmId;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getLastEnemySpawned() {
+		return lastEnemySpawned;
+	}
+
+	public void setLastEnemySpawned(long lastEnemySpawned) {
+		this.lastEnemySpawned = lastEnemySpawned;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 	//A value that represents the lsaat time zombies were spawned
 	private long lastEnemySpawned;
 
@@ -47,9 +75,10 @@ public class User {
 	    this.ammo = 5;
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
+		this.range = 100;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double range, Date lastModified) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -58,6 +87,8 @@ public class User {
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
 		this.range = range;
+		this.lastEnemySpawned = lastEnemySpawned;
+		this.lastModified = lastModified;
 	}
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();
@@ -229,5 +260,9 @@ public class User {
 			return true;
 
 		return false;
+	}
+
+	public void setRange(double range) {
+		this.range = range;
 	}
 }
