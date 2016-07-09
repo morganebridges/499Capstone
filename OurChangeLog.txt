@@ -1,0 +1,23 @@
+***** 7/8/16 ***** _-_-MORGAN-_-_ *****
+
+I'm startin to work on making changes to the way that we handle our user services
+from the server side.
+
+1. I changed the findZombiesInRange to actually find zombies by distance.
+
+2. I refactored our zombie repository to return a Stream (cOoL) instead of an Interable.
+
+3. I'm refactoring the ArrayList<> implementations of our Zombie return collection into a hash table. The reasons for this
+are as follows:
+    i. We can't get an ArrayList directly from hibernate anyway, so we need to process it to get it in that form.
+    ii. If we are gonna index, lets do it by something reliable, such as a UID, (doyy)
+    iii. Why not?
+
+
+
+
+Android adjustments that need to be made due to server changes (7.9.16)
+
+Make my Update API take a ClientUpdateDto instead of an arraylist of zombies, duh.
+
+Instead of ArrayList, take a Hashtable.

@@ -72,10 +72,12 @@ public class UserService {
 
     public void login(User user){
         //TODO: is this for registration or login?  If login why setting lastUsedSerum?
+        // 7.8.16 - Right now "registration" mostly refers to registering for GCM.
+
         user.setActive(true);
-        user.setLastUsedSerum(new Date());
-        user.setLastAttacked(System.currentTimeMillis());
-        //dangerManager.registerUser(user); TODO: uncomment this when we get danger manager working
+        //user.setLastUsedSerum(new Date());
+        //user.setLastAttacked(System.currentTimeMillis());
+        dangerManager.registerUser(user);
     }
 
     public ArrayList<Zombie> generateTestZombies(User user, int count){

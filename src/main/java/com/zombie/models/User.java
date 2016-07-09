@@ -27,9 +27,12 @@ public class User {
 
 	private long lastAttack;
 
-	//Google Cloud Messaging registration Id
-	private String gcmId;
+	//range in feet
+	private double range;
 
+	//Google Cloud Messaging registration Id
+
+	private String gcmId;
 	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
 	private double latitude;
 	private double longitude;
@@ -37,6 +40,7 @@ public class User {
     public User(){}
 
     public User(String name){
+		this.range = 20;
 	    this.name = name;
 	    this.totalKills = 0;
 	    this.kills = 0;
@@ -47,7 +51,7 @@ public class User {
 	    this.lastAttack = 0;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -56,6 +60,7 @@ public class User {
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
 		this.lastAttack = 0;
+		this.range = range;
 	}
 
 	public Iterator<Object> getAllFields() {
@@ -181,4 +186,7 @@ public class User {
 		return "" + this.getId();
 	}
 
+	public double getRange() {
+		return range;
+	}
 }

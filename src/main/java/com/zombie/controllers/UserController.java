@@ -6,6 +6,7 @@ import com.zombie.models.dto.UserActionDto;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
+import com.zombie.services.ZombieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -38,36 +40,15 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	ZombieService zombieService;
+
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    
-	@RequestMapping(path="/getuser", method=RequestMethod.POST)
-    public ResponseEntity<User> getUser(@RequestParam(required=true) String name, HttpServletRequest request, HttpServletResponse response) {
-
-		//TODO: I don't like that this endpoint is used for both getting a user and creating a new one.  What if thinks they are creating a new user but instead gets a current one?
-		//TODO: Why aren't we getting users by id?
-		log.debug("User controller hit, requesting user Object for name={}", name);
-    		
-        User user = userService.findUserByName(name);
-        if(user != null) {
-	        log.debug("User query to database produced user object with name={} id={}", user.getName(), user.getId());
-        }else{
-            user = new User(name);
-	        userService.save(user);
-	        log.info("Requested User not found in database, created new user with name={} userid={}", name, user.getId());
-        }
-
-		if(user.getLastUsedSerum() == null) {
-			user.setLastUsedSerum(new Date());
-			userService.save(user);
-			log.warn("Encountered a userId={} with no lastusedSerum property, setting to lastUsedSerum={}",
-					user.getId(), user.getLastUsedSerum());
-		}
-		return new ResponseEntity<>(user, HttpStatus.OK);
-    }
 
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
+		ArrayList<Zombie> returnData;
 		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
 				userActionDto.getLongitude(), userActionDto.getTargetId());
@@ -78,25 +59,22 @@ public class UserController {
 		//update location of user from the DTO
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
-		//TODO: fix up the way we are generating / getting zombies for the backend - right now only provide 4 test zombies.
-		//Iterable<Zombie> list = userService.update(user.getId());
-		//Iterator<Zombie> it = list.iterator();
 
-		//System.out.println("Zombies generated");
-		//System.out.println(list);
-		//generate some test zombies so we can ensure we always get some
-		ArrayList<Zombie> testZoms = userService.generateTestZombies(user, 4);
-		log.trace("generating test zombies size={}", testZoms.size());
-		ArrayList<Zombie> zombList= new ArrayList<>();
+		if(userActionDto.action == UserActionDto.Action.ATTACK){
+			Zombie attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+
+		}
+
+		List<Zombie> zombieList = zombieService.findZombiesInRange(user);
+		if(!(zombieList.size() > 0))
+			zombieList = userService.generateTestZombies(user, 4);
+		log.trace("generating test zombies size={}", zombieList.size());
 
 
 
-		/*while(it.hasNext())
-			zombList.add(it.next());*/
-
-		zombList.addAll(testZoms);
-		log.trace("Returning zombies. Total zombie list length={}", zombList.size());
-		return new ResponseEntity<>(zombList, HttpStatus.OK);
+		log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
+		ArrayList<Zombie> zombieArrList = zombieService.listToArrayList(zombieList);
+		return new ResponseEntity<>(zombieArrList, HttpStatus.OK);
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
@@ -104,6 +82,7 @@ public class UserController {
 		//TODO: again, we shouldnt be creating new users in the login endpoint
 		log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
+
 		if(user != null){
 			if(user.getName() == null) {
 				String defaultName = "Generic Jerk";
