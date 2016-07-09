@@ -38,7 +38,7 @@ public  class ApplicationActiveUsers {
     ZombieGenerationManager zombieGenerationManager;
 
     Date lastObjectRefresh;
-    private final Logger log = LoggerFactory.getLogger(ApplicationActiveUsers.class);
+
 
     public ApplicationActiveUsers(){activeUsers = new HashMap<Long, User>();}
     public ApplicationActiveUsers(HashMap<Long, User> userList){activeUsers = userList;};
@@ -68,7 +68,6 @@ public  class ApplicationActiveUsers {
             zombieGenerationManager.deRegister(user.getId());
 
         }else{
-            log.debug("The user was not found in the active users Map");
         }
         return user;
 
