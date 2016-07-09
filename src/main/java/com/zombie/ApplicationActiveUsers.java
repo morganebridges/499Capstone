@@ -6,9 +6,7 @@ import com.zombie.models.User;
 import com.zombie.repositories.UserRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.BasicMarker;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
