@@ -31,7 +31,6 @@ public class TestDataPrep {
         log.trace("Generating numberOfUsers={} test users", numRecords);
         for(int i = 0; i < numRecords; i++){
             User user = new User(returnName());
-            userService.save(user);
             user.setAmmo(randomGenerator.nextInt(500));
             user.setKills(randomGenerator.nextInt(60));
             user.setTotalKills(randomGenerator.nextInt(130));

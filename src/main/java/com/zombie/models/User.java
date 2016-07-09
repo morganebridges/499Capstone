@@ -26,7 +26,7 @@ public class User {
 	private long lastEnemySpawned;
 
 	//range in feet (default)
-	private double range = 100;
+	private double range;
 
 	//Google Cloud Messaging registration Id
 
@@ -49,7 +49,7 @@ public class User {
 	    this.lastUsedSerum = new Date();
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, double range) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -57,6 +57,7 @@ public class User {
 		this.ammo = ammo;
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
+		this.range = 100;
 	}
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();
