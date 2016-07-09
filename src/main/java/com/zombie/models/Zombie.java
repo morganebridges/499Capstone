@@ -34,7 +34,7 @@ public class Zombie {
     private int hp;
     private boolean alive;
 
-
+    private boolean foundByPlayer = false;
 
     protected Zombie(){}
 
@@ -98,4 +98,11 @@ public class Zombie {
         return alive;
     }
 
+    public boolean isFoundByPlayer() {
+        return foundByPlayer;
+    }
+
+    public void setFoundByPlayer(boolean foundByPlayer) {
+        this.foundByPlayer = foundByPlayer;
+    }
 }

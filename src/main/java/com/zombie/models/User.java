@@ -2,10 +2,7 @@ package com.zombie.models;
 
 import com.zombie.models.dto.LatLng;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.*;
 
 /**
@@ -38,8 +35,6 @@ public class User {
 	private double latitude;
 	private double longitude;
 
-	@Transient
-	List<Zombie> zombiesFound;
 
     public User(){}
 
@@ -63,7 +58,6 @@ public class User {
 		this.serum = serum;
 		this.lastUsedSerum = new Date();
 	}
-
 	public Iterator<Object> getAllFields() {
 		ArrayList<Object> list = new ArrayList<>();
 		list.add(name);
@@ -73,7 +67,6 @@ public class User {
 		list.add(ammo);
 		list.add(serum);
 		list.add(lastUsedSerum);
-		list.add(range);
 		//leaving location out of import/export for now
 		return list.iterator();
 	}
@@ -87,7 +80,7 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-
+	@OneToMany
 	public long getId() {
 		// TODO Auto-generated method stub
 		return id;
