@@ -84,34 +84,25 @@ public class UserController {
 		User user = userService.findUserById(uid);
 
 		if(user != null){
-			if(user.getName() == null) {
-				String defaultName = "Generic Jerk";
-				log.warn("userId={} found without a name.  Setting name to name={}", user.getId(), defaultName);
-				user.setName(defaultName);
-				userService.save(user);
-			}
 			userService.login(user);
-			return new ResponseEntity<>(user, HttpStatus.OK);
-
-		} else{
-			user = new User();
-			userService.save(user);
-			if(user.getName() == null) {
-				String defaultName = "Generic Jell";
-				log.warn("New userId={} found without a name.  Setting default to name={}", user.getId(), defaultName);
-				user.setName(defaultName);
-				userService.save(user);
-			}
-
-			userService.login(user);
-
-			log.info("New user being sent: userId={}", user.getId());
-
-			log.trace("test"); //TODO: What purpose does this line serve?  Could it be more descriptive?
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
+		return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+
+
 	}
 
+
+	@RequestMapping(path="/new", method=RequestMethod.POST)
+	public ResponseEntity<User>createUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
+		if(user.getName() == null || user.getName().length() < 1)
+			return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+
+		User newUser = new User(user.getName());
+		userService.save(newUser);
+		userService.login(newUser);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
 	@RequestMapping(path="/attack", method=RequestMethod.POST)
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
 		//TODO: What is the point of having the action field if we are hitting action specific endpoints?

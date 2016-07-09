@@ -78,6 +78,7 @@ public class UserService {
         //user.setLastUsedSerum(new Date());
         //user.setLastAttacked(System.currentTimeMillis());
         dangerManager.registerUser(user);
+
     }
 
     public ArrayList<Zombie> generateTestZombies(User user, int count){
