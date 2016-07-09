@@ -184,7 +184,12 @@ public class User {
 	public double getRange() {
 		return range;
 	}
-	public List<Zombie> getZombiesFound(){
+
+	/**
+	 * Considering moving zombieFound logic to a boolean flag in zombie model
+	 * @return
+     */
+	/*public List<Zombie> getZombiesFound(){
 		return zombiesFound;
 	}
 
@@ -203,7 +208,7 @@ public class User {
 			zombiesFound = new ArrayList<>();
 		zombiesFound.addAll(newList);
 		return zombiesFound;
-	}
+	}*/
 
 	public Date getLastModified() {
 		return lastModified;
