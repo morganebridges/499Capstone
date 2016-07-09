@@ -1,10 +1,13 @@
 package com.zombie.entityManagers;
 
 import com.zombie.models.User;
+import com.zombie.models.Zombie;
+import com.zombie.models.dto.LatLng;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.ZombieService;
+import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by morganebridges on 6/21/16.
@@ -23,7 +27,7 @@ import java.util.HashMap;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 
-public class PlayerDangerManager {
+public class ZombieGenerationManager {
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired
@@ -32,22 +36,24 @@ public class PlayerDangerManager {
     NotificationService noteService;
     @Autowired
     ZombieService zombieService;
+    @Autowired
+    PlayerDangerManager dangerManager;
 
     private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
 
     private HashMap<Long, User> userMap;
-    public PlayerDangerManager(){
+    public ZombieGenerationManager(){
         userMap = new HashMap<>();
 
         log.debug("initializing danger manager");
 
         Runnable r = () -> {
-                try{
-                    log.trace("inside the run method of danger worker");
-                    runWork();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+            try{
+                log.trace("inside the run method of danger worker");
+                runWork();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         };
         Thread privateThread = new Thread(r);
         privateThread.start();
@@ -57,24 +63,32 @@ public class PlayerDangerManager {
 
         while(true){
             long lastCheck = System.currentTimeMillis();
-            log.trace("User Danger Worker in outer loop");
+            log.trace("ZombieGenerationManager.runWork()");
             userMap.entrySet().stream()
-                .forEach(
-                    mapEntry -> {
-                        User user = mapEntry.getValue();
-                        log.trace("Danger Worker processing for user = {}", user.getId());
-                        if (zombieService.areZombiesInRange(user)) {
-                            // TODO: we need some way to ensure we don't keep telling the same user there are zombies over and over, maybe deregister?
-                            // Another way could be to somehow put found zombies in a list so that ZombieService.areZombiesInRange() doesn't find those zombies
-                            log.info("Zombies near user = {}", user.getId());
-                            noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
-                        }
-                    }
-                );
-            long sleepTime = Globals.ZOMBIE_LOOP_TIME - (System.currentTimeMillis() - lastCheck);
+                    .forEach(
+                            mapEntry -> {
+                                User user = mapEntry.getValue();
+                                if(zombieService.findZombiesInRange(user).size() < Globals.MAXIMUM_SPAWN_NUMBER){
+                                    spawnZombies(user);
+                                }
+                            }
+                    );
+            long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
             if(sleepTime > 0){
                 Thread.sleep(sleepTime);
             }
+        }
+    }
+
+    private void spawnZombies(User user) {
+        log.debug("ZombieGenerationManager.spawnZombies()");
+        Random rnd = new Random();
+        int numZoms = rnd.nextInt(3);
+        for(int i = 0; i < numZoms; i++){
+            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getRange()));
+            log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
+            Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
+            zombieService.save(newZombie);
         }
     }
 

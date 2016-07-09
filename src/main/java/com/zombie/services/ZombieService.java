@@ -69,4 +69,8 @@ public class ZombieService {
                 );
         return zMap;
     }
+
+    public void save(Zombie newZombie) {
+        zombieRepo.save(newZombie);
+    }
 }
