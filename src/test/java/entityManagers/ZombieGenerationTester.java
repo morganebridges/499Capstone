@@ -18,7 +18,7 @@ class ZombieGenerationTester extends TestCase{
 
         }
     }
-    @Test
+    /*@Test
     public void testGenerationEquation(){
         ZombieGenerationManager testguy = new ZombieGenerationManager();
         User me = new User("Morgan");
@@ -26,5 +26,5 @@ class ZombieGenerationTester extends TestCase{
         me.setLongitude(-95.2);
         Zombie testZom = testguy.genRandomZombie(me);
         System.out.println("breakpoint");
-    }
+    }*/
 }
