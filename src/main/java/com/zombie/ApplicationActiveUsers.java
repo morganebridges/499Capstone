@@ -24,9 +24,9 @@ import java.util.Hashtable;
 /** This class is to contain and maintain our active users.
  * Created by morganebridges on 7/9/16.
  */
+@Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-@Service
 public  class ApplicationActiveUsers {
     private static HashMap<Long, User> activeUsers;
     @Autowired

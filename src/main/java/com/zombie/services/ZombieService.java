@@ -47,7 +47,7 @@ public class ZombieService {
 
     }
 
-    //TODO: make this more efficient in the great someday or if it is a performance issue
+    //TODO: make this more efficient in the great somey or if it is a performance issue
     public boolean areZombiesInRange(User user) {
         return findZombiesInRange(user).entrySet().iterator().hasNext();
     }
@@ -72,5 +72,11 @@ public class ZombieService {
 
     public void save(Zombie newZombie) {
         zombieRepo.save(newZombie);
+    }
+
+    public ArrayList<Zombie> mapToList(HashMap<Long, Zombie> map){
+        ArrayList<Zombie> list = new ArrayList<Zombie>();
+        list.addAll(map.values());
+        return list;
     }
 }

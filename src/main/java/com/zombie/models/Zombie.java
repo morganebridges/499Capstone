@@ -4,11 +4,13 @@ import com.zombie.models.dto.LatLng;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by morganebridges on 5/25/16.
  */
 @Entity
+@Table(name="zombie")
 public class Zombie {
     @Id
     @GeneratedValue
@@ -32,7 +34,7 @@ public class Zombie {
     private boolean alive;
     private boolean foundByPlayer = false;
 
-    protected Zombie(){}
+    public Zombie(){}
 
     public Zombie(long clientKey, LatLng location) {
         this.clientKey = clientKey;
@@ -120,5 +122,13 @@ public class Zombie {
     }
     public void setTimeToLive(long time){
         this.timeToLive = time;
+    }
+
+    public long getFreshStamp() {
+        return freshStamp;
+    }
+
+    public void setFreshStamp(long freshStamp) {
+        this.freshStamp = freshStamp;
     }
 }

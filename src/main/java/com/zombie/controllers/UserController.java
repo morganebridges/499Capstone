@@ -74,7 +74,7 @@ public class UserController {
 		//log.trace("generating test zombies size={}", zombieList.size());
 
 
-		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zombieList, user, userActionDto.action);
+		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zombieService.mapToList(zombieList), user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
@@ -89,7 +89,8 @@ public class UserController {
 			userService.login(user);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
-		return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 
 	}

@@ -3,8 +3,8 @@ package com.zombie.models.dto;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.ArrayList;
+
 
 /**
  * This class is a data transfer object that will update the client
@@ -15,12 +15,12 @@ public class ClientUpdateDTO {
     long id;
 
     long targetId;
-    HashMap<Long, Zombie> zombies;
+    ArrayList<Zombie> zombies;
     User user;
     UserActionDto.Action userAction;
 
     public ClientUpdateDTO(){}
-    public ClientUpdateDTO(long targetId, HashMap<Long, Zombie> zombies, User user, UserActionDto.Action userAction){
+    public ClientUpdateDTO(long targetId, ArrayList<Zombie> zombies, User user, UserActionDto.Action userAction){
         this.targetId = targetId;
         this. zombies = zombies;
         this.user = user;
@@ -59,11 +59,11 @@ public class ClientUpdateDTO {
         this.user = user;
     }
 
-    public HashMap<Long, Zombie> getZombies() {
+    public ArrayList<Zombie> getZombies() {
         return zombies;
     }
 
-    public void setZombies(HashMap<Long, Zombie> zombies) {
+    public void setZombies(ArrayList<Zombie> zombies) {
         this.zombies = zombies;
     }
 
