@@ -46,6 +46,8 @@ public  class ApplicationActiveUsers {
             //set modified stamp
             user.setLastModified(new Date());
             //register for notifications
+            dangerManager.registerUser(user);
+            zombieGenerationManager.registerUser(user);
             activeUsers.put(user.getId(), user);
             userService.save(user);
             return true;

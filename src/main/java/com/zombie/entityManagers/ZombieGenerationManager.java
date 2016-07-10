@@ -45,11 +45,11 @@ public class ZombieGenerationManager {
     public ZombieGenerationManager(){
         userMap = new HashMap<>();
 
-        log.debug("initializing danger manager");
+        log.debug("initializing generation manager");
 
         Runnable r = () -> {
             try{
-                log.trace("inside the run method of danger worker");
+                log.trace("inside the run method of generation worker");
                 runWork();
             }catch(Exception e){
                 e.printStackTrace();
@@ -87,6 +87,7 @@ public class ZombieGenerationManager {
             spawnHoard(user);
 
         for(int i = 0; i < numZoms; i++){
+            System.out.println("ZombiejGenerationManager saving zombie: " + i);
             LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
             log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
