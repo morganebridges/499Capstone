@@ -26,6 +26,7 @@ import java.util.Hashtable;
 @Service
 public  class ApplicationActiveUsers {
     private static HashMap<Long, User> activeUsers;
+    @Autowired
     static UserService userService;
     @Autowired
     static NotificationService noteService;
@@ -83,10 +84,6 @@ public  class ApplicationActiveUsers {
                     activeUsers.put(entry.getKey(), userService.findUserById(entry.getKey()));
                 }
         );
-    }
-    @Autowired
-    public static void setUserService(UserService service){
-        userService = service;
     }
 
 
