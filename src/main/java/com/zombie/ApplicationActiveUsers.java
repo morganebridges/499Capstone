@@ -8,6 +8,7 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 
+import com.zombie.services.interfaces.communications.ContextSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -125,5 +126,7 @@ public  class ApplicationActiveUsers {
             return zombieGenerationManager;
         else throw new Exception("THE WORLD IS DEAD");
     }
-    public ContextSubscriber
+    public Object subscribe(ContextSubscriber s){
+        return new Object();
+    }
 }
