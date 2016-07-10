@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -79,7 +77,7 @@ public class UserService {
     public void login(User user){
         //TODO: is this for registration or login?  If login why setting lastUsedSerum?
         // 7.8.16 - Right now "registration" mostly refers to registering for GCM.
-        ApplicationActiveUsers.instance().setUserActive(user);
+        ApplicationActiveUsers.instance().activateUser(user);
 
     }
 

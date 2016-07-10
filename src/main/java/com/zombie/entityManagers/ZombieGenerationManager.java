@@ -7,7 +7,7 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.ZombieService;
-import com.zombie.utility.AlarmObserver;
+import com.zombie.services.interfaces.communications.AlarmObserver;
 import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;

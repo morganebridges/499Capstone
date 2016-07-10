@@ -43,8 +43,11 @@ public  class ApplicationActiveUsers {
     static ApplicationActiveUsers instance;
 
 
-    public static void initialize(){
-
+    public void initialize(ApplicationActiveUsers guru){
+        if(appInitialized)
+            return;
+        instance = guru;
+        appInitialized = true;
     }
     public ApplicationActiveUsers(){
         if(appInitialized)
@@ -61,7 +64,7 @@ public  class ApplicationActiveUsers {
         return instance;
     }
 
-    public boolean setUserActive(User user){
+    public boolean activateUser(User user){
         try{
             //set modified stamp
             user.setLastModified(new Date());
@@ -81,7 +84,7 @@ public  class ApplicationActiveUsers {
      * @param user
      * @return
      */
-    public User setUserInactive(User user){
+    public User deactivateUser(User user){
 
         if((user = activeUsers.remove(user.getId())) != null){
             user.setActive(false);
@@ -122,4 +125,5 @@ public  class ApplicationActiveUsers {
             return zombieGenerationManager;
         else throw new Exception("THE WORLD IS DEAD");
     }
+    public ContextSubscriber
 }
