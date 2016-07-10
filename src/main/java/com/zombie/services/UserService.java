@@ -36,7 +36,7 @@ public class UserService {
 
     @Autowired
     ZombieRepository zombieRepo;
-    
+
 
     Logger log = LoggerFactory.getLogger(UserService.class);
 

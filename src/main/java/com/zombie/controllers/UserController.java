@@ -107,8 +107,7 @@ public class UserController {
 			return new ResponseEntity<>(new User(null), HttpStatus.BAD_REQUEST);
 
 		User newUser = new User(userName);
-		if(newUser.getGcmId() == null || newUser.getGcmId() == "")
-
+		
 		userService.login(newUser);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
