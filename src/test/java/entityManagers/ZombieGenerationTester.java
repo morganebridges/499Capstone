@@ -1,4 +1,4 @@
-package test.com.zombie.entityManagers;
+package entityManagers;
 
 import java.util.Scanner;
 

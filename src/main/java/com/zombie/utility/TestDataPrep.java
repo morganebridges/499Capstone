@@ -1,5 +1,6 @@
 package com.zombie.utility;
 
+import com.zombie.ApplicationActiveUsers;
 import com.zombie.models.User;
 import com.zombie.services.UserService;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class TestDataPrep {
         }
     }
     public void zombiesForUsers(User user){
-
+        ApplicationActiveUsers.instance().requestZombies(user);
     }
     private String returnName() {
         int index = randomGenerator.nextInt(names.length);

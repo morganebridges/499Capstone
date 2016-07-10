@@ -22,12 +22,11 @@ public class Zombie {
 
     private double longitude;
     //Fields relating to the temporal state of the zombie
-    private static long timeToLive = 30000;
 
     private long freshStamp;
     //Fields relating to the zombie's game logic state
 
-    private static int defaultHp = 5;
+    long timeToLive = ZombieTraits.getTimeToLive();
 
     private int hp;
     private boolean alive;
@@ -41,7 +40,7 @@ public class Zombie {
         this.longitude = location.getLongitude();
         this.alive = true;
         this.freshStamp = System.currentTimeMillis();
-        this.hp = defaultHp;
+        this.hp = ZombieTraits.getDefaultHp();
     }
 
     public Zombie(long clientKey, double latitude, double longitude){
@@ -50,7 +49,7 @@ public class Zombie {
         this.longitude = longitude;
         this.alive = true;
         this.freshStamp = System.currentTimeMillis();
-        this.hp = defaultHp;
+        this.hp = ZombieTraits.getDefaultHp();
     }
     /** Identification methods **/
     @Override
@@ -117,9 +116,9 @@ public class Zombie {
 
     /** Temporal attribute */
     public long getTimeToLive(){
-        return timeToLive;
+        return ZombieTraits.getTimeToLive();
     }
     public void setTimeToLive(long time){
-        Zombie.timeToLive = time;
+        this.timeToLive = time;
     }
 }
