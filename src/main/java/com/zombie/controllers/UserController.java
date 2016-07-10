@@ -103,8 +103,9 @@ public class UserController {
 
 	@RequestMapping(path="/new", method=RequestMethod.POST)
 	public ResponseEntity<User>createUser(@RequestBody String userName, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
+		User nullUser = null;
 		if(userName == null || userName.length() < 1)
-			return new ResponseEntity<>(new User(null), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(nullUser, HttpStatus.BAD_REQUEST);
 
 		User newUser = new User(userName);
 		userService.save(newUser);
