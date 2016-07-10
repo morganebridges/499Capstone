@@ -49,7 +49,7 @@ public class UserService {
     }
 
     public User findUserById(long id){
-        log.trace("In findUserById userRepo={}", userRepo);
+        //log.trace("In findUserById userRepo={}", userRepo);
         return userRepo.findUserById(id);
     }
 
@@ -89,13 +89,13 @@ public class UserService {
         double latPosNeg = 1;
         double longPosNeg = 1;
 
-        log.debug("generating zombieCount={} zombies for userId={}", count, user);
+        //log.debug("generating zombieCount={} zombies for userId={}", count, user);
         for(int i = 0; i < count; i++) {
             if(randomizer.nextBoolean())
                 latPosNeg = -1;
             if(randomizer.nextBoolean())
                 longPosNeg = -1;
-            log.trace("User Location is Lat={} : Long={} ", user.getLatitude(), user.getLongitude());
+            //log.trace("User Location is Lat={} : Long={} ", user.getLatitude(), user.getLongitude());
             LatLng zombLoc = new LatLng(user.getLatitude() + (.0007 * (randomizer.nextInt()%5) * latPosNeg)
                     , user.getLongitude() + (.0007 * (randomizer.nextInt()%5) * longPosNeg));
             Zombie zom = new Zombie(user.getId(), zombLoc);
@@ -115,9 +115,9 @@ public class UserService {
         if(zombie != null){
             zombie.dealDamage(5);
             zombieRepo.save(zombie);
-            log.debug("ZombieId={} killed by userId={}", zombieId, user);
+            //log.debug("ZombieId={} killed by userId={}", zombieId, user);
         }else{
-            log.warn("UserId={} trying to kill a zombieId={} that could not be found", user, zombieId);
+            //log.warn("UserId={} trying to kill a zombieId={} that could not be found", user, zombieId);
         }
 
         return zombie;

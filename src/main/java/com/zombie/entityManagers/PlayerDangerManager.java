@@ -1,5 +1,6 @@
 package com.zombie.entityManagers;
 
+import com.zombie.ApplicationActiveUsers;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
@@ -28,28 +29,58 @@ public class PlayerDangerManager extends AbstractManager{
     NotificationService noteService;
     @Autowired
     ZombieService zombieService;
+    private int urgency;
 
+    private int workCounter;
+    private int breakTime = 50;
     private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
 
     @Override
     synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
-        log.trace("User Danger Worker in outer loop");
+        //log.trace("User Danger Worker in outer loop");
         userMap.values().stream()
             .forEach(
                 user -> {
-                    log.trace("Danger Worker processing for user = {}", user.getId());
+                    //log.trace("Danger Worker processing for user = {}", user.getId());
                     if (zombieService.areZombiesInRange(user)) {
                         // TODO: we need some way to ensure we don't keep telling the same user there are zombies over and over, maybe deregister?
                         // Another way could be to somehow put found zombies in a list so that ZombieService.areZombiesInRange() doesn't find those zombies
-                        log.info("Zombies near user = {}", user.getId());
+                        //log.info("Zombies near user = {}", user.getId());
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
+                    }else{
+                        ApplicationActiveUsers.instance().requestZombies(user);
                     }
                 }
             );
         long sleepTime = Globals.ZOMBIE_LOOP_TIME - (System.currentTimeMillis() - lastCheck);
         if(sleepTime > 0){
-            Thread.sleep(sleepTime);
+            wait(Globals.ZOMBIE_MANAGER_SLEEP_INTERVAL);
         }
+    }
+    public void youNeedANap(long msNapTime){
+
+            long startTime = System.currentTimeMillis();
+            long endTime = startTime + msNapTime;
+            long timeElapsed;
+            while((timeElapsed = System.currentTimeMillis() - startTime) < msNapTime && Globals.WAKING_URGENCY_THRESHOLD > this.urgency ){
+                try {
+                    wait(endTime - System.currentTimeMillis());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+    public  void setUrgency(int level){
+        this.urgency = level;
+        if(urgency > Globals.WAKING_URGENCY_THRESHOLD){
+            //We'll do something more vigilant here later
+
+        }
+    }
+    public void stasis(){
+        youNeedANap(0);
     }
 }

@@ -71,18 +71,18 @@ public class UserController {
 
 		HashMap<Long, Zombie> zombieList = zombieService.findZombiesInRange(user);
 
-		log.trace("generating test zombies size={}", zombieList.size());
+		//log.trace("generating test zombies size={}", zombieList.size());
 
 
 		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zombieList, user, userActionDto.action);
-		log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
+		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ResponseEntity<User>login(@RequestBody long uid, HttpServletRequest request, HttpServletResponse response){
 		//TODO: again, we shouldnt be creating new users in the login endpoint
-		log.trace("In user login endpoint userId={}", uid);
+		//log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
 
 		if(user != null){
@@ -97,7 +97,7 @@ public class UserController {
 
 	@RequestMapping(path="/new", method=RequestMethod.POST)
 	public ResponseEntity<User>createUser(@RequestBody String userName, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
-		log.debug("RequestBody /new " + userName);
+		//log.debug("RequestBody /new " + userName);
 		User nullUser = null;
 		if(userName == null || userName.length() < 1)
 			return new ResponseEntity<>(nullUser, HttpStatus.BAD_REQUEST);
@@ -124,7 +124,7 @@ public class UserController {
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 
 		if(userActionDto.action == UserActionDto.Action.ATTACK){
-			log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
+			//log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
 		} else {
 			log.error("Attack endpoint hit without attack action set userId={} actionId={}",
@@ -132,7 +132,7 @@ public class UserController {
 		}
 
 		if(attackedZombie != null){
-			log.info("userId={} attacking zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
+			//log.info("userId={} attacking zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			theReturn = new ResponseEntity<>(attackedZombie, HttpStatus.OK);
 		}else{
 			log.warn("The attacked zombieId={} from userId={} was null in the user controller. Was it already dead?",

@@ -7,6 +7,7 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.ZombieService;
+import com.zombie.utility.AlarmObserver;
 import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ import java.util.Random;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 
-public class ZombieGenerationManager extends AbstractManager{
+public class ZombieGenerationManager extends AbstractManager implements AlarmObserver{
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired
@@ -44,8 +45,8 @@ public class ZombieGenerationManager extends AbstractManager{
     synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
 
-        log.debug("ZombieGenerationManager in runWork");
-        log.debug("Zombie HashMap runWork", userMap.entrySet());
+        //log.debug("ZombieGenerationManager in runWork");
+        //log.debug("Zombie HashMap runWork", userMap.entrySet());
         userMap.values().stream()
                 .forEach(this::spawnZombies);
         long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
@@ -55,16 +56,16 @@ public class ZombieGenerationManager extends AbstractManager{
     }
 
     private void spawnZombies(User user) {
-        log.debug("ZombieGenerationManager.spawnZombies()");
+        //log.debug("ZombieGenerationManager.spawnZombies()");
         Random rnd = new Random();
         int numZoms = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER);
         if(Math.random() <= Globals.HORDE_LIKELIHOOD_COEFFICIENT)
             spawnHorde(user);
 
         for(int i = 0; i < numZoms; i++){
-            log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
+            //log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
             LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
-            log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
+            //log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
             zombieService.save(newZombie);
         }
@@ -73,6 +74,19 @@ public class ZombieGenerationManager extends AbstractManager{
         Zombie patientZero = new Zombie(user.getId(), user.getLocation());
         Random rnd = new Random();
         int zomNum = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER * 2);
+
+    }
+
+    @Override
+    public int sendAlarm(int level) {
+        return 0;
+    }
+
+    @Override
+    public void beInformed(int level) {
+
+    }
+    public void requestZombiesForUser(User user){
 
     }
 }

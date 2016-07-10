@@ -25,13 +25,13 @@ public class UploadExcelController {
     public String uploadFile(
             @RequestParam("uploadedFile") MultipartFile uploadedFileRef) {
 	    try {
-		    log.trace("uploading user data");
+		    //log.trace("uploading user data");
 		    long oldUserCount = userService.getUserCount();
 		    Iterable<User> oldUsers = userService.getAllUsers();
 		    int newUserCount = adminService.importUserData(uploadedFileRef);
 		    userService.deleteUsers(oldUsers);
 
-		    log.info("Successfully uploaded new user data usersRemoved={} usersAdded={}", oldUserCount, newUserCount);
+		    //log.info("Successfully uploaded new user data usersRemoved={} usersAdded={}", oldUserCount, newUserCount);
 		    return newUserCount + " users were added. " + oldUserCount + " users were removed.";
 	    } catch (Exception e) {
 		    e.printStackTrace();

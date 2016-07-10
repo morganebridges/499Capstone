@@ -31,7 +31,7 @@ public abstract class AbstractManager {
 
         Runnable r = () -> {
                 try{
-                    log.trace("inside the run method of abstract manager");
+                    //log.trace("inside the run method of abstract manager");
                     runWork();
                 }catch(Exception e){
                     e.printStackTrace();
@@ -65,7 +65,7 @@ public abstract class AbstractManager {
         if(userMap.containsKey(userId)){
             userMap.remove(userId, userMap.get(userId));
         } else{
-            log.debug("Attempt to deregister user={} from manager failed - user not registered.", userId);
+            //log.debug("Attempt to deregister user={} from manager failed - user not registered.", userId);
         }
     }
 
@@ -85,11 +85,13 @@ public abstract class AbstractManager {
         if(userMap.containsKey(zombieId)){
             zombieMap.remove(zombieId, zombieMap.get(zombieId));
         } else{
-            log.debug("Attempt to deregister zombie={} from manager failed - zombie not registered.", zombieId);
+            //log.debug("Attempt to deregister zombie={} from manager failed - zombie not registered.", zombieId);
         }
     }
 
     public void deRegisterZombie(long uid){
         deRegisterZombie(zombieMap.get(uid));
     }
+
+
 }

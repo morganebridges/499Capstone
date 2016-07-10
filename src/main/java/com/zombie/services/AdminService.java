@@ -35,7 +35,7 @@ public class AdminService {
 	Logger log = LoggerFactory.getLogger(AdminService.class);
 
 	public byte[] exportUserData() {
-		log.trace("In exportuserData");
+		//log.trace("In exportuserData");
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 		Iterator<User> userIterator = userService.getAllUsers().iterator();
@@ -96,12 +96,12 @@ public class AdminService {
 			workbook.write(out);
 			byte[] bytes = out.toByteArray();
 			out.close();
-			log.trace("exportUserData returning data");
+			//log.trace("exportUserData returning data");
 			return bytes;
 		}
 		catch (IOException e)
 		{
-			log.error("Error exporting user data", e);
+			//log.error("Error exporting user data", e);
 			return new byte[0];
 		}
 	}
@@ -114,7 +114,7 @@ public class AdminService {
 	 * @throws IllegalArgumentException If the source is not an Excel document or the data is invalid for a user
 	 */
 	public int importUserData(InputStreamSource input) throws IllegalArgumentException{
-		log.trace("in importUserData");
+		//log.trace("in importUserData");
 
 		int numOfUsers = 0;
 
@@ -181,14 +181,14 @@ public class AdminService {
 					userService.save(newUser);
 					numOfUsers++;
 				} catch (IllegalStateException e) {
-					log.error("Error importing user data", e);
+					//log.error("Error importing user data", e);
 					throw new IllegalArgumentException("Invalid cell in row " + (numOfUsers + 2) + ", " + e.getMessage());
 				}
 			}
 		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException("Not enough columns");
 		}
-		log.trace("finishing importUserData numberOfUsers={}", numOfUsers);
+		//log.trace("finishing importUserData numberOfUsers={}", numOfUsers);
 		return numOfUsers;
 	}
 }

@@ -1,5 +1,6 @@
 package com.zombie;
 
+import com.zombie.entityManagers.AbstractManager;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -37,6 +39,7 @@ public  class ApplicationActiveUsers {
 
     Date lastObjectRefresh;
     private static boolean appInitialized;
+    private ArrayList<AbstractManager> managerList;
     static ApplicationActiveUsers instance;
 
 
@@ -48,6 +51,7 @@ public  class ApplicationActiveUsers {
             throw new IllegalStateException("Don't call my constructor");
         activeUsers = new HashMap<Long, User>();
         appInitialized = true;
+        managerList = new ArrayList<AbstractManager>();
     }
 
     public static ApplicationActiveUsers instance(){
@@ -83,8 +87,8 @@ public  class ApplicationActiveUsers {
             user.setActive(false);
             user.setLastModified(new Date());
 
-            dangerManager.deRegister(user.getId());
-            zombieGenerationManager.deRegister(user.getId());
+            dangerManager.deRegisterUser(user.getId());
+            zombieGenerationManager.deRegisterUser(user.getId());
 
         }else{
         }
@@ -104,5 +108,12 @@ public  class ApplicationActiveUsers {
         );
     }
 
-
+    /**
+     * If a service or a different manager notices that somebody isn't getting their fill of fun zombies,
+     * we need to make sure the guru takes care of it.
+     * @param user
+     */
+    public void requestZombies(User user) {
+        zombieGenerationManager.requestZombiesForUser(user);
+    }
 }
