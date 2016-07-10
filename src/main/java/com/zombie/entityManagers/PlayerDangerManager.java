@@ -1,5 +1,6 @@
 package com.zombie.entityManagers;
 
+import com.zombie.Application;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
@@ -29,6 +30,8 @@ public class PlayerDangerManager extends AbstractManager{
     NotificationService noteService;
     @Autowired
     ZombieService zombieService;
+    @Autowired
+    ApplicationActiveUsers guru;
     private int urgency;
 
     private int workCounter;
@@ -49,7 +52,7 @@ public class PlayerDangerManager extends AbstractManager{
                         //log.info("Zombies near user = {}", user.getId());
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                     }else{
-                        ApplicationActiveUsers.instance().requestZombies(user);
+                        guru.requestZombies(user);
                     }
                 }
             );

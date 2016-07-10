@@ -35,6 +35,9 @@ public class UserService {
     @Autowired
     ZombieRepository zombieRepo;
 
+    @Autowired
+    ApplicationActiveUsers guru;
+
 
     Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -77,7 +80,7 @@ public class UserService {
     public void login(User user){
         //TODO: is this for registration or login?  If login why setting lastUsedSerum?
         // 7.8.16 - Right now "registration" mostly refers to registering for GCM.
-        ApplicationActiveUsers.instance().activateUser(user);
+        guru.activateUser(user);
 
     }
 

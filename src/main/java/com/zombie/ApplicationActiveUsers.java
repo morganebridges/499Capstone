@@ -45,13 +45,11 @@ public  class ApplicationActiveUsers {
 
 
     public void initialize(){
-        if(appInitialized)
-            return;
         if(managerList == null)
             managerList = new ArrayList<AbstractManager>();
         if(instance == null)
             instance = this;
-        if(!appInitialized)
+
             appInitialized = true;
 
     }
@@ -95,6 +93,7 @@ public  class ApplicationActiveUsers {
             zombieGenerationManager.deRegisterUser(user.getId());
 
         }else{
+            //That user was not logged in.
         }
         return user;
 
