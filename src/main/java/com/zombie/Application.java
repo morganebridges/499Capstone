@@ -52,7 +52,11 @@ public class Application implements CommandLineRunner{
     public void run(String ...args){
     		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-            TestDataPrep prep = new TestDataPrep(userService);
+
+            while(universalContext == null){
+                System.out.println("We're waiting for the guru");
+            }
+            TestDataPrep prep = new TestDataPrep(userService, universalContext);
 
             prep.populate(100);
     }

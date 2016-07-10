@@ -1,5 +1,6 @@
 package com.zombie.utility;
 
+import com.zombie.Application;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.models.User;
 import com.zombie.services.UserService;
@@ -22,10 +23,12 @@ public class TestDataPrep {
     private String[] names = {"James", "Helen", "Frank", "Corin", "Morgan", "Jacob", "Ben", "Siva", "Fred", "Pickle", "Jenny",
             "Samantha", "Randy", "Jimbo", "Rashen", "Khoa", "Chee", "Sandy", "Lawerence", "Mai", "Sketch"};
     private Random randomGenerator;
-
-    public TestDataPrep(UserService service){
+    private ApplicationActiveUsers guru;
+    public TestDataPrep(UserService service, ApplicationActiveUsers guru){
         this.randomGenerator = new Random();
         this.userService = service;
+        this.guru = guru;
+
     }
 
     public void populate(int numRecords){
@@ -46,7 +49,7 @@ public class TestDataPrep {
         }
     }
     public void zombiesForUsers(User user){
-        ApplicationActiveUsers.instance().requestZombies(user);
+        guru.requestZombies(user);
     }
     private String returnName() {
         int index = randomGenerator.nextInt(names.length);
