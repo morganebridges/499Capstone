@@ -43,6 +43,7 @@ public class Zombie {
         this.alive = true;
         this.freshStamp = System.currentTimeMillis();
         this.hp = ZombieTraits.getDefaultHp();
+
     }
 
     public Zombie(long clientKey, double latitude, double longitude){

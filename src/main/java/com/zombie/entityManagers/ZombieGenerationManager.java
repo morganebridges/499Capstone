@@ -55,7 +55,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
         }
     }
 
-    private void spawnZombies(User user) {
+    public void spawnZombies(User user) {
         //log.debug("ZombieGenerationManager.spawnZombies()");
         Random rnd = new Random();
         int numZoms = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER);
@@ -64,13 +64,15 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
 
         for(int i = 0; i < numZoms; i++){
             //log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
-           genRandomZombie(user);
+           zombieService.save(genRandomZombie(user));
         }
     }
     private void spawnHorde(User user){
         Zombie patientZero = new Zombie(user.getId(), user.getLocation());
         Random rnd = new Random();
-        int zomNum = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER * 2);
+        for(int i = 0; i < rnd.nextInt()%15; i++){
+            int zomNum = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER * 2);
+        }
 
     }
 
