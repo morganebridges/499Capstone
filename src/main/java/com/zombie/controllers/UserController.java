@@ -107,7 +107,7 @@ public class UserController {
 			return new ResponseEntity<>(new User(null), HttpStatus.BAD_REQUEST);
 
 		User newUser = new User(userName);
-		
+		userService.save(newUser);
 		userService.login(newUser);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
