@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -27,8 +28,7 @@ import java.util.Random;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 public class ZombieGenerationManager {
-    @Autowired
-    ZombieRepository zombieRepo;
+
     @Autowired
     UserRepository userRepo;
     @Autowired
@@ -38,6 +38,8 @@ public class ZombieGenerationManager {
     @Autowired
     PlayerDangerManager dangerManager;
 
+    @Transient
+    int loopIterationCounter = 0;
     private final Logger log = LoggerFactory.getLogger(ZombieGenerationManager.class);
 
     private HashMap<Long, User> userMap;
@@ -76,6 +78,8 @@ public class ZombieGenerationManager {
             if(sleepTime > 0){
                 Thread.sleep(sleepTime);
             }
+            loopIterationCounter++;
+            if(loopIterationCounter % 100 == 0 && zombieService.)
         }
 
     }

@@ -8,6 +8,7 @@ public class Globals {
 	public static final long ZOMBIE_LOOP_TIME = 20000;
 	public static final long ENEMY_SPAWN_INTERVAL = 30000;
 	public static final int MAXIMUM_SPAWN_NUMBER = 15;
+	public static final int ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
 
 	//global constants must be defined as static final
 	public static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
