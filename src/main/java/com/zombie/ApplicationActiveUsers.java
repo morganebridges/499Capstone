@@ -57,7 +57,7 @@ public  class ApplicationActiveUsers {
         return instance;
     }
 
-    public static boolean setUserActive(User user){
+    public boolean setUserActive(User user){
         try{
             //set modified stamp
             user.setLastModified(new Date());
@@ -77,7 +77,7 @@ public  class ApplicationActiveUsers {
      * @param user
      * @return
      */
-    public static User setUserInactive(User user){
+    public User setUserInactive(User user){
 
         if((user = activeUsers.remove(user.getId())) != null){
             user.setActive(false);
