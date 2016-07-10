@@ -36,10 +36,26 @@ public  class ApplicationActiveUsers {
     static ZombieGenerationManager zombieGenerationManager;
 
     Date lastObjectRefresh;
+    private static boolean appInitialized;
+    static ApplicationActiveUsers instance;
 
 
-    public ApplicationActiveUsers(){activeUsers = new HashMap<Long, User>();}
-    public ApplicationActiveUsers(HashMap<Long, User> userList){activeUsers = userList;};
+    public static void initialize(){
+
+    }
+    public ApplicationActiveUsers(){
+        if(appInitialized)
+            throw new IllegalStateException("Don't call my constructor");
+        activeUsers = new HashMap<Long, User>();
+        appInitialized = true;
+    }
+
+    public static ApplicationActiveUsers instance(){
+        if(instance == null){
+            throw new IllegalStateException("This should __never__ever__be__the__case___");
+        }
+        return instance;
+    }
 
     public static boolean setUserActive(User user){
         try{

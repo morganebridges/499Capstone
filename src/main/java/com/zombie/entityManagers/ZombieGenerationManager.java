@@ -26,7 +26,6 @@ import java.util.Random;
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-
 public class ZombieGenerationManager {
     @Autowired
     ZombieRepository zombieRepo;
@@ -62,7 +61,9 @@ public class ZombieGenerationManager {
     private synchronized void runWork() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         while(true){
-
+            log.debug("ZombieGenerationManager in runWork");
+            System.out.println("ZombieGenerationManager in runWork");
+            log.debug("Zombie HashMap runWork", userMap.entrySet());
             log.trace("ZombieGenerationManager.runWork()");
             userMap.entrySet().stream()
                     .forEach(

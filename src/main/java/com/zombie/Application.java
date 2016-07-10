@@ -37,6 +37,10 @@ public class Application implements CommandLineRunner{
     private EntityManager entityManager;
     Logger log = LoggerFactory.getLogger(Application.class);
 
+    @Autowired
+    ApplicationActiveUsers universalContext;
+
+    
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);

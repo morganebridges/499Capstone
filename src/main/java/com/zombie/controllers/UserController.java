@@ -35,12 +35,6 @@ import java.util.List;
 @RestController
 public class UserController {
 	@Autowired
-	UserRepository userRepo;
-
-	@Autowired
-	ZombieRepository zombieRepo;
-
-	@Autowired
 	UserService userService;
 
 	@Autowired
@@ -113,6 +107,8 @@ public class UserController {
 		userService.login(newUser);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
+
+
 	@RequestMapping(path="/attack", method=RequestMethod.POST)
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {
 		//TODO: What is the point of having the action field if we are hitting action specific endpoints?
