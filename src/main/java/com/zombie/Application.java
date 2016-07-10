@@ -40,7 +40,7 @@ public class Application implements CommandLineRunner{
     @Autowired
     ApplicationActiveUsers universalContext;
 
-    
+
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);

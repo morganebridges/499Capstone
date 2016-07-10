@@ -27,13 +27,13 @@ import java.util.Hashtable;
 public  class ApplicationActiveUsers {
     private static HashMap<Long, User> activeUsers;
     @Autowired
-    static UserService userService;
+     UserService userService;
     @Autowired
-    static NotificationService noteService;
+     NotificationService noteService;
     @Autowired
-    static PlayerDangerManager dangerManager;
+     PlayerDangerManager dangerManager;
     @Autowired
-    static ZombieGenerationManager zombieGenerationManager;
+     ZombieGenerationManager zombieGenerationManager;
 
     Date lastObjectRefresh;
     private static boolean appInitialized;

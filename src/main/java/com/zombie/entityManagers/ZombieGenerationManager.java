@@ -102,6 +102,8 @@ public class ZombieGenerationManager {
 
     }
     public void registerUser(User user){
+        System.out.println("ZombieGenerationManager.registerUser : " + user.getId() + " " + user.getName());
+        log.warn("ZombieGenerationManager.registerUser : " + user.getId() + " " + user.getName());
         if(userMap.containsKey(user.getId()))
             return;
         this.userMap.put(user.getId(), user);
