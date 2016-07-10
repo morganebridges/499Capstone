@@ -16,9 +16,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Transient;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -27,8 +24,10 @@ import java.util.Random;
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-public class ZombieGenerationManager {
 
+public class ZombieGenerationManager extends AbstractManager{
+    @Autowired
+    ZombieRepository zombieRepo;
     @Autowired
     UserRepository userRepo;
     @Autowired
@@ -38,50 +37,21 @@ public class ZombieGenerationManager {
     @Autowired
     PlayerDangerManager dangerManager;
 
-    @Transient
-    int loopIterationCounter = 0;
     private final Logger log = LoggerFactory.getLogger(ZombieGenerationManager.class);
 
-    private HashMap<Long, User> userMap;
-    public ZombieGenerationManager(){
-        userMap = new HashMap<>();
 
-        log.debug("initializing generation manager");
-
-        Runnable r = () -> {
-            try{
-                log.trace("inside the run method of generation worker");
-                runWork();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        };
-        Thread privateThread = new Thread(r);
-        privateThread.start();
-    }
-
-    private synchronized void runWork() throws InterruptedException {
+    @Override
+    synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
-        while(true){
-            log.debug("ZombieGenerationManager in runWork");
-            System.out.println("ZombieGenerationManager in runWork");
-            log.debug("Zombie HashMap runWork", userMap.entrySet());
-            log.trace("ZombieGenerationManager.runWork()");
-            userMap.entrySet().stream()
-                    .forEach(
-                            mapEntry -> {
-                                User user = mapEntry.getValue();
 
-                                    spawnZombies(user);
-                            });
-            long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
-            if(sleepTime > 0){
-                Thread.sleep(sleepTime);
-            }
-            loopIterationCounter++;
-            if(loopIterationCounter % 100 == 0 && zombieService.)
+        log.debug("ZombieGenerationManager in runWork");
+        log.debug("Zombie HashMap runWork", userMap.entrySet());
+        userMap.values().stream()
+                .forEach(this::spawnZombies);
+        long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
+        if(sleepTime > 0){
+            Thread.sleep(Globals.ZOMBIE_MANAGER_SLEEP_INTERVAL);
         }
-
     }
 
     private void spawnZombies(User user) {
@@ -89,39 +59,20 @@ public class ZombieGenerationManager {
         Random rnd = new Random();
         int numZoms = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER);
         if(Math.random() <= Globals.HORDE_LIKELIHOOD_COEFFICIENT)
-            spawnHoard(user);
+            spawnHorde(user);
 
         for(int i = 0; i < numZoms; i++){
-            System.out.println("ZombiejGenerationManager saving zombie: " + i);
+            log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
             LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
             log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
             zombieService.save(newZombie);
         }
     }
-    private void spawnHoard(User user){
+    private void spawnHorde(User user){
         Zombie patientZero = new Zombie(user.getId(), user.getLocation());
         Random rnd = new Random();
         int zomNum = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER * 2);
 
-    }
-    public void registerUser(User user){
-        System.out.println("ZombieGenerationManager.registerUser : " + user.getId() + " " + user.getName());
-        log.warn("ZombieGenerationManager.registerUser : " + user.getId() + " " + user.getName());
-        if(userMap.containsKey(user.getId()))
-            return;
-        this.userMap.put(user.getId(), user);
-
-    }
-
-    public void deRegister(User user){
-        if(userMap.containsKey(user.getId())){
-            userMap.remove(user.getId(), userMap.get(user.getId()));
-        } else{
-            log.debug("Attempt to deregister user from danger manager failed - user not registered.");
-        }
-    }
-    public void deRegister(long uid){
-        deRegister(userMap.get(uid));
     }
 }
