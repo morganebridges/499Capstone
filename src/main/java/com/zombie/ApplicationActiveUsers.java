@@ -55,10 +55,8 @@ public  class ApplicationActiveUsers {
             appInitialized = true;
 
     }
-    @Autowired
-    public ApplicationActiveUsers(){
-        initialize();
-    }
+
+    public ApplicationActiveUsers(){}
 
     public static ApplicationActiveUsers instance(){
         if(instance == null){
