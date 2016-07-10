@@ -114,6 +114,12 @@ public  class ApplicationActiveUsers {
      * @param user
      */
     public void requestZombies(User user) {
-        zombieGenerationManager.requestZombiesForUser(user);
+        zombieGenerationManager.requestZombiesForUser(user, 5);
+    }
+
+    public ZombieGenerationManager introZombManager() throws Exception {
+        if(zombieGenerationManager != null)
+            return zombieGenerationManager;
+        else throw new Exception("THE WORLD IS DEAD");
     }
 }

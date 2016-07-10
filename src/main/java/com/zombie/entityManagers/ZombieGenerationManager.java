@@ -64,10 +64,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
 
         for(int i = 0; i < numZoms; i++){
             //log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
-            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
-            //log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
-            Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
-            zombieService.save(newZombie);
+           genRandomZombie(user);
         }
     }
     private void spawnHorde(User user){
@@ -86,7 +83,17 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
     public void beInformed(int level) {
 
     }
-    public void requestZombiesForUser(User user){
-
+    public void requestZombiesForUser(User user, int numRequested){
+        for(int i = 0; i < numRequested; i++){
+            genRandomZombie(user);
+        }
+    }
+    public Zombie genRandomZombie(User user){
+        LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
+        log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
+        Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
+        log.debug("ZombieGenerationManager : zombie in spawnZombie");
+        zombieService.save(newZombie);
+        return newZombie;
     }
 }

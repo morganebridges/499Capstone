@@ -39,10 +39,14 @@ public class TestDataPrep {
             user.setSerum(randomGenerator.nextInt(5));
             user.setLastUsedSerum(new Date());
             user.setattackRange(100);
+            zombiesForUsers(user);
             userService.save(user);
+
         }
     }
+    public void zombiesForUsers(User user){
 
+    }
     private String returnName() {
         int index = randomGenerator.nextInt(names.length);
         return names[index];
