@@ -35,9 +35,6 @@ public class User {
 	private double latitude;
 	private double longitude;
 
-	public double getAttackRange() {
-		return attackRange;
-	}
 
 	public void setAttackRange(double attackRange) {
 		this.attackRange = attackRange;
@@ -80,35 +77,6 @@ public class User {
 		this.attackRange = attackRange;
 		this.lastModified = date;
 	}
-
-	public String getGcmId() {
-		return gcmId;
-	}
-
-	public void setGcmId(String gcmId) {
-		this.gcmId = gcmId;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getLastEnemySpawned() {
-		return lastEnemySpawned;
-	}
-
-	public void setLastEnemySpawned(long lastEnemySpawned) {
-		this.lastEnemySpawned = lastEnemySpawned;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
 
 
     public User(){}
@@ -265,6 +233,35 @@ public class User {
 	public double getattackRange() {
 		return attackRange;
 	}
+
+	public String getGcmId() {
+		return gcmId;
+	}
+
+	public void setGcmId(String gcmId) {
+		this.gcmId = gcmId;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getLastEnemySpawned() {
+		return lastEnemySpawned;
+	}
+
+	public void setLastEnemySpawned(long lastEnemySpawned) {
+		this.lastEnemySpawned = lastEnemySpawned;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 
 	/**
 	 * Considering moving zombieFound logic to a boolean flag in zombie model
