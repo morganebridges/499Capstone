@@ -4,8 +4,6 @@ import com.zombie.models.dto.LatLng;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Hashtable;
-import java.util.List;
 
 /**
  * Created by morganebridges on 5/25/16.

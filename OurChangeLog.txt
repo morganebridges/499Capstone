@@ -28,3 +28,13 @@ Instead of ArrayList, take a Hashtable.
 
 ### Active user Global Object HashTable ###
 We have talked before about keeping
+
+
+Decision for refactoring manager classes:
+
+Abstract Manager that will not autowire its services and will not implement runwork.
+
+abstract class _does_ implement runWork(), but it just calls an abstract method to be implemented
+by concrete managers
+
+Change from miles to meters for geo math

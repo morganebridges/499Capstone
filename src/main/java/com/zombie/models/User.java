@@ -21,11 +21,12 @@ public class User {
 	private int serum;
 	private Date lastUsedSerum;
 	private Date lastModified;
-	//A value that represents the lsaat time zombies were spawned
+	//A value that represents the last time zombies were spawned
 	private long lastEnemySpawned;
 
 	//attackRange in feet (default)
 	private double attackRange;
+	private double perceptionRange;
 
 	//Google Cloud Messaging registration Id
 
@@ -34,7 +35,23 @@ public class User {
 	private double latitude;
 	private double longitude;
 
-	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills) {
+	public double getAttackRange() {
+		return attackRange;
+	}
+
+	public void setAttackRange(double attackRange) {
+		this.attackRange = attackRange;
+	}
+
+	public double getPerceptionRange() {
+		return perceptionRange;
+	}
+
+	public void setPerceptionRange(double perceptionRange) {
+		this.perceptionRange = perceptionRange;
+	}
+
+	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills, double perceptionRange) {
 		this.active = active;
 		this.ammo = ammo;
 		this.gcmId = gcmId;
@@ -46,7 +63,9 @@ public class User {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
+		this.perceptionRange = perceptionRange;
 		this.attackRange = attackRange;
+
 		this.serum = serum;
 		this.totalKills = totalKills;
 	}
@@ -104,9 +123,9 @@ public class User {
 	    this.ammo = 5;
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
-		this.attackRange = 100;
+		this.attackRange = 30.0;
 		this.lastEnemySpawned = System.currentTimeMillis();
-
+		this.perceptionRange = 60.0;
     }
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double attackRange, Date lastModified, double latitude, double longitude) {

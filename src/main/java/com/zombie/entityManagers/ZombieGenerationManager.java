@@ -60,38 +60,45 @@ public class ZombieGenerationManager {
     }
 
     private synchronized void runWork() throws InterruptedException {
-
+        long lastCheck = System.currentTimeMillis();
         while(true){
-            long lastCheck = System.currentTimeMillis();
+
             log.trace("ZombieGenerationManager.runWork()");
             userMap.entrySet().stream()
                     .forEach(
                             mapEntry -> {
                                 User user = mapEntry.getValue();
-                                if(zombieService.findZombiesInRange(user).size() < Globals.MAXIMUM_SPAWN_NUMBER){
+
                                     spawnZombies(user);
-                                }
-                            }
-                    );
+                            });
             long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
             if(sleepTime > 0){
                 Thread.sleep(sleepTime);
             }
         }
+
     }
 
     private void spawnZombies(User user) {
         log.debug("ZombieGenerationManager.spawnZombies()");
         Random rnd = new Random();
-        int numZoms = rnd.nextInt(3);
+        int numZoms = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER);
+        if(Math.random() <= Globals.HORDE_LIKELIHOOD_COEFFICIENT)
+            spawnHoard(user);
+
         for(int i = 0; i < numZoms; i++){
-            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getattackRange()));
+            LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
             log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
             Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
             zombieService.save(newZombie);
         }
     }
+    private void spawnHoard(User user){
+        Zombie patientZero = new Zombie(user.getId(), user.getLocation());
+        Random rnd = new Random();
+        int zomNum = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER * 2);
 
+    }
     public void registerUser(User user){
         if(userMap.containsKey(user.getId()))
             return;

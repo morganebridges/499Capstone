@@ -3,11 +3,7 @@ package com.zombie.models.dto;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -18,33 +14,33 @@ public class ClientUpdateDTO {
 
     long id;
 
-    Zombie attackedZombie;
-
-    Hashtable<Long, Zombie> zombies;
+    long targetId;
+    HashMap<Long, Zombie> zombies;
     User user;
-    Action action;
+    UserActionDto.Action userAction;
 
     public ClientUpdateDTO(){}
-    public ClientUpdateDTO(Zombie attackedZombie, Hashtable<Long, Zombie> zombies, User user, Action action){
-        this.attackedZombie = attackedZombie;
+    public ClientUpdateDTO(long targetId, HashMap<Long, Zombie> zombies, User user, UserActionDto.Action userAction){
+        this.targetId = targetId;
         this. zombies = zombies;
         this.user = user;
-        this.action = action;
+        this.userAction = userAction;
     }
-    public Action getAction() {
-        return action;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
+    public UserActionDto.Action getUserAction() {
+        return userAction;
     }
 
-    public Zombie getAttackedZombie() {
-        return attackedZombie;
+    public void setUserAction(UserActionDto.Action userAction) {
+        this.userAction = userAction;
+    }
+
+
+    public long getTargetId() {
+        return targetId;
     }
 
     public void setAttackedZombie(Zombie attackedZombie) {
-        this.attackedZombie = attackedZombie;
+        this.targetId = targetId;
     }
 
     public long getId() {
@@ -63,11 +59,28 @@ public class ClientUpdateDTO {
         this.user = user;
     }
 
-    public Hashtable<Long, Zombie> getZombies() {
+    public HashMap<Long, Zombie> getZombies() {
         return zombies;
     }
 
-    public void setZombies(Hashtable<Long, Zombie> zombies) {
+    public void setZombies(HashMap<Long, Zombie> zombies) {
         this.zombies = zombies;
+    }
+
+    public enum UserAction {
+        NOTHING (0),
+        ATTACK (1),
+        SALVAGE (2);
+
+        private long id;
+
+        int code;
+        UserAction(int code) {
+            this.code = code;
+        }
+
+        int getCode() {
+            return this.code;
+        }
     }
 }

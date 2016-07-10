@@ -2,6 +2,8 @@ package com.zombie.controllers;
 
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
+import com.zombie.models.dto.ClientUpdateDTO;
+import com.zombie.models.dto.UserAction;
 import com.zombie.models.dto.UserActionDto;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @ComponentScan("com.zombie")
@@ -47,11 +50,13 @@ public class UserController {
 
 
 	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<ArrayList<Zombie>>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
-		ArrayList<Zombie> returnData;
+	public ResponseEntity<ClientUpdateDTO>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
+		HashMap<Long, Zombie> zombieMap;
+
 		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
 				userActionDto.getLongitude(), userActionDto.getTargetId());
+
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
@@ -60,21 +65,24 @@ public class UserController {
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
 
+
+		//TODO: Refactor to maket he code more meaningful - item salvaging etc
+		long targetId = userActionDto.getAction();
+		Zombie attackedZombie = null;
 		if(userActionDto.action == UserActionDto.Action.ATTACK){
-			Zombie attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+			targetId = attackedZombie.getId();
 
 		}
 
-		List<Zombie> zombieList = zombieService.findZombiesInRange(user);
-		if(!(zombieList.size() > 0))
-			zombieList = userService.generateTestZombies(user, 4);
+		HashMap<Long, Zombie> zombieList = zombieService.findZombiesInRange(user);
+
 		log.trace("generating test zombies size={}", zombieList.size());
 
 
-
+		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zombieList, user, userActionDto.action);
 		log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
-		ArrayList<Zombie> zombieArrList = zombieService.listToArrayList(zombieList);
-		return new ResponseEntity<>(zombieArrList, HttpStatus.OK);
+		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
@@ -99,7 +107,8 @@ public class UserController {
 			return new ResponseEntity<>(new User(null), HttpStatus.BAD_REQUEST);
 
 		User newUser = new User(userName);
-		userService.save(newUser);
+		if(newUser.getGcmId() == null || newUser.getGcmId() == "")
+
 		userService.login(newUser);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}

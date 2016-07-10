@@ -1,5 +1,6 @@
 package com.zombie.services;
 
+import com.zombie.ApplicationActiveUsers;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
@@ -17,6 +18,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -34,6 +36,8 @@ public class UserService {
 
     @Autowired
     ZombieRepository zombieRepo;
+
+    @Autowired
 
     Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -76,16 +80,12 @@ public class UserService {
     public void login(User user){
         //TODO: is this for registration or login?  If login why setting lastUsedSerum?
         // 7.8.16 - Right now "registration" mostly refers to registering for GCM.
-
-        user.setActive(true);
-        //user.setLastUsedSerum(new Date());
-        //user.setLastAttacked(System.currentTimeMillis());
-        dangerManager.registerUser(user);
+        ApplicationActiveUsers.setUserActive(user);
 
     }
 
-    public ArrayList<Zombie> generateTestZombies(User user, int count){
-        ArrayList<Zombie> zomList = new ArrayList<>();
+    public HashMap<Long, Zombie> generateTestZombies(User user, int count){
+        HashMap<Long, Zombie> zomList = new HashMap<>();
         Random randomizer = new Random();
         double latPosNeg = 1;
         double longPosNeg = 1;
@@ -101,7 +101,8 @@ public class UserService {
                     , user.getLongitude() + (.0007 * (randomizer.nextInt()%5) * longPosNeg));
             Zombie zom = new Zombie(user.getId(), zombLoc);
             zombieRepo.save(zom);
-            zomList.add(zom);
+            zomList.put(zom.getId(), zom);
+
             log.debug("New Zombie Location is Lat={} : Long={} zombieId={}",
                     zom.getLatitude(), zom.getLongitude(), zom.getId());
         }

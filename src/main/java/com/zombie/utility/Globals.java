@@ -11,7 +11,7 @@ public class Globals {
 
 	//global constants must be defined as static final
 	public static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
-
+	public static final double HORDE_LIKELIHOOD_COEFFICIENT = .05;
 	public static List<String> gcmIdStore;
 
 	public static List<String> getOrderedUserFields() {

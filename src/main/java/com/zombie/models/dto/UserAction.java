@@ -8,7 +8,7 @@ import javax.persistence.Id;
  * Created by morganebridges on 7/9/16.
  */
 @Entity
-public enum Action {
+public enum UserAction {
 
     NOTHING (0),
     ATTACK (1),
@@ -18,12 +18,12 @@ public enum Action {
     @GeneratedValue
     private long id;
 
-    private final int code;
-    Action(int code) {
+    int code;
+    UserAction(int code) {
         this.code = code;
     }
 
-    private int getCode() {
+    int getCode() {
         return this.code;
     }
 }

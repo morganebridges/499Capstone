@@ -32,14 +32,14 @@ public class ZombieService {
     NotificationService noteService;
 
     //TODO: make this thing actually check a range.
-    public ArrayList<Zombie> findZombiesInRange(User user) {
+    public HashMap<Long, Zombie> findZombiesInRange(User user) {
         Stream<Zombie> userZombies = zombieRepo.streamByUserId(user.getId());
-        ArrayList<Zombie> zombiesInRange = new ArrayList<>();
+        HashMap<Long, Zombie> zombiesInRange = new HashMap<>();
         userZombies.forEach(
                 zombie -> {
                     if(Geomath.getDistance(user.getLocation(), zombie.getLocation(), "M")
                                     <= Geomath.feetToMiles(user.getattackRange())){
-                        zombiesInRange.add(zombie);
+                        zombiesInRange.put(zombie.getId(),zombie);
                     }
                 }
         );
@@ -49,7 +49,7 @@ public class ZombieService {
 
     //TODO: make this more efficient in the great someday or if it is a performance issue
     public boolean areZombiesInRange(User user) {
-        return findZombiesInRange(user).iterator().hasNext();
+        return findZombiesInRange(user).entrySet().iterator().hasNext();
     }
 
     //TODO: Make a cooler way to take a list and a type and create an arraylist of list and type

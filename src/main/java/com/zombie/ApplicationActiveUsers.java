@@ -26,23 +26,25 @@ import java.util.Hashtable;
 @Service
 public  class ApplicationActiveUsers {
     private static HashMap<Long, User> activeUsers;
+    static UserService userService;
     @Autowired
-    UserService userService;
+    static NotificationService noteService;
     @Autowired
-    NotificationService noteService;
+    static PlayerDangerManager dangerManager;
     @Autowired
-    PlayerDangerManager dangerManager;
-    @Autowired
-    ZombieGenerationManager zombieGenerationManager;
+    static ZombieGenerationManager zombieGenerationManager;
 
     Date lastObjectRefresh;
 
 
     public ApplicationActiveUsers(){activeUsers = new HashMap<Long, User>();}
     public ApplicationActiveUsers(HashMap<Long, User> userList){activeUsers = userList;};
-    public boolean setUserActive(User user){
+
+    public static boolean setUserActive(User user){
         try{
+            //set modified stamp
             user.setLastModified(new Date());
+            //register for notifications
             activeUsers.put(user.getId(), user);
             userService.save(user);
             return true;
@@ -56,7 +58,7 @@ public  class ApplicationActiveUsers {
      * @param user
      * @return
      */
-    public User setUserInactive(User user){
+    public static User setUserInactive(User user){
 
         if((user = activeUsers.remove(user.getId())) != null){
             user.setActive(false);
@@ -82,7 +84,10 @@ public  class ApplicationActiveUsers {
                 }
         );
     }
-
+    @Autowired
+    public static void setUserService(UserService service){
+        userService = service;
+    }
 
 
 }

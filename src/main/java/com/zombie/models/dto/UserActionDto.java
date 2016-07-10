@@ -22,13 +22,13 @@ public class UserActionDto {
     //Object additionalParam;
 
     /**
-     * Generate received from the client.  If the update includes an action that
+     * Generate received from the client.  If the update includes an userAction that
      * requires a target, setTarget() should be called after construction.  If the
-     * action requires an additional parameter, setAdditionParameter() should be called.
+     * userAction requires an additional parameter, setAdditionParameter() should be called.
      * @param id The id of the user making the update
      * @param latitude The latitude of the user
      * @param longitude The longitude of the user
-     * @param action An inner enum representing the action the user is taking.
+     * @param action An inner enum representing the userAction the user is taking.
      */
     public UserActionDto(long id, long latitude, long longitude, Action action){
         this.id = id;
@@ -77,7 +77,7 @@ public class UserActionDto {
             this.code = code;
         }
 
-        private int getCode() {
+        public int getCode() {
             return this.code;
         }
     }
@@ -87,6 +87,6 @@ public class UserActionDto {
     }
 
     public int getAction(){
-        return 0;
+        return action.getCode();
     }
 }
