@@ -55,15 +55,11 @@ public class Application implements CommandLineRunner{
             TestDataPrep prep = new TestDataPrep(userService);
 
             prep.populate(100);
-            installTheGuru();
     }
 
     /**
      * This Awkward method allows our beloved guru to rise to his throne, sitting finally aloft a seat of inscrutible
      * power.
      */
-    public void installTheGuru(){
-        universalContext.initialize(universalContext);
 
-    }
 }

@@ -41,21 +41,23 @@ public  class ApplicationActiveUsers {
     Date lastObjectRefresh;
     private static boolean appInitialized;
     private ArrayList<AbstractManager> managerList;
-    static ApplicationActiveUsers instance;
+    private static ApplicationActiveUsers instance;
 
 
-    public void initialize(ApplicationActiveUsers guru){
+    public void initialize(){
         if(appInitialized)
             return;
-        instance = guru;
-        appInitialized = true;
+        if(managerList == null)
+            managerList = new ArrayList<AbstractManager>();
+        if(instance == null)
+            instance = this;
+        if(!appInitialized)
+            appInitialized = true;
+
     }
+    @Autowired
     public ApplicationActiveUsers(){
-        if(appInitialized)
-            throw new IllegalStateException("Don't call my constructor");
-        activeUsers = new HashMap<Long, User>();
-        appInitialized = true;
-        managerList = new ArrayList<AbstractManager>();
+        initialize();
     }
 
     public static ApplicationActiveUsers instance(){
@@ -129,4 +131,17 @@ public  class ApplicationActiveUsers {
     public Object subscribe(ContextSubscriber s){
         return new Object();
     }
+
+    public ArrayList<AbstractManager> getManagerList() {
+        return managerList;
+    }
+
+    public void setManagerList(ArrayList<AbstractManager> managerList) {
+        this.managerList = managerList;
+    }
+    public static void setAppInitialized(boolean appInitialized) {
+        ApplicationActiveUsers.appInitialized = appInitialized;
+    }
+
+
 }
