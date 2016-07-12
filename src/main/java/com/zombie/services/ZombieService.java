@@ -50,7 +50,16 @@ public class ZombieService {
 
     }
     public ArrayList<Zombie> findZombiesByUser(User user){
-        return listToArrayList(zombieRepo.findByClientKey(user.getId()));
+        ArrayList<Zombie> zomArr = listToArrayList(zombieRepo.findByClientKey(user.getId()));
+        ArrayList<Zombie> returnList = new ArrayList<>();
+        Iterator<Zombie> zomIt = zomArr.iterator();
+        while(zomIt.hasNext()){
+            Zombie zom = zomIt.next();
+            if(zom.isAlive()){
+                returnList.add(zom);
+            }
+        }
+        return returnList;
     }
 
     //TODO: make this more efficient in the great somey or if it is a performance issue
