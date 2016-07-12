@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -72,11 +69,17 @@ public class UserController {
 
 		ArrayList<Zombie> zArrList = zombieService.mapToList(zombieList);
 		ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
+
 		zArrList.addAll(genZomList);
+		Iterator<Zombie> iterator = zArrList.iterator();
 
+		while(iterator.hasNext()){
+			Zombie tmp = iterator.next();
+			if(!tmp.isAlive())
+				zArrList.remove(tmp);
 
+		}
 		//log.trace("generating test zombies size={}", zombieList.size());
-
 
 		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zArrList, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
