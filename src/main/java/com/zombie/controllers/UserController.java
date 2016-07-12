@@ -1,5 +1,6 @@
 package com.zombie.controllers;
 
+import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.models.dto.ClientUpdateDTO;
@@ -49,7 +50,10 @@ public class UserController {
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
-
+		if(!Globals.zombiesGenerated && user.getLatitude() > 5){
+			zombieService.requestZombies(user, 5);
+			Globals.zombiesGenerated = true;
+		}
 		//update location of user from the DTO
 		//if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());

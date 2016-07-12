@@ -94,4 +94,7 @@ public class ZombieService {
         list.addAll(map.values());
         return list;
     }
+    public void requestZombies(User user, int num){
+        zombieManager.requestZombiesForUser(user, num);
+    }
 }
