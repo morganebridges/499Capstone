@@ -225,10 +225,7 @@ public class User {
 		this.lastEnemySpawned = lastEnemySpawned;
 	}
 
-	@Override
-	public String toString() {
-		return "" + this.getId();
-	}
+
 
 	public double getattackRange() {
 		return attackRange;
@@ -310,5 +307,14 @@ public class User {
 
 	public void setattackRange(double attackRange) {
 		this.attackRange = attackRange;
+	}
+	@Override
+	public String toString(){
+		return "" +
+				"id : " + this.id + "\n" +
+				"name : " + this.name + "\n" +
+				"latitude: " + this.latitude + "\n" +
+				"longitude : " + this.longitude + "\n";
+
 	}
 }

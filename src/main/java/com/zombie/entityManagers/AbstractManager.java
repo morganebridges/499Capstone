@@ -54,6 +54,7 @@ public abstract class AbstractManager {
     abstract void runWorkImpl() throws InterruptedException ;
 
     public void registerUser(User user){
+        System.out.println("Registering user: " + user.getName() + " ");
         if(userMap.containsKey(user.getId()))
             return;
         this.userMap.put(user.getId(), user);
@@ -61,6 +62,9 @@ public abstract class AbstractManager {
     }
 
     public void deRegisterUser(User user){
+        System.out.println("Deregistering user: " + user.getName() + " ");
+        System.out.println("This : " + this.toString());
+
         long userId = user.getId();
         if(userMap.containsKey(userId)){
             userMap.remove(userId, userMap.get(userId));

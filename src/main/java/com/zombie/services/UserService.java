@@ -89,6 +89,7 @@ public class UserService {
     public void login(User user){
         //TODO: is this for registration or login?  If login why setting lastUsedSerum?
         // 7.8.16 - Right now "registration" mostly refers to registering for GCM.
+
         guru.activateUser(user);
 
     }

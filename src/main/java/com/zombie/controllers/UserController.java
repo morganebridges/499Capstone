@@ -9,6 +9,7 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
+import com.zombie.utility.Globals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,8 @@ public class UserController {
 			throw new IllegalStateException("User does not exist in the system!");
 
 		//update location of user from the DTO
-		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
+		if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
+			user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
 
 
@@ -71,6 +73,7 @@ public class UserController {
 
 		HashMap<Long, Zombie> zombieList = zombieService.findZombiesInRange(user);
 
+
 		//log.trace("generating test zombies size={}", zombieList.size());
 
 
@@ -84,7 +87,7 @@ public class UserController {
 		//TODO: again, we shouldnt be creating new users in the login endpoint
 		//log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
-
+		Globals.tempZomList = userService.generateTestZombies(user, 4);
 		if(user != null){
 			userService.login(user);
 			return new ResponseEntity<>(user, HttpStatus.OK);
@@ -127,6 +130,7 @@ public class UserController {
 		if(userActionDto.action == UserActionDto.Action.ATTACK){
 			//log.debug("Attack action found userId={} zombieId={}", userActionDto.getId(), userActionDto.getTargetId());
 			attackedZombie = userService.attackZombie(user, userActionDto.getTargetId());
+
 		} else {
 			log.error("Attack endpoint hit without attack action set userId={} actionId={}",
 					userActionDto.getId(), userActionDto.getAction());

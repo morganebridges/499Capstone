@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -25,7 +26,6 @@ import java.util.Random;
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
-
 public class ZombieGenerationManager extends AbstractManager implements AlarmObserver{
     @Autowired
     ZombieRepository zombieRepo;
@@ -38,12 +38,22 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
     @Autowired
     PlayerDangerManager dangerManager;
 
+    private static ArrayList<GenRequest> requestList = new ArrayList<GenRequest>();
+
+
+    static ArrayList<User> userList = new ArrayList<User>();
+    public ZombieGenerationManager(){
+        super();
+        System.out.println("ZombieGenerationManager constructed");
+    }
     private final Logger log = LoggerFactory.getLogger(ZombieGenerationManager.class);
 
 
     @Override
     synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
+        System.out.println("ZombieGenerationManager runimp");
+
 
         //log.debug("ZombieGenerationManager in runWork");
         //log.debug("Zombie HashMap runWork", userMap.entrySet());
@@ -57,12 +67,17 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
 
     public void spawnZombies(User user) {
         //log.debug("ZombieGenerationManager.spawnZombies()");
+        System.out.println("ZombieGenerationManager.spawnZombies");
+        Globals.prln(user.toString());
+
+
         Random rnd = new Random();
         int numZoms = rnd.nextInt(Globals.MAXIMUM_SPAWN_NUMBER);
         if(Math.random() <= Globals.HORDE_LIKELIHOOD_COEFFICIENT)
             spawnHorde(user);
 
         for(int i = 0; i < numZoms; i++){
+            Globals.prln("Number of zombies: " + numZoms);
             //log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
            zombieService.save(genRandomZombie(user));
         }
@@ -86,16 +101,30 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
 
     }
     public void requestZombiesForUser(User user, int numRequested){
+        System.out.println("Requesting zombies for: \n" + user.toString());
         for(int i = 0; i < numRequested; i++){
             genRandomZombie(user);
         }
     }
     public Zombie genRandomZombie(User user){
+        Globals.prln("ZombieGenerationManager.genRandomZombie");
+        Globals.prln(user.toString());
+
         LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
-        log.debug("ZombieGenerationManager spawnZombies() - Zombie location random {} ,  {}", zomLoc.getLatitude(), zomLoc.getLongitude());
+        System.out.printf("ZombieGenerationManager spawnZombie %f- Zombie location random %f" , zomLoc.getLatitude(), zomLoc.getLongitude());
         Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
-        log.debug("ZombieGenerationManager : zombie in spawnZombie");
+        Globals.prln("ZombieGenerationManager : zombie in spawnZombie");
         zombieService.save(newZombie);
         return newZombie;
+    }
+
+    public boolean requestStuff(User user, int num){
+        requestList.add(new GenRequest(user, num));
+        return true;
+    }
+    public class GenRequest{
+        User user;
+        int num;
+        public GenRequest(User user, int num){this.user = user; this.num = num;}
     }
 }

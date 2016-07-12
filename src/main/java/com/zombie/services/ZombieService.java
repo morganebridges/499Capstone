@@ -1,5 +1,6 @@
 package com.zombie.services;
 
+import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
@@ -30,6 +31,8 @@ public class ZombieService {
     UserRepository userRepo;
     @Autowired
     NotificationService noteService;
+    @Autowired
+    ZombieGenerationManager zombieManager;
 
     //TODO: make this thing actually check a range.
     public HashMap<Long, Zombie> findZombiesInRange(User user) {
@@ -38,7 +41,7 @@ public class ZombieService {
         userZombies.forEach(
                 zombie -> {
                     if(Geomath.getDistance(user.getLocation(), zombie.getLocation(), "M")
-                                    <= Geomath.feetToMiles(user.getattackRange())){
+                                    <= Geomath.feetToMiles(user.getattackRange()) && zombie.isAlive()){
                         zombiesInRange.put(zombie.getId(),zombie);
                     }
                 }

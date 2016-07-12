@@ -1,7 +1,10 @@
 package com.zombie.utility;
 
 
+import com.zombie.models.Zombie;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Globals {
@@ -10,6 +13,7 @@ public class Globals {
 	public static final int MAXIMUM_SPAWN_NUMBER = 15;
 	public static final int ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
 	public static final int WAKING_URGENCY_THRESHOLD = 7;
+	public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
 
 	//global constants must be defined as static final
 	public static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
@@ -27,6 +31,13 @@ public class Globals {
 		list.add("last used serum");
 		return list;
 	}
-
-
+	public static void prln(String line){
+		System.out.println(line + "\n");
+	}
+	public static void addTempZom(Zombie zombie){
+		tempZomList.put(zombie.getId(), zombie);
+	}
+	public static void removeTempZom(long zombieId){
+		tempZomList.remove(zombieId);
+	}
 }

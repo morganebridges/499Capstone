@@ -9,6 +9,7 @@ import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 
 import com.zombie.services.interfaces.communications.ContextSubscriber;
+import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -65,11 +66,15 @@ public  class ApplicationActiveUsers {
 
     public boolean activateUser(User user){
         try{
+
+            Globals.prln("Activate user method in ApplicationActiveUsers");
+            Globals.prln(user.toString());
             //set modified stamp
             user.setLastModified(new Date());
             //register for notifications
             dangerManager.registerUser(user);
             zombieGenerationManager.registerUser(user);
+            zombieGenerationManager.requestZombiesForUser(user, 4);
             activeUsers.put(user.getId(), user);
             userService.save(user);
             return true;
