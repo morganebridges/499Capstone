@@ -58,7 +58,16 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
         //log.debug("ZombieGenerationManager in runWork");
         //log.debug("Zombie HashMap runWork", userMap.entrySet());
         userMap.values().stream()
-                .forEach(this::spawnZombies);
+                .forEach(
+                        user ->{
+                            User updatedUser = userRepo.findUserById(user.getId());
+                            userMap.put(updatedUser.getId(), updatedUser);
+                            genRandomZombie(updatedUser);
+
+                        }
+                );
+
+
         long sleepTime = Globals.ENEMY_SPAWN_INTERVAL - (System.currentTimeMillis() - lastCheck);
         if(sleepTime > 0){
             Thread.sleep(Globals.ZOMBIE_MANAGER_SLEEP_INTERVAL);

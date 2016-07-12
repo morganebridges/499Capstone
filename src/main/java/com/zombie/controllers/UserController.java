@@ -65,10 +65,10 @@ public class UserController {
 
 		}
 
-		HashMap<Long, Zombie> zombieList = zombieService.findZombiesInRange(user);
+		HashMap<Long, Zombie> zomMap = zombieService.findZombiesInRange(user);
 
 		//ArrayList<Zombie> zArrList = zombieService.mapToList(zombieList);
-		ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
+		//ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
 
 		//zArrList.addAll(genZomList);
 		//Iterator<Zombie> iterator = zArrList.iterator();
@@ -79,9 +79,15 @@ public class UserController {
 				zArrList.remove(tmp);
 
 		}*/
+		ArrayList<Zombie> returnList = new ArrayList<>();
+		zomMap.values().stream().forEach(
+				zombie -> {
+					returnList.add(zombie);
+				}
+		);
 		//log.trace("generating test zombies size={}", zombieList.size());
 
-		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, genZomList, user, userActionDto.action);
+		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, returnList, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
