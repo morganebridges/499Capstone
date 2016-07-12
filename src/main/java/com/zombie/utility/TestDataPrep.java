@@ -44,8 +44,7 @@ public class TestDataPrep {
             user.setLastUsedSerum(new Date());
             user.setattackRange(100);
             user.setLatitude(44.02);
-            user.setLongitude(44.02);
-            userService.login(user);
+            user.setLongitude(-95.02);
             zombiesForUsers(user);
             userService.save(user);
 

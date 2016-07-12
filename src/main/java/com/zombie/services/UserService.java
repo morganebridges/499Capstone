@@ -68,7 +68,7 @@ public class UserService {
     }
 
     /**
-     * This method basically calls save with some extra validation (and therefore overhead). We cannot 100% trust that client
+     * This method will basicall call save with some extra validation (and therefore overhead). We cannot 100% trust that client
      * all requests will contain good information. For instance, if we are recieving values that evaluate to 0 for lat/lng
      * we don't want to write it to the database.
      * @param user

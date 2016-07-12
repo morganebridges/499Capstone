@@ -3,10 +3,7 @@ package com.zombie.controllers;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.models.dto.ClientUpdateDTO;
-import com.zombie.models.dto.UserAction;
 import com.zombie.models.dto.UserActionDto;
-import com.zombie.repositories.UserRepository;
-import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
 import com.zombie.utility.Globals;
@@ -20,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +57,8 @@ public class UserController {
 			user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
 
-
+		System.out.println("user controller before attack");
+		System.out.println(user.toString());
 		//TODO: Refactor to maket he code more meaningful - item salvaging etc
 		long targetId = userActionDto.getAction();
 		Zombie attackedZombie = null;
@@ -73,11 +70,15 @@ public class UserController {
 
 		HashMap<Long, Zombie> zombieList = zombieService.findZombiesInRange(user);
 
+		ArrayList<Zombie> zArrList = zombieService.mapToList(zombieList);
+		ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
+		zArrList.addAll(genZomList);
+
 
 		//log.trace("generating test zombies size={}", zombieList.size());
 
 
-		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zombieService.mapToList(zombieList), user, userActionDto.action);
+		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, zArrList, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
