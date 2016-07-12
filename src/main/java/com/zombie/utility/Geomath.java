@@ -50,7 +50,7 @@ public class Geomath {
     public static double feetToMiles(double feet){ return feet * .000189;}
     public static double milesToFeet(double miles){ return (miles / .000189);}
 
-    public static LatLng getRandomLocationWithin(double lat, double lng, double radius) {
+    public static LatLng getRandomLocationWithin(double lat, double lng, double radius) throws Exception {
         Random random = new Random();
         System.out.println("randomLocationWithin");
         System.out.println("Point of origin:");
@@ -76,7 +76,7 @@ public class Geomath {
         double foundLatitude = y + lng;
         System.out.println("Longitude: " + foundLongitude + "  Latitude: " + foundLatitude );
         throw new Exception("GeoMath exception");
-        return new LatLng(foundLatitude, foundLongitude);
+        //return new LatLng(foundLatitude, foundLongitude);
     }
 }
 
