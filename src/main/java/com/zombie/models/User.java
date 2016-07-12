@@ -36,17 +36,6 @@ public class User {
 	private double longitude;
 
 
-	public void setAttackRange(double attackRange) {
-		this.attackRange = attackRange;
-	}
-
-	public double getPerceptionRange() {
-		return perceptionRange;
-	}
-
-	public void setPerceptionRange(double perceptionRange) {
-		this.perceptionRange = perceptionRange;
-	}
 
 	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills, double perceptionRange) {
 		this.active = active;
@@ -121,6 +110,17 @@ public class User {
 		list.add(lastUsedSerum);
 		//leaving location out of import/export for now
 		return list.iterator();
+	}
+	public void setAttackRange(double attackRange) {
+		this.attackRange = attackRange;
+	}
+
+	public double getPerceptionRange() {
+		return perceptionRange;
+	}
+
+	public void setPerceptionRange(double perceptionRange) {
+		this.perceptionRange = perceptionRange;
 	}
 
 	public void updateLocation(LatLng lastLocation){

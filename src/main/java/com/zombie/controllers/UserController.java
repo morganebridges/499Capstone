@@ -47,7 +47,7 @@ public class UserController {
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ClientUpdateDTO>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
 		HashMap<Long, Zombie> zombieMap;
-
+		System.out.println(userActionDto.toString());
 		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
 				userActionDto.getLongitude(), userActionDto.getTargetId());
