@@ -73,7 +73,7 @@ public  class ApplicationActiveUsers {
             user.setLastModified(new Date());
             //register for notifications
             dangerManager.registerUser(user);
-            zombieGenerationManager.registerUser(user);
+            //zombieGenerationManager.registerUser(user);
             zombieGenerationManager.requestZombiesForUser(user, 4);
             activeUsers.put(user.getId(), user);
             userService.save(user);
