@@ -49,7 +49,7 @@ public class UserController {
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
-		
+
 		//update location of user from the DTO
 		//if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
