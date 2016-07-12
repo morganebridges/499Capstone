@@ -64,8 +64,8 @@ public class UserController {
 			targetId = attackedZombie.getId();
 
 		}
-
-		HashMap<Long, Zombie> zomMap = zombieService.findZombiesInRange(user);
+		/** we'll put this back in once we're done hacking for the presentation */
+		//HashMap<Long, Zombie> zomMap = zombieService.findZombiesInRange(user);
 
 		//ArrayList<Zombie> zArrList = zombieService.mapToList(zombieList);
 		//ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
@@ -78,16 +78,16 @@ public class UserController {
 			if(!tmp.isAlive())
 				zArrList.remove(tmp);
 
-		}*/
+		}
 		ArrayList<Zombie> returnList = new ArrayList<>();
 		zomMap.values().stream().forEach(
 				zombie -> {
 					returnList.add(zombie);
 				}
-		);
+		);*/
 		//log.trace("generating test zombies size={}", zombieList.size());
-
-		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, returnList, user, userActionDto.action);
+		ArrayList<Zombie> list = zombieService.findZombiesByUser(user);
+		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, list, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}

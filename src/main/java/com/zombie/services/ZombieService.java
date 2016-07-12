@@ -49,6 +49,9 @@ public class ZombieService {
         return zombiesInRange;
 
     }
+    public ArrayList<Zombie> findZombiesByUser(User user){
+        return listToArrayList(zombieRepo.findByClientKey(user.getId()));
+    }
 
     //TODO: make this more efficient in the great somey or if it is a performance issue
     public boolean areZombiesInRange(User user) {
