@@ -50,7 +50,7 @@ public class Geomath {
     public static double feetToMiles(double feet){ return feet * .000189;}
     public static double milesToFeet(double miles){ return (miles / .000189);}
 
-    public static LatLng getRandomLocationWithin(double lat, double lng, double radius) throws Exception {
+    public static LatLng getRandomLocationWithin(double lat, double lng, double radius) {
         Random random = new Random();
         System.out.println("randomLocationWithin");
         System.out.println("Point of origin:");
