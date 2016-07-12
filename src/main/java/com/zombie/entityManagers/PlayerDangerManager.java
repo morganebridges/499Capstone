@@ -52,7 +52,6 @@ public class PlayerDangerManager extends AbstractManager{
                         //log.info("Zombies near user = {}", user.getId());
                         noteService.pushNotificationToGCM(user.getGcmRegId(), "Zombies are coming", user);
                     }else{
-                        guru.requestZombies(user);
                     }
                 }
             );

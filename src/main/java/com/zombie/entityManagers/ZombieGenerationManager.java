@@ -62,7 +62,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
                         user ->{
                             User updatedUser = userRepo.findUserById(user.getId());
                             userMap.put(updatedUser.getId(), updatedUser);
-                            genRandomZombie(updatedUser);
+                            //genRandomZombie(updatedUser);
 
                         }
                 );

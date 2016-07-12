@@ -54,8 +54,8 @@ public class UserController {
 			Globals.zombiesGenerated = true;
 		}
 		//update location of user from the DTO
-		if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
-			user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
+		//if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
+		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
 		userService.save(user);
 
 		System.out.println("user controller before attack");
