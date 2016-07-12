@@ -64,7 +64,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
                             User thisUser = userRepo.findUserById(user.getId());
                             if(!hasGenerated.containsKey(user.getId())){
                                 System.out.println("Hasn't generated for user : " + user.getName());
-                                if((thisUser.getLatitude() > 0 && thisUser.getLongitude() > 0)){
+                                if((thisUser.getLatitude() > 0)){
                                     requestZombiesForUser(thisUser, 4);
                                     hasGenerated.put(thisUser.getId(), true);
                                 }
