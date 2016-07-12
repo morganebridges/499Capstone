@@ -97,7 +97,6 @@ public class UserController {
 		//TODO: again, we shouldnt be creating new users in the login endpoint
 		//log.trace("In user login endpoint userId={}", uid);
 		User user = userService.findUserById(uid);
-		Globals.tempZomList = userService.generateTestZombies(user, 4);
 		if(user != null){
 			userService.login(user);
 			return new ResponseEntity<>(user, HttpStatus.OK);
