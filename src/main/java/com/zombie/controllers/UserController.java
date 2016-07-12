@@ -40,6 +40,7 @@ public class UserController {
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<ClientUpdateDTO>update(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException{
 		HashMap<Long, Zombie> zombieMap;
+
 		System.out.println(userActionDto.toString());
 		log.trace("User update endpoint hit userId={} actionId={} latitude={} longitude={} targetId={}",
 				userActionDto.getId(), userActionDto.getAction(), userActionDto.getLatitude(),
@@ -48,7 +49,10 @@ public class UserController {
 		User user = userService.findUserById(userActionDto.getId());
 		if(user == null)
 			throw new IllegalStateException("User does not exist in the system!");
-
+		if(!Globals.zombiesGenerated){
+			userService.generateTestZombies(user, 4);
+			Globals.zombiesGenerated = true;
+		}
 		//update location of user from the DTO
 		if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
 			user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());

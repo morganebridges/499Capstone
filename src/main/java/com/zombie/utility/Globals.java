@@ -14,6 +14,7 @@ public class Globals {
 	public static final int ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
 	public static final int WAKING_URGENCY_THRESHOLD = 7;
 	public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
+	public static boolean zombiesGenerated = false;
 
 	//global constants must be defined as static final
 	public static final String GCMServerKey = "AIzaSyCF_pvDl4MTcLPIPkua65ZmhJvdsOOctoI";
