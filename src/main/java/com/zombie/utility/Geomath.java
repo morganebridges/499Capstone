@@ -75,8 +75,7 @@ public class Geomath {
 
         double foundLatitude = y + lng;
         System.out.println("Longitude: " + foundLongitude + "  Latitude: " + foundLatitude );
-        throw new Exception("GeoMath exception");
-        //return new LatLng(foundLatitude, foundLongitude);
+        return new LatLng(foundLatitude, foundLongitude);
     }
 }
 
