@@ -55,7 +55,7 @@ public class ZombieService {
         Iterator<Zombie> zomIt = zomArr.iterator();
         while(zomIt.hasNext()){
             Zombie zom = zomIt.next();
-            if(zom.isAlive()){
+            if(zom.isAlive() && zom.getLatitude() > 42){
                 returnList.add(zom);
             }
         }

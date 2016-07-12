@@ -125,7 +125,9 @@ public class UserService {
         //For now we just assume a one-hit kill
         if(zombie != null){
             zombie.dealDamage(5);
+
             zombieRepo.save(zombie);
+
             //log.debug("ZombieId={} killed by userId={}", zombieId, user);
         }else{
             //log.warn("UserId={} trying to kill a zombieId={} that could not be found", user, zombieId);
