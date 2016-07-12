@@ -18,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -39,7 +40,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
     PlayerDangerManager dangerManager;
 
     private static ArrayList<GenRequest> requestList = new ArrayList<GenRequest>();
-
+    private static HashMap<Long, Boolean> hasGenerated = new HashMap<>();
 
     static ArrayList<User> userList = new ArrayList<User>();
     public ZombieGenerationManager(){
@@ -60,8 +61,15 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
         userMap.values().stream()
                 .forEach(
                         user ->{
-                            User updatedUser = userRepo.findUserById(user.getId());
-                            userMap.put(updatedUser.getId(), updatedUser);
+                            User thisUser = userRepo.findUserById(user.getId());
+                            if(!hasGenerated.containsKey(user.getId())){
+                                System.out.println("Hasn't generated for user : " + user.getName());
+                                if((thisUser.getLatitude() > 0 && thisUser.getLongitude() > 0)){
+                                    requestZombiesForUser(thisUser, 4);
+                                    hasGenerated.put(thisUser.getId(), true);
+                                }
+                            }
+
                             //genRandomZombie(updatedUser);
 
                         }
