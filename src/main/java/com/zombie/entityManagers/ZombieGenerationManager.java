@@ -129,7 +129,7 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
     public Zombie genRandomZombie(User user){
         Globals.prln("ZombieGenerationManager.genRandomZombie");
         Globals.prln(user.toString());
-        LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), Geomath.feetToMiles(user.getPerceptionRange()));
+        LatLng zomLoc = Geomath.getRandomLocationWithin(user.getLatitude(), user.getLongitude(), user.getPerceptionRange() * 3);
         System.out.printf("ZombieGenerationManager spawnZombie %f- Zombie location random %f" , zomLoc.getLatitude(), zomLoc.getLongitude());
         Zombie newZombie = new Zombie(user.getId(), zomLoc.getLatitude(), zomLoc.getLongitude());
         Globals.prln("ZombieGenerationManager : zombie in spawnZombie");
