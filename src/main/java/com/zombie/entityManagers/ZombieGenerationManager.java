@@ -69,8 +69,11 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
                                     hasGenerated.put(thisUser.getId(), true);
                                 }
                             }
-
-                            //genRandomZombie(updatedUser);
+                            if(System.currentTimeMillis() - thisUser.getLastEnemySpawned() > 6000){
+                                genRandomZombie(thisUser);
+                                noteService.pushNotificationToGCM(user.getGcmRegId(), "A zombie has spawned near you", thisUser);
+                                thisUser.setLastEnemySpawned(System.currentTimeMillis());
+                            }
 
                         }
                 );
