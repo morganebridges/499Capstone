@@ -37,8 +37,7 @@ public class PlayerDangerManager extends AbstractManager{
     private int workCounter;
     private int breakTime = 50;
     private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
-
-    @Override
+    
     protected synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         //log.trace("User Danger Worker in outer loop");
