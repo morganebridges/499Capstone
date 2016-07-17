@@ -26,7 +26,6 @@ import java.util.Random;
  * Created by morganebridges on 7/16/16.
  */
 @Component
-@EnableAutoConfiguration
 public class ZombieGenerationScheduler extends AbstractManager implements AlarmObserver {
     @Autowired
     ZombieRepository zombieRepo;

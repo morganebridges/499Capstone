@@ -15,8 +15,6 @@ import java.util.HashMap;
  */
 @Service
 @ComponentScan("com.zombie")
-@EnableAutoConfiguration
-
 public abstract class AbstractManager {
 
     final Logger log = LoggerFactory.getLogger(AbstractManager.class);
