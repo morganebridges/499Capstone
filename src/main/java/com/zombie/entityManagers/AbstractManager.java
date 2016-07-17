@@ -22,7 +22,7 @@ public abstract class AbstractManager {
     final Logger log = LoggerFactory.getLogger(AbstractManager.class);
 
 
-    HashMap<Long, User> userMap;
+    public HashMap<Long, User> userMap;
     HashMap<Long, Zombie> zombieMap;
     public AbstractManager(){
         userMap = new HashMap<>();
@@ -51,7 +51,7 @@ public abstract class AbstractManager {
 	/**
 	 * This is where the work of the manager happens
      */
-    abstract void runWorkImpl() throws InterruptedException ;
+    protected abstract void runWorkImpl() throws InterruptedException ;
 
     public void registerUser(User user){
         System.out.println("Registering user: " + user.getName() + " ");

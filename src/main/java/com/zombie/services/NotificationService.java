@@ -39,7 +39,9 @@ public class NotificationService {
                 gcmRegId, message, user, Globals.GCMServerKey);
         final String GCM_API_KEY = Globals.GCMServerKey;
         final int retries = 3;
-
+        System.out.println("Sending GCM message for: " + user);
+        System.out.println("GCM id: " + gcmRegId);
+        System.out.println("Message: " + message);
         Sender sender = new Sender(GCM_API_KEY);
         Message msg = new Message.Builder()
                 .addData("message",message)

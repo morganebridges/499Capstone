@@ -9,6 +9,7 @@ import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 
 import com.zombie.services.interfaces.communications.ContextSubscriber;
+import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -37,7 +38,7 @@ public  class ApplicationActiveUsers {
     @Autowired
      PlayerDangerManager dangerManager;
     @Autowired
-     ZombieGenerationManager zombieGenerationManager;
+    ZombieGenerationScheduler zombieGenerationManager;
 
     Date lastObjectRefresh;
     private static boolean appInitialized;
@@ -124,7 +125,7 @@ public  class ApplicationActiveUsers {
         zombieGenerationManager.requestZombiesForUser(user, 5);
     }
 
-    public ZombieGenerationManager introZombManager() throws Exception {
+    public ZombieGenerationScheduler introZombManager() throws Exception {
         if(zombieGenerationManager != null)
             return zombieGenerationManager;
         else throw new Exception("THE WORLD IS DEAD");

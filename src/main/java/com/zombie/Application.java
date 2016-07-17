@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,7 @@ import javax.persistence.PersistenceContext;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration(exclude = { RepositoryRestMvcAutoConfiguration.class })
 @SpringBootApplication(scanBasePackages = {"com.zombie.services", "com.zombie.repositories"})
+@EnableScheduling
 public class Application implements CommandLineRunner{
     @Autowired
     UserService userService;

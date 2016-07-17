@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Globals {
 	public static final long ZOMBIE_LOOP_TIME = 20000;
-	public static final long ENEMY_SPAWN_INTERVAL = 30000;
+	public static final long ENEMY_SPAWN_INTERVAL = 75000;
 	public static final int MAXIMUM_SPAWN_NUMBER = 15;
 	public static final int ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
 	public static final int WAKING_URGENCY_THRESHOLD = 7;

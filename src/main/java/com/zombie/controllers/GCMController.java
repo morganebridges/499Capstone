@@ -40,7 +40,7 @@ public class GCMController {
             user.setGcmRegId(gcmId);
             userService.save(user);
             //log.debug("Calling gcm service");
-            noteService.pushNotificationToGCM(gcmId, "Here is a message in response to your stuff that is great", user);
+            noteService.pushNotificationToGCM(gcmId, "You have successfully registered for cloud messaging.", user);
             return new ResponseEntity<>(user, HttpStatus.OK);
         }else{
             if(key == -1)

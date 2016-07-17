@@ -39,7 +39,7 @@ public class PlayerDangerManager extends AbstractManager{
     private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
 
     @Override
-    synchronized void runWorkImpl() throws InterruptedException {
+    protected synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         //log.trace("User Danger Worker in outer loop");
         userMap.values().stream()
