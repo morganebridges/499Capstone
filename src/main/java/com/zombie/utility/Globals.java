@@ -8,12 +8,23 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Globals {
+	/**
+	 * Many of these values are constants that will determine the timing of many of our
+	 * play cycle tasks. Time values are in milliseconds to be comparable to System.currentTime
+	 */
 	public static final long ZOMBIE_LOOP_TIME = 20000;
+	//Values regarding how to deal with zombie generation
 	public static final long ENEMY_SPAWN_INTERVAL = 75000;
 	public static final int MAXIMUM_SPAWN_NUMBER = 15;
-	public static final int ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
+	public static final long ZOMBIE_MANAGER_SLEEP_INTERVAL = 15000;
+
+	//This is for those classes that are going to implement the subscription alarm interface
 	public static final int WAKING_URGENCY_THRESHOLD = 7;
-	public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
+
+	//Values for the movement of zombies.
+	public static final long ZOMBIE_MOVEMENT_REFRESH_INTERVAL = 20000;
+
+	//public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
 	public static boolean zombiesGenerated = false;
 
 	//global constants must be defined as static final
@@ -35,10 +46,5 @@ public class Globals {
 	public static void prln(String line){
 		System.out.println(line + "\n");
 	}
-	public static void addTempZom(Zombie zombie){
-		tempZomList.put(zombie.getId(), zombie);
-	}
-	public static void removeTempZom(long zombieId){
-		tempZomList.remove(zombieId);
-	}
+
 }

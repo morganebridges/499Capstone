@@ -7,6 +7,7 @@ import com.zombie.repositories.UserRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 
+import com.zombie.services.ZombieService;
 import com.zombie.services.interfaces.communications.ContextSubscriber;
 import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
 import com.zombie.utility.Globals;
@@ -38,12 +39,12 @@ public  class ApplicationActiveUsers {
      PlayerDangerManager dangerManager;
     @Autowired
     ZombieGenerationScheduler zombieGenerationManager;
-
+    @Autowired
+    ZombieService zombieService;
     Date lastObjectRefresh;
     private static boolean appInitialized;
     private ArrayList<AbstractManager> managerList;
     private static ApplicationActiveUsers instance;
-
 
     public void initialize(){
         if(managerList == null)

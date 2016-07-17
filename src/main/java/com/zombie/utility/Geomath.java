@@ -77,5 +77,8 @@ public class Geomath {
         System.out.println("Longitude: " + foundLongitude + "  Latitude: " + foundLatitude );
         return new LatLng(foundLongitude, foundLatitude);
     }
+    public static double metersToDegrees(double meters){
+        return meters / 71695.8;
+    }
 }
 
