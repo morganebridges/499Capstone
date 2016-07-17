@@ -103,7 +103,7 @@ public class Application implements CommandLineRunner{
      * Clear out your hibernate cache
      */
      public void clearPersistenceCache(){
-         Session session = sessionFactory.getCurrentSession();
+         Session session = sessionFactory.openSession();
 
          if(session != null){
              session.clear();
