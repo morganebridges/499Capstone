@@ -50,7 +50,6 @@ public class Application implements CommandLineRunner{
 
     @PersistenceContext
     private EntityManager entityManager;
-    entityManager.;
     Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
