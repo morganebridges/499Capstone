@@ -11,6 +11,9 @@ import com.zombie.services.ZombieService;
 import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
 import com.zombie.services.scheduledTasks.ZombieMovementScheduler;
 import com.zombie.utility.TestDataPrep;
+import org.hibernate.Cache;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +59,8 @@ public class Application implements CommandLineRunner{
 
     @Autowired
     ApplicationActiveUsers guru;
+    @Autowired
+    SessionFactory sessionFactory;
 
 
 
@@ -69,8 +74,9 @@ public class Application implements CommandLineRunner{
     public void run(String ...args){
     		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-            entityManager.flush();
-            entityManager.clear();
+
+            //Clear our Hibernate Cache
+            clearPersistenceCache();
 
             while(guru == null){
                 System.out.println("We're waiting for the guru");
@@ -79,7 +85,21 @@ public class Application implements CommandLineRunner{
 
             prep.populate(30);
     }
+    /**
+     * Clear out your hibernate cache
+     */
+     public void clearPersistenceCache(){
+         Session session = sessionFactory.getCurrentSession();
 
+         if(session != null){
+             session.clear();
+         }
+         Cache cache = sessionFactory.getCache();
+         if(cache!= null){
+             cache.evictAllRegions();
+         }
+
+     }
     /**
      * This Awkward method allows our beloved guru to rise to his throne, sitting finally aloft a seat of inscrutible
      * power.
