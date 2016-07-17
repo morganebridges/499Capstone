@@ -13,6 +13,7 @@ import com.zombie.services.interfaces.communications.AlarmObserver;
 import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ import java.util.Random;
  * Created by morganebridges on 7/16/16.
  */
 @Component
+@EnableAutoConfiguration
 public class ZombieGenerationScheduler extends AbstractManager implements AlarmObserver {
     @Autowired
     ZombieRepository zombieRepo;
