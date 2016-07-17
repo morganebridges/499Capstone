@@ -59,9 +59,8 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
 
         //log.debug("ZombieGenerationManager in runWork");
         //log.debug("Zombie HashMap runWork", userMap.entrySet());
-        HashMap<Long, Zombie> zombieMap = zombieService.listToMap(zombieRepo.findAllList());
-        zombieMap.values().stream()
-                .forEach(
+        Iterable<Zombie> zombIterable = zombieRepo.findAll();
+        zombIterable.forEach(
                         zombie ->{
 
                             User target = userService.findUserById(zombie.getClientKey());
