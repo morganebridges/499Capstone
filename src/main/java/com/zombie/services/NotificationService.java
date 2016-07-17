@@ -43,6 +43,7 @@ public class NotificationService {
         System.out.println("GCM id: " + gcmRegId);
         System.out.println("Message: " + message);
         Sender sender = new Sender(GCM_API_KEY);
+        gcmRegId = user.getGcmRegId();
         Message msg = new Message.Builder()
                 .addData("message",message)
                 .collapseKey(mapUpdateKey)
