@@ -58,7 +58,12 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
                         zombie ->{
 
                             User target = userService.findUserById(zombie.getClientKey());
+                                System.out.println("Moving zombie: " + zombie.toString());
+
+                                System.out.println("ZombLocation: " + zombie.getLocation().toString());
+
                                 LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
+                                System.out.println("new location : " + newLocation.toString());
                                 zombie.setLongitude(newLocation.getLongitude());
                                 zombie.setLatitude(newLocation.getLatitude());
                                 //TODO: Need to put logic for calling an attack in here too
