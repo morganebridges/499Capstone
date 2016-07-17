@@ -51,6 +51,8 @@ public class Application implements CommandLineRunner{
     ZombieGenerationScheduler zGenScheduler;
     @Autowired
     NotificationService noteService;
+    @Autowired
+    EntityManagerFactory emFactory;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -81,12 +83,12 @@ public class Application implements CommandLineRunner{
     public Application(){
         super();
     }
-    
+
     @Override
     public void run(String ...args){
     		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
-
+            sessionFactory = emFactory.unwrap(SessionFactory.class);
             //Clear our Hibernate Cache
             clearPersistenceCache();
 
