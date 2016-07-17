@@ -1,10 +1,9 @@
 package com.zombie.services;
-
-import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
+import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
 import com.zombie.utility.Geomath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,7 +31,7 @@ public class ZombieService {
     @Autowired
     NotificationService noteService;
     @Autowired
-    ZombieGenerationManager zombieManager;
+    ZombieGenerationScheduler zombieManager;
 
     //TODO: make this thing actually check a range.
     public HashMap<Long, Zombie> findZombiesInRange(User user) {

@@ -1,6 +1,5 @@
 package com.zombie.controllers;
 
-import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.models.dto.ClientUpdateDTO;
