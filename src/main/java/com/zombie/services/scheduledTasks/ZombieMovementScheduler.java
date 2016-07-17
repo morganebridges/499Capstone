@@ -51,11 +51,10 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
     @Scheduled(fixedRate = Globals.ZOMBIE_MOVEMENT_REFRESH_INTERVAL)
     public void manageZombieGeneration() throws InterruptedException {
         runWorkImpl();
-    }@Override
+    }
     protected synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         System.out.println("ZombieMovementSchduler runimp");
-
 
         //log.debug("ZombieGenerationManager in runWork");
         //log.debug("Zombie HashMap runWork", userMap.entrySet());
@@ -168,5 +167,70 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
     }
     public void registerZombie(Zombie zombie){
 
+    }
+    /* Accessors and Mutators */
+
+    public PlayerDangerManager getDangerManager() {
+        return dangerManager;
+    }
+
+    public void setDangerManager(PlayerDangerManager dangerManager) {
+        this.dangerManager = dangerManager;
+    }
+
+    public static HashMap<Long, Boolean> getHasGenerated() {
+        return hasGenerated;
+    }
+
+    public static void setHasGenerated(HashMap<Long, Boolean> hasGenerated) {
+        ZombieMovementScheduler.hasGenerated = hasGenerated;
+    }
+
+    public static HashMap<Long, Long> getLastMoved() {
+        return lastMoved;
+    }
+
+    public static void setLastMoved(HashMap<Long, Long> lastMoved) {
+        ZombieMovementScheduler.lastMoved = lastMoved;
+    }
+
+    public NotificationService getNoteService() {
+        return noteService;
+    }
+
+    public void setNoteService(NotificationService noteService) {
+        this.noteService = noteService;
+    }
+
+    public static ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public static void setUserList(ArrayList<User> userList) {
+        ZombieMovementScheduler.userList = userList;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public ZombieRepository getZombieRepo() {
+        return zombieRepo;
+    }
+
+    public void setZombieRepo(ZombieRepository zombieRepo) {
+        this.zombieRepo = zombieRepo;
+    }
+
+    public ZombieService getZombieService() {
+        return zombieService;
+    }
+
+    public void setZombieService(ZombieService zombieService) {
+        this.zombieService = zombieService;
     }
 }

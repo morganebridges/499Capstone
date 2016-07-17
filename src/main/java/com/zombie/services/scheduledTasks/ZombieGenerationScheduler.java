@@ -14,6 +14,7 @@ import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +26,11 @@ import java.util.Random;
 /**
  * Created by morganebridges on 7/16/16.
  */
+
 @Component
+@ComponentScan("com.zombie")
 public class ZombieGenerationScheduler extends AbstractManager implements AlarmObserver {
+
     @Autowired
     ZombieRepository zombieRepo;
     @Autowired
@@ -44,15 +48,15 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
 
     static ArrayList<User> userList = new ArrayList<User>();
     public ZombieGenerationScheduler(){
-
         super();
         System.out.println("ZombieGenerationManager constructed");
     }
     @Scheduled(fixedRate = Globals.ZOMBIE_MANAGER_SLEEP_INTERVAL)
     public void manageZombieGeneration() throws InterruptedException {
-       runWorkImpl();
-    }@Override
-    protected synchronized void runWorkImpl() throws InterruptedException {
+       generationLoop();
+    }
+
+    private synchronized void generationLoop() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         System.out.println("ZombieScheduledTask runimp");
 
@@ -153,4 +157,70 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
         int num;
         public GenRequest(User user, int num){this.user = user; this.num = num;}
     }
+
+    /* Accessors && Mutators */
+    public PlayerDangerManager getDangerManager() {
+        return dangerManager;
+    }
+
+    public void setDangerManager(PlayerDangerManager dangerManager) {
+        this.dangerManager = dangerManager;
+    }
+
+    public static HashMap<Long, Boolean> getHasGenerated() {
+        return hasGenerated;
+    }
+
+    public static void setHasGenerated(HashMap<Long, Boolean> hasGenerated) {
+        ZombieGenerationScheduler.hasGenerated = hasGenerated;
+    }
+
+    public NotificationService getNoteService() {
+        return noteService;
+    }
+
+    public void setNoteService(NotificationService noteService) {
+        this.noteService = noteService;
+    }
+
+    public static ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public static void setUserList(ArrayList<User> userList) {
+        ZombieGenerationScheduler.userList = userList;
+    }
+
+    public UserRepository getUserRepo() {
+        return userRepo;
+    }
+
+    public void setUserRepo(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    public ZombieRepository getZombieRepo() {
+        return zombieRepo;
+    }
+
+    public void setZombieRepo(ZombieRepository zombieRepo) {
+        this.zombieRepo = zombieRepo;
+    }
+
+    public ZombieService getZombieService() {
+        return zombieService;
+    }
+
+    public void setZombieService(ZombieService zombieService) {
+        this.zombieService = zombieService;
+    }
+
+    public ZombieMovementScheduler getZomMoveScheduler() {
+        return zomMoveScheduler;
+    }
+
+    public void setZomMoveScheduler(ZombieMovementScheduler zomMoveScheduler) {
+        this.zomMoveScheduler = zomMoveScheduler;
+    }
+
 }

@@ -5,7 +5,11 @@ package com.zombie;
 
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
+import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
+import com.zombie.services.ZombieService;
+import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
+import com.zombie.services.scheduledTasks.ZombieMovementScheduler;
 import com.zombie.utility.TestDataPrep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,15 +36,24 @@ public class Application implements CommandLineRunner{
     @Autowired
     UserService userService;
     @Autowired
+    ZombieService zombieService;
+    @Autowired
     ZombieRepository zombieRepo;
     @Autowired
     UserRepository userRepo;
+    @Autowired
+    ZombieMovementScheduler zMoveScheduler;
+    @Autowired
+    ZombieGenerationScheduler zGenScheduler;
+    @Autowired
+    NotificationService noteService;
+
     @PersistenceContext
     private EntityManager entityManager;
     Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
-    ApplicationActiveUsers universalContext;
+    ApplicationActiveUsers guru;
 
 
 
@@ -55,12 +68,12 @@ public class Application implements CommandLineRunner{
     		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
 
-            while(universalContext == null){
+            while(guru == null){
                 System.out.println("We're waiting for the guru");
             }
-            TestDataPrep prep = new TestDataPrep(userService, universalContext);
+            TestDataPrep prep = new TestDataPrep(userService, guru);
 
-            prep.populate(100);
+            prep.populate(30);
     }
 
     /**

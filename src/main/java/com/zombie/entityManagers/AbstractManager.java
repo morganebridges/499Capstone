@@ -26,31 +26,11 @@ public abstract class AbstractManager {
         userMap = new HashMap<>();
         zombieMap = new HashMap<>();
 
-
-        Runnable r = () -> {
-                try{
-                    //log.trace("inside the run method of abstract manager");
-                    runWork();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-        };
-        Thread privateThread = new Thread(r);
-        privateThread.start();
-    }
-
-    private synchronized void runWork() throws InterruptedException {
-
-        while(true){
-            runWorkImpl();
-        }
     }
 
 	/**
 	 * This is where the work of the manager happens
      */
-    protected abstract void runWorkImpl() throws InterruptedException ;
-
     public void registerUser(User user){
         System.out.println("Registering user: " + user.getName() + " ");
         if(userMap.containsKey(user.getId()))
