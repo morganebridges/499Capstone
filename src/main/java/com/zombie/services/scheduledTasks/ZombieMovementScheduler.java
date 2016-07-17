@@ -6,8 +6,6 @@ import com.zombie.models.User;
 import com.zombie.models.Zombie;
 import com.zombie.models.ZombieTraits;
 import com.zombie.models.dto.LatLng;
-import com.zombie.repositories.UserRepository;
-import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
@@ -15,7 +13,6 @@ import com.zombie.services.interfaces.communications.AlarmObserver;
 import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +26,6 @@ import java.util.Random;
  */
 @Component
 public class ZombieMovementScheduler extends AbstractManager implements AlarmObserver {
-    @Autowired
-    ZombieRepository zombieRepo;
     @Autowired
     UserService userService;
     @Autowired
@@ -58,7 +53,7 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
 
         //log.debug("ZombieGenerationManager in runWork");
         //log.debug("Zombie HashMap runWork", userMap.entrySet());
-        Iterable<Zombie> zombIterable = zombieRepo.findAll();
+        Iterable<Zombie> zombIterable = zombieService.findAll();
         zombIterable.forEach(
                         zombie ->{
 
@@ -216,14 +211,6 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
 
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    public ZombieRepository getZombieRepo() {
-        return zombieRepo;
-    }
-
-    public void setZombieRepo(ZombieRepository zombieRepo) {
-        this.zombieRepo = zombieRepo;
     }
 
     public ZombieService getZombieService() {

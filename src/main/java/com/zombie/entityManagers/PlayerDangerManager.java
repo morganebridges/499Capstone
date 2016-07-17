@@ -3,7 +3,6 @@ package com.zombie.entityManagers;
 import com.zombie.Application;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.repositories.UserRepository;
-import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.ZombieService;
 import com.zombie.utility.Globals;
@@ -23,10 +22,6 @@ import org.springframework.stereotype.Service;
 
 public class PlayerDangerManager extends AbstractManager{
     @Autowired
-    ZombieRepository zombieRepo;
-    @Autowired
-    UserRepository userRepo;
-    @Autowired
     NotificationService noteService;
     @Autowired
     ZombieService zombieService;
@@ -37,7 +32,7 @@ public class PlayerDangerManager extends AbstractManager{
     private int workCounter;
     private int breakTime = 50;
     private final Logger log = LoggerFactory.getLogger(PlayerDangerManager.class);
-    
+
     protected synchronized void runWorkImpl() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
         //log.trace("User Danger Worker in outer loop");

@@ -93,6 +93,16 @@ public class ZombieService {
         list.addAll(map.values());
         return list;
     }
+    public List<Zombie> findAllList(){
+        ArrayList<Zombie> zs = new ArrayList<>();
+        zombieRepo.findAll().forEach(
+                zs::add
+        );
+        return zs;
+    }
+    public Iterable<Zombie> findAll(){
+        return zombieRepo.findAll();
+    }
     public void requestZombies(User user, int num){
         zombieManager.requestZombiesForUser(user, num);
     }
