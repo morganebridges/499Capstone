@@ -37,9 +37,6 @@ public class GCMController {
 
             //log.info("Registering gcm userId={} cgmId={}", user.getId(), gcmId);
 
-            user.setGcmRegId(gcmId);
-            userService.save(user);
-            //log.debug("Calling gcm service");
             noteService.pushNotificationToGCM(gcmId, "You have successfully registered for cloud messaging.", user);
             return new ResponseEntity<>(user, HttpStatus.OK);
         }else{

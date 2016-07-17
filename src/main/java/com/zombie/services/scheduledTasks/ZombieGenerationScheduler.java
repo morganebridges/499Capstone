@@ -37,6 +37,8 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
     ZombieService zombieService;
     @Autowired
     PlayerDangerManager dangerManager;
+    @Autowired
+    ZombieMovementScheduler zomMoveScheduler;
 
     private static HashMap<Long, Boolean> hasGenerated = new HashMap<>();
 
@@ -99,7 +101,9 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
         for(int i = 0; i < numZoms; i++){
             Globals.prln("Number of zombies: " + numZoms);
             //log.trace("ZombiejGenerationManager saving zombieNumber={} ", i);
-            zombieService.save(genRandomZombie(user));
+            Zombie newZom = genRandomZombie(user);
+            newZom.setFreshStamp(System.currentTimeMillis());
+            zombieService.save(newZom);
         }
     }
     private void spawnHorde(User user){

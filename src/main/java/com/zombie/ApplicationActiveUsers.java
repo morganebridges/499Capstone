@@ -10,6 +10,7 @@ import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
 import com.zombie.services.interfaces.communications.ContextSubscriber;
 import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
+import com.zombie.services.scheduledTasks.ZombieMovementScheduler;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -35,12 +36,16 @@ public  class ApplicationActiveUsers {
      UserService userService;
     @Autowired
      NotificationService noteService;
+    /* Our task scheduling managers */
     @Autowired
      PlayerDangerManager dangerManager;
     @Autowired
     ZombieGenerationScheduler zombieGenerationManager;
     @Autowired
     ZombieService zombieService;
+    @Autowired
+    ZombieMovementScheduler movementScheduler;
+
     Date lastObjectRefresh;
     private static boolean appInitialized;
     private ArrayList<AbstractManager> managerList;

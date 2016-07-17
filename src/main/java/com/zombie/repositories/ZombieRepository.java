@@ -32,6 +32,6 @@ public interface ZombieRepository extends PagingAndSortingRepository<Zombie, Lon
 
 	@Query("select p from Zombie p where p.clientKey=:clientKey")
 	Stream<Zombie> streamByUserId(@Param("clientKey") long clientKey);
-	
+
 
 }

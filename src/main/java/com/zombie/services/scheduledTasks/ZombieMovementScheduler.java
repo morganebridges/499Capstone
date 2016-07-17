@@ -166,4 +166,7 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
         int num;
         public GenRequest(User user, int num){this.user = user; this.num = num;}
     }
+    public void registerZombie(Zombie zombie){
+
+    }
 }
