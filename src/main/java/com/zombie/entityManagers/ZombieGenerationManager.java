@@ -23,7 +23,7 @@ import java.util.Random;
 
 /**
  * Created by morganebridges on 6/21/16.
- */
+ *
 @Service
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -151,3 +151,4 @@ public class ZombieGenerationManager extends AbstractManager implements AlarmObs
         public GenRequest(User user, int num){this.user = user; this.num = num;}
     }
 }
+*/

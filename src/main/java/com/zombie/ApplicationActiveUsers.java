@@ -2,7 +2,6 @@ package com.zombie;
 
 import com.zombie.entityManagers.AbstractManager;
 import com.zombie.entityManagers.PlayerDangerManager;
-import com.zombie.entityManagers.ZombieGenerationManager;
 import com.zombie.models.User;
 import com.zombie.repositories.UserRepository;
 import com.zombie.services.NotificationService;
