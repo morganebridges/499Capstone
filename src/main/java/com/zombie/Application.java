@@ -50,6 +50,8 @@ public class Application implements CommandLineRunner{
 
     @PersistenceContext
     private EntityManager entityManager;
+
+
     Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
@@ -67,6 +69,8 @@ public class Application implements CommandLineRunner{
     public void run(String ...args){
     		////log.trace("Inside @Override CommandLineRunner.run method");
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
+            entityManager.flush();
+            entityManager.clear();
 
             while(guru == null){
                 System.out.println("We're waiting for the guru");
