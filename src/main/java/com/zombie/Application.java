@@ -27,6 +27,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
 //frameworks
@@ -59,7 +60,7 @@ public class Application implements CommandLineRunner{
 
     @Autowired
     ApplicationActiveUsers guru;
-    @Autowired
+
     SessionFactory sessionFactory;
 
 
@@ -70,6 +71,17 @@ public class Application implements CommandLineRunner{
         LoggerFactory.getLogger(Application.class).info("Zombie Application is online.");
 
     }
+    @Autowired
+    public Application(EntityManagerFactory emFactory){
+        if(emFactory.unwrap(SessionFactory.class) == null){
+            throw new NullPointerException("Factory is not a hibernate factory");
+        }
+        this.sessionFactory = emFactory.unwrap(SessionFactory.class);
+    }
+    public Application(){
+        super();
+    }
+    
     @Override
     public void run(String ...args){
     		////log.trace("Inside @Override CommandLineRunner.run method");
