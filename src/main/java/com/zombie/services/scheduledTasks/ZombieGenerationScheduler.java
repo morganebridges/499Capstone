@@ -8,6 +8,7 @@ import com.zombie.models.dto.LatLng;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
+import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
 import com.zombie.services.interfaces.communications.AlarmObserver;
 import com.zombie.utility.Geomath;
@@ -36,6 +37,9 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
     @Autowired
     UserRepository userRepo;
     @Autowired
+    UserService userService;
+
+    @Autowired
     NotificationService noteService;
     @Autowired
     ZombieService zombieService;
@@ -43,6 +47,7 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
     PlayerDangerManager dangerManager;
     @Autowired
     ZombieMovementScheduler zomMoveScheduler;
+
 
     private static HashMap<Long, Boolean> hasGenerated = new HashMap<>();
 
@@ -77,9 +82,12 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
                             if(System.currentTimeMillis() - thisUser.getLastEnemySpawned() > Globals.ENEMY_SPAWN_INTERVAL){
                                 if(zombieService.findZombiesByUser(user).size() > 15)
                                     return;
-                                genRandomZombie(thisUser);
-                                noteService.pushNotificationToGCM(user.getGcmRegId(), "A zombie has spawned near you", thisUser);
+                                Zombie genZom = genRandomZombie(thisUser);
+                                if(Geomath.getDistance(genZom.getLatitude(), genZom.getLongitude(), user.getLatitude(),user.getLongitude()
+                                , "M") < user.getPerceptionRange() && System.currentTimeMillis() - Globals.userLastGCM > Globals.USER_TIME_BETWEEN_INFORMATIVE_MESSAGES)
+                                    noteService.pushNotificationToGCM(user.getGcmRegId(), "A zombie has spawned near you", thisUser);
                                 thisUser.setLastEnemySpawned(System.currentTimeMillis());
+                                userService.save(thisUser);
                             }
 
                         }

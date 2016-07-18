@@ -89,15 +89,19 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
      * @return newLocation: A LatLng object that represents the new location of the mover.
      */
     private LatLng advanceTowardTarget(LatLng moverLocation, LatLng targetLocation, double speed) {
+
+        System.out.println("***** ADVANCING TOWARDS TARGET ****");
+        System.out.println(moverLocation.toString()+  " \n" + targetLocation.toString());
         boolean moverLatHigher = (moverLocation.getLatitude() >= targetLocation.getLatitude());
         boolean moverLongHigher = (moverLocation.getLongitude() >= targetLocation.getLongitude());
         double newLat, newLong;
+        Random rnd = new Random();
         if(moverLatHigher)
-            newLat = moverLocation.getLatitude() - Geomath.metersToDegrees(speed/2.0);
-        else newLat = moverLocation.getLatitude() + Geomath.metersToDegrees(speed/2.0);
+            newLat = moverLocation.getLatitude() - (speed / (rnd.nextInt(3) + .4));
+        else newLat = moverLocation.getLatitude() + (speed / (rnd.nextInt(3) + .4));
         if(moverLongHigher)
-            newLong = moverLocation.getLongitude() - Geomath.metersToDegrees(speed/2.0);
-        else newLong = moverLocation.getLongitude() + Geomath.metersToDegrees(speed/2.0);
+            newLong = moverLocation.getLongitude() - (speed / (rnd.nextInt(3) + .4));
+        else newLong = moverLocation.getLongitude() + (speed / (rnd.nextInt(3) + .4));
         return new LatLng(newLat, newLong);
 
     }

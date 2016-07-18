@@ -43,9 +43,12 @@ public class User {
 		this.gcmId = gcmId;
 		this.id = id;
 		this.kills = kills;
+
+
 		this.lastEnemySpawned = lastEnemySpawned;
 		this.lastModified = lastModified;
 		this.lastUsedSerum = lastUsedSerum;
+
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;

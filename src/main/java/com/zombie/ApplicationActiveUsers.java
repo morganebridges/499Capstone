@@ -40,7 +40,7 @@ public  class ApplicationActiveUsers {
     @Autowired
      PlayerDangerManager dangerManager;
     @Autowired
-    ZombieGenerationScheduler zombieGenerationManager;
+    ZombieGenerationScheduler zombieGenScheduler;
     @Autowired
     ZombieService zombieService;
     @Autowired
@@ -79,7 +79,7 @@ public  class ApplicationActiveUsers {
             user.setLastModified(new Date());
             //register for notifications
             dangerManager.registerUser(user);
-            zombieGenerationManager.registerUser(user);
+            zombieGenScheduler.registerUser(user);
             activeUsers.put(user.getId(), user);
             userService.save(user);
             return true;
@@ -100,7 +100,7 @@ public  class ApplicationActiveUsers {
             user.setLastModified(new Date());
 
             dangerManager.deRegisterUser(user.getId());
-            zombieGenerationManager.deRegisterUser(user.getId());
+            zombieGenScheduler.deRegisterUser(user.getId());
 
         }else{
             //That user was not logged in.
@@ -127,12 +127,12 @@ public  class ApplicationActiveUsers {
      * @param user
      */
     public void requestZombies(User user) {
-        zombieGenerationManager.requestZombiesForUser(user, 5);
+        zombieGenScheduler.requestZombiesForUser(user, 5);
     }
 
     public ZombieGenerationScheduler introZombManager() throws Exception {
-        if(zombieGenerationManager != null)
-            return zombieGenerationManager;
+        if(zombieGenScheduler != null)
+            return zombieGenScheduler;
         else throw new Exception("THE WORLD IS DEAD");
     }
     public Object subscribe(ContextSubscriber s){

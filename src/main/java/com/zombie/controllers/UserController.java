@@ -53,6 +53,7 @@ public class UserController {
 			zombieService.requestZombies(user, 5);
 			Globals.zombiesGenerated = true;
 		}
+		Globals.userLastUpdate = System.currentTimeMillis();
 		//update location of user from the DTO
 		//if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
 		user.setLocation(userActionDto.getLatitude(), userActionDto.getLongitude());
@@ -68,29 +69,9 @@ public class UserController {
 			targetId = attackedZombie.getId();
 
 		}
-		/** we'll put this back in once we're done hacking for the presentation */
-		//HashMap<Long, Zombie> zomMap = zombieService.findZombiesInRange(user);
 
-		//ArrayList<Zombie> zArrList = zombieService.mapToList(zombieList);
-		//ArrayList<Zombie> genZomList = zombieService.mapToList(Globals.tempZomList);
-
-		//zArrList.addAll(genZomList);
-		//Iterator<Zombie> iterator = zArrList.iterator();
-
-		/*while(iterator.hasNext()){
-			Zombie tmp = iterator.next();
-			if(!tmp.isAlive())
-				zArrList.remove(tmp);
-
-		}
-		ArrayList<Zombie> returnList = new ArrayList<>();
-		zomMap.values().stream().forEach(
-				zombie -> {
-					returnList.add(zombie);
-				}
-		);*/
 		//log.trace("generating test zombies size={}", zombieList.size());
-		ArrayList<Zombie> list = zombieService.findZombiesByUser(user);
+		ArrayList<Zombie> list = zombieService.findZombiesInRange(user);
 		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, list, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
