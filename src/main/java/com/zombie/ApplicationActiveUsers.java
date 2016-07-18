@@ -150,5 +150,9 @@ public  class ApplicationActiveUsers {
         ApplicationActiveUsers.appInitialized = appInitialized;
     }
 
+    /**
+     * These functions are related to 
+     */
+
 
 }

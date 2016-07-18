@@ -19,30 +19,34 @@ public class User {
 	private boolean active;
 	private int ammo;
 	private int serum;
+	private int hp;
+
+	/* Fields relating to time */
 	private Date lastUsedSerum;
 	private Date lastModified;
 	//A value that represents the last time zombies were spawned
 	private long lastEnemySpawned;
 
-	//attackRange in feet (default)
+	//ranges in meters (default)
 	private double attackRange;
 	private double perceptionRange;
 
 	//Google Cloud Messaging registration Id
-
 	private String gcmId;
+
 	// lat and long individually to avoid mapping issue with db, update atomically with LatLng object
 	private double latitude;
 	private double longitude;
 
 
 
-	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills, double perceptionRange) {
+	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills, double perceptionRange, int hp) {
 		this.active = active;
 		this.ammo = ammo;
 		this.gcmId = gcmId;
 		this.id = id;
 		this.kills = kills;
+		this.hp = hp;
 
 
 		this.lastEnemySpawned = lastEnemySpawned;
@@ -57,6 +61,7 @@ public class User {
 
 		this.serum = serum;
 		this.totalKills = totalKills;
+
 	}
 
 	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double attackRange, Date date) {
@@ -319,5 +324,13 @@ public class User {
 				"latitude: " + this.latitude + "\n" +
 				"longitude : " + this.longitude + "\n";
 
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 }
