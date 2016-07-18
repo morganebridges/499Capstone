@@ -56,11 +56,12 @@ public class ZombieMovementScheduler extends AbstractManager implements AlarmObs
         Iterable<Zombie> zombIterable = zombieService.findAll();
         zombIterable.forEach(
                         zombie ->{
+                            if(zombie.getLocation()== null)
 
                             User target = userService.findUserById(zombie.getClientKey());
-                                System.out.println("Moving zombie: " + zombie.toString());
+                                //System.out.println("Moving zombie: " + zombie.toString());
 
-                                System.out.println("ZombLocation: " + zombie.getLocation().toString());
+                                //System.out.println("ZombLocation: " + zombie.getLocation().toString());
 
                                 LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
                                 System.out.println("new location : " + newLocation.toString());

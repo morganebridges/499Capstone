@@ -90,7 +90,7 @@ public class Application implements CommandLineRunner{
     		ApplicationPrintTester printTester = new ApplicationPrintTester();
             sessionFactory = emFactory.unwrap(SessionFactory.class);
             //Clear our Hibernate Cache
-            clearPersistenceCache();
+            //clearPersistenceCache();
 
             while(guru == null){
                 System.out.println("We're waiting for the guru");
