@@ -14,13 +14,11 @@ import com.zombie.services.interfaces.communications.AlarmObserver;
 import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -51,11 +49,12 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
 
     private static HashMap<Long, Boolean> hasGenerated = new HashMap<>();
 
-    static ArrayList<User> userList = new ArrayList<User>();
+    static ArrayList<User> userList = new ArrayList<>();
     public ZombieGenerationScheduler(){
         super();
         System.out.println("ZombieGenerationManager constructed");
     }
+
     @Scheduled(fixedRate = Globals.ZOMBIE_MANAGER_SLEEP_INTERVAL)
     public void manageZombieGeneration() throws InterruptedException {
        generationLoop();
