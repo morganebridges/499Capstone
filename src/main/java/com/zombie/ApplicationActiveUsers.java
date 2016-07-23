@@ -19,10 +19,7 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.*;
 
 /** This class is to contain and maintain our active users.
  * Created by morganebridges on 7/9/16.
@@ -148,6 +145,9 @@ public  class ApplicationActiveUsers {
     }
     public static void setAppInitialized(boolean appInitialized) {
         ApplicationActiveUsers.appInitialized = appInitialized;
+    }
+    public Collection<User> requestUsersList(User user){
+        return activeUsers.values();
     }
 
     /**

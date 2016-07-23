@@ -132,4 +132,8 @@ public class Zombie {
     public void setFreshStamp(long freshStamp) {
         this.freshStamp = freshStamp;
     }
+
+    public int getHp() {
+        return hp;
+    }
 }

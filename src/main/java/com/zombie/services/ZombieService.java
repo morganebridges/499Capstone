@@ -106,4 +106,18 @@ public class ZombieService {
     public void requestZombies(User user, int num){
         zombieManager.requestZombiesForUser(user, num);
     }
+
+
+    public ArrayList<Zombie> valZomList(ArrayList<Zombie> list) {
+        ArrayList<Zombie> liveOnes = new ArrayList<>();
+        list.stream()
+                .forEach(
+                        zombie -> {
+                            if(zombie.isAlive() ){
+                                liveOnes.add(zombie);
+                            }
+                        }
+                );
+        return liveOnes;
+    }
 }
