@@ -1,6 +1,5 @@
 package com.zombie.utility;
 
-import com.zombie.Application;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.models.User;
 import com.zombie.services.UserService;

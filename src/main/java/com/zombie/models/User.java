@@ -28,7 +28,7 @@ public class User {
 	private long lastEnemySpawned;
 
 	//ranges in meters (default)
-	private double attackRange;
+	private float attackRange;
 	private double perceptionRange;
 
 	//Google Cloud Messaging registration Id
@@ -40,7 +40,7 @@ public class User {
 
 
 
-	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, double attackRange, int serum, int totalKills, double perceptionRange, int hp) {
+	public User(boolean active, int ammo, String gcmId, long id, int kills, long lastEnemySpawned, Date lastModified, Date lastUsedSerum, double latitude, double longitude, String name, float attackRange, int serum, int totalKills, double perceptionRange, int hp) {
 		this.active = active;
 		this.ammo = ammo;
 		this.gcmId = gcmId;
@@ -64,7 +64,7 @@ public class User {
 
 	}
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, double attackRange, Date date) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long l, float attackRange, Date date) {
 		this.totalKills = totalKills;
 		this.kills = kills;
 		this.active = active;
@@ -88,12 +88,12 @@ public class User {
 	    this.ammo = 5;
 	    this.serum = 5;
 	    this.lastUsedSerum = new Date();
-		this.attackRange = 30.0;
+		this.attackRange = 30.0f;
 		this.lastEnemySpawned = System.currentTimeMillis();
 		this.perceptionRange = 60.0;
     }
 
-	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, double attackRange, Date lastModified, double latitude, double longitude) {
+	public User(String name, int totalKills, int kills, boolean active, int ammo, int serum, long lastEnemySpawned, float attackRange, Date lastModified, double latitude, double longitude) {
 		this.name = name;
 		this.totalKills = totalKills;
 		this.kills = kills;
@@ -119,7 +119,7 @@ public class User {
 		//leaving location out of import/export for now
 		return list.iterator();
 	}
-	public void setAttackRange(double attackRange) {
+	public void setAttackRange(float attackRange) {
 		this.attackRange = attackRange;
 	}
 
@@ -313,7 +313,7 @@ public class User {
 		return false;
 	}
 
-	public void setattackRange(double attackRange) {
+	public void setattackRange(float attackRange) {
 		this.attackRange = attackRange;
 	}
 	@Override
