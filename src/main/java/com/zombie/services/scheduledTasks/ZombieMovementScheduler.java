@@ -26,6 +26,7 @@ import java.util.Random;
  * Created by morganebridges on 7/16/16.
  */
 @Component
+@Scope("singleton")
 public class ZombieMovementScheduler implements AlarmObserver {
     private Logger logger = LoggerFactory.getLogger(ZombieMovementScheduler.class);
 
@@ -45,7 +46,10 @@ public class ZombieMovementScheduler implements AlarmObserver {
         users = new ArrayList<>();
 
     }
-
+    @PostConstruct
+    public void doSomething() {
+        System.out.println("I am initalized!");
+    }
     @Scheduled(fixedRate = Globals.ZOMBIE_MOVEMENT_REFRESH_INTERVAL)
     public void manageZombieGeneration() throws InterruptedException {
         runTask();

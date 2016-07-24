@@ -46,7 +46,11 @@ public class User {
 		this.gcmId = gcmId;
 		this.id = id;
 		this.kills = kills;
-		this.hp = hp;
+
+		if(hp == 0)
+			this.hp = 10;
+		else this.hp = hp;
+
 
 
 		this.lastEnemySpawned = lastEnemySpawned;
