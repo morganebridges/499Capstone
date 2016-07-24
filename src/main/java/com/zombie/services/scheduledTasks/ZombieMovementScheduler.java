@@ -14,9 +14,9 @@ import com.zombie.utility.Globals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,10 +46,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
         users = new ArrayList<>();
 
     }
-    @PostConstruct
-    public void doSomething() {
-        System.out.println("I am initalized!");
-    }
+
     @Scheduled(fixedRate = Globals.ZOMBIE_MOVEMENT_REFRESH_INTERVAL)
     public void manageZombieGeneration() throws InterruptedException {
         runTask();
