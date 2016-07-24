@@ -1,5 +1,6 @@
 package com.zombie.services.scheduledTasks;
 
+import com.zombie.ApplicationActiveUsers;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
 import com.zombie.models.Zombie;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -25,6 +28,8 @@ import java.util.Random;
 public class ZombieMovementScheduler implements AlarmObserver {
     private Logger logger = LoggerFactory.getLogger(ZombieMovementScheduler.class);
 
+    @Autowired
+    ApplicationActiveUsers guru;
     @Autowired
     UserService userService;
     @Autowired
@@ -45,27 +50,33 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
     protected synchronized void runTask() throws InterruptedException {
         Globals.prln("ZombieMovementScheduler runimp");
+        Collection<User> users = guru.requestUsersList();
+        Globals.prln("ZombieMovementSched users list has size = " + users.size());
+        users.forEach(
+                user ->{
+            Globals.prln("ZombieMovementSched for user : " + user.getName());
+            //todo register zombies or use in-memory ones instead of getting them all from the DB
+            Iterable<Zombie> zombIterable = zombieService.findZombiesByUser(user);
+            zombIterable.forEach(
+                            zombie ->{
+                                if(zombie.getLocation() == null) {
+                                    Globals.prln("Zombie found with no location");
+                                    User target = userService.findUserById(zombie.getClientKey());
 
-        //todo register zombies or use in-memory ones instead of getting them all from the DB
-        Iterable<Zombie> zombIterable = zombieService.findAll();
-        zombIterable.forEach(
-                        zombie ->{
-                            if(zombie.getLocation() == null) {
-                                Globals.prln("Zombie found with no location");
-                                User target = userService.findUserById(zombie.getClientKey());
+                                    LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
+                                    Globals.prln("Moving zombie={} location={} newLocation={}" +
+                                            zombie + zombie.getLocation() + newLocation);
+                                    zombie.setLongitude(newLocation.getLongitude());
+                                    zombie.setLatitude(newLocation.getLatitude());
 
-                                LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
-                                Globals.prln("Moving zombie={} location={} newLocation={}" +
-                                        zombie + zombie.getLocation() + newLocation);
-                                zombie.setLongitude(newLocation.getLongitude());
-                                zombie.setLatitude(newLocation.getLatitude());
+                                    //TODO: Need to put logic for calling an attack in here too
 
-                                //TODO: Need to put logic for calling an attack in here too
-
-                                zombieService.save(zombie);
+                                    zombieService.save(zombie);
+                                }
                             }
-                        }
-                );
+                    );
+                }
+            );
     }
 
     /**

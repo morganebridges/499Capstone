@@ -146,7 +146,7 @@ public  class ApplicationActiveUsers {
     public static void setAppInitialized(boolean appInitialized) {
         ApplicationActiveUsers.appInitialized = appInitialized;
     }
-    public Collection<User> requestUsersList(User user){
+    public Collection<User> requestUsersList(){
         return activeUsers.values();
     }
 
