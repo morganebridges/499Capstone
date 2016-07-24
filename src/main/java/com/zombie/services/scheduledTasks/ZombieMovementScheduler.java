@@ -64,6 +64,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
                             zombie ->{
                                 if(zombie.getLocation() == null) {
                                     Globals.prln("Zombie found with no location");
+                                }
                                     User target = userService.findUserById(zombie.getClientKey());
 
                                     LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
@@ -75,7 +76,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
                                     //TODO: Need to put logic for calling an attack in here too
 
                                     zombieService.save(zombie);
-                                }
+                                
                             }
                     );
                 }
