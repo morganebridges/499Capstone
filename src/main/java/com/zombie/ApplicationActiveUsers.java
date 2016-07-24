@@ -28,7 +28,6 @@ import java.util.*;
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
 public  class ApplicationActiveUsers {
-    private static HashMap<Long, User> activeUsers;
     @Autowired
      UserService userService;
     @Autowired
@@ -43,6 +42,7 @@ public  class ApplicationActiveUsers {
     @Autowired
     ZombieMovementScheduler zombieMovementScheduler;
 
+    private static HashMap<Long, User> activeUsers;
     Date lastObjectRefresh;
     private static boolean appInitialized;
     private ArrayList<AbstractManager> managerList;
@@ -58,13 +58,8 @@ public  class ApplicationActiveUsers {
 
     }
 
-    public ApplicationActiveUsers(){}
-
-    public static ApplicationActiveUsers instance(){
-        if(instance == null){
-            throw new IllegalStateException("This should __never__ever__be__the__case___");
-        }
-        return instance;
+    public ApplicationActiveUsers(){
+        activeUsers = new HashMap<>();
     }
 
     public boolean activateUser(User user){
