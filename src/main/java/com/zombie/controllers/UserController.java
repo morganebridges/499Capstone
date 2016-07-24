@@ -76,10 +76,7 @@ public class UserController {
 		list = zombieService.valZomList(list);
 		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, list, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
-		for(Zombie zom : list){
-			System.out.println("Zombie : " + "id" + zom.getId() + "CLient : " + zom.getClientKey()
-					+ "hp: " + zom.getHp());
-		}
+
 		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
 	}
 

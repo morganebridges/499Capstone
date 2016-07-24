@@ -41,7 +41,7 @@ public  class ApplicationActiveUsers {
     @Autowired
     ZombieService zombieService;
     @Autowired
-    ZombieMovementScheduler movementScheduler;
+    ZombieMovementScheduler zombieMovementScheduler;
 
     Date lastObjectRefresh;
     private static boolean appInitialized;
@@ -78,6 +78,7 @@ public  class ApplicationActiveUsers {
             dangerManager.registerUser(user);
             zombieGenScheduler.registerUser(user);
             activeUsers.put(user.getId(), user);
+            zombieMovementScheduler.registerUser(user);
             userService.save(user);
             return true;
         }catch(Exception e){
@@ -95,7 +96,6 @@ public  class ApplicationActiveUsers {
         if((user = activeUsers.remove(user.getId())) != null){
             user.setActive(false);
             user.setLastModified(new Date());
-
             dangerManager.deRegisterUser(user.getId());
             zombieGenScheduler.deRegisterUser(user.getId());
 

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
@@ -38,9 +39,11 @@ public class ZombieMovementScheduler implements AlarmObserver {
     ZombieService zombieService;
     @Autowired
     PlayerDangerManager dangerManager;
-
+    private ArrayList<User> users;
     public ZombieMovementScheduler(){
         Globals.prln("Zombie Movement Scheduler constructed");
+        users = =new ArrayList<>();
+
     }
 
     @Scheduled(fixedRate = Globals.ZOMBIE_MOVEMENT_REFRESH_INTERVAL)
@@ -50,7 +53,6 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
     protected synchronized void runTask() throws InterruptedException {
         Globals.prln("ZombieMovementScheduler runimp");
-        Collection<User> users = guru.requestUsersList();
         Globals.prln("ZombieMovementSched users list has size = " + users.size());
         users.forEach(
                 user ->{
@@ -116,6 +118,11 @@ public class ZombieMovementScheduler implements AlarmObserver {
         //requestList.add(new GenRequest(user, num));
         return true;
     }
+
+    public void registerUser(User user) {
+        users.add(user);
+    }
+
     public class GenRequest{
         User user;
         int num;
