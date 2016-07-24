@@ -35,7 +35,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
     PlayerDangerManager dangerManager;
 
     public ZombieMovementScheduler(){
-        logger.debug("Zombie Movement Scheduler constructed");
+        Globals.prln("Zombie Movement Scheduler constructed");
     }
 
     @Scheduled(fixedRate = Globals.ZOMBIE_MOVEMENT_REFRESH_INTERVAL)
@@ -44,19 +44,19 @@ public class ZombieMovementScheduler implements AlarmObserver {
     }
 
     protected synchronized void runTask() throws InterruptedException {
-        logger.debug("ZombieMovementScheduler runimp");
+        Globals.prln("ZombieMovementScheduler runimp");
 
         //todo register zombies or use in-memory ones instead of getting them all from the DB
         Iterable<Zombie> zombIterable = zombieService.findAll();
         zombIterable.forEach(
                         zombie ->{
                             if(zombie.getLocation() == null) {
-                                logger.error("Zombie found with no location");
+                                Globals.prln("Zombie found with no location");
                                 User target = userService.findUserById(zombie.getClientKey());
 
                                 LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
-                                logger.debug("Moving zombie={} location={} newLocation={}",
-                                        zombie, zombie.getLocation(), newLocation);
+                                Globals.prln("Moving zombie={} location={} newLocation={}" +
+                                        zombie + zombie.getLocation() + newLocation);
                                 zombie.setLongitude(newLocation.getLongitude());
                                 zombie.setLatitude(newLocation.getLatitude());
 
@@ -78,7 +78,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
      */
     private LatLng advanceTowardTarget(LatLng moverLocation, LatLng targetLocation, double speed) {
         //TODO: SOmeday we need to fix this.  distance represented by 1 long degree gets smaller as we get closer to the poles
-        logger.debug("***** ADVANCING TOWARDS TARGET ****");
+        Globals.prln("***** ADVANCING TOWARDS TARGET ****");
         int latPolarity = (moverLocation.getLatitude() >= targetLocation.getLatitude()) ? -1 : 1;
         int longPolarity = (moverLocation.getLongitude() >= targetLocation.getLongitude()) ? -1 : 1;
         Random rnd = new Random();

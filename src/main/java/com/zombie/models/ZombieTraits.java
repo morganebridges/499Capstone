@@ -5,7 +5,7 @@ package com.zombie.models;
  */
 public class ZombieTraits {
 
-    public static double speed = 5;
+    public static double speed = 10;
     private static long timeToLive = 30000;
     private static int defaultHp = 5;
 
