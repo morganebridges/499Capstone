@@ -42,7 +42,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
     private ArrayList<User> users;
     public ZombieMovementScheduler(){
         Globals.prln("Zombie Movement Scheduler constructed");
-        users = =new ArrayList<>();
+        users = new ArrayList<>();
 
     }
 
