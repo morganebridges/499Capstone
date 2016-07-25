@@ -21,7 +21,7 @@ public class Globals {
 	public static final int WAKING_URGENCY_THRESHOLD = 7;
 
 	//Values for the movement of zombies.
-	public static final long ZOMBIE_MOVEMENT_REFRESH_INTERVAL = 5000;
+	public static final long ZOMBIE_MOVEMENT_REFRESH_INTERVAL = 500;
 
 	//public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
 	public static boolean zombiesGenerated = false;
