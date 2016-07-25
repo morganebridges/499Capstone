@@ -57,7 +57,7 @@ public class Geomath {
         System.out.println("Lat: " + lat + " Long: " + lng );
         System.out.println("radius: " + radius);
         // Convert radius from meters to degrees
-        double radiusInDegrees = radius / 111000f;
+        double radiusInDegrees = metersToDegrees(radius);
 
         double u = random.nextDouble();
         double v = random.nextDouble();
@@ -77,9 +77,25 @@ public class Geomath {
         System.out.println("Longitude: " + foundLongitude + "  Latitude: " + foundLatitude );
         return new LatLng(foundLongitude, foundLatitude);
     }
+
+    public static LatLng moveTowardsTarget(
+            double sourceLat, double sourceLng, double destLat, double destLng, double meters) {
+        double dx = (destLng - sourceLng) * Math.cos(sourceLat) * 6371000;
+        double dy = Math.sin(destLat - sourceLat) * 6371000;
+        double d = Math.sqrt(dx * dx + dy * dy);
+        d = d > meters ? meters : d;
+        double f = meters / d;
+        double newLat = sourceLat + (destLat - sourceLat) * f;
+        double newLng = sourceLng + (destLng - sourceLng) * f;
+        return new LatLng(newLat, newLng);
+    }
+
     public static double metersToDegrees(double meters){
-        System.out.println("Geomath.meter");
-        return meters / 71695.8;
+        return meters / 111000f;
+    }
+
+    public static double degreesToMeters(double degrees){
+        return degrees * 111000f;
     }
 }
 

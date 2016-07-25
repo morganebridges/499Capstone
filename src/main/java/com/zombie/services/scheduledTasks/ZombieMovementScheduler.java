@@ -10,6 +10,7 @@ import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
 import com.zombie.services.interfaces.communications.AlarmObserver;
+import com.zombie.utility.Geomath;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Random;
 
 /**
  * Created by morganebridges on 7/16/16.
@@ -92,18 +91,14 @@ public class ZombieMovementScheduler implements AlarmObserver {
      * @return newLocation: A LatLng object that represents the new location of the mover.
      */
     private LatLng advanceTowardTarget(LatLng moverLocation, LatLng targetLocation, double speed) {
-        //TODO: SOmeday we need to fix this.  distance represented by 1 long degree gets smaller as we get closer to the poles
-        Globals.prln("***** ADVANCING TOWARDS TARGET ****");
-        int latPolarity = (moverLocation.getLatitude() >= targetLocation.getLatitude()) ? -1 : 1;
-        int longPolarity = (moverLocation.getLongitude() >= targetLocation.getLongitude()) ? -1 : 1;
-        Random rnd = new Random();
+        System.out.println("***** ADVANCING TOWARDS TARGET ****");
+        System.out.println("***** moverLocation = " + moverLocation + " ****");
+        Globals.prln("***** targetLocation = " + targetLocation + " ****");
 
-        // This should make each unit of zombie speed = roughly 0 to 2 feet per tic
-        double newLat = moverLocation.getLatitude()
-                + ((speed * ((1+ rnd.nextInt(3)) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * latPolarity) / 23.0;
-        double newLong = moverLocation.getLongitude()
-                + ((speed * ((rnd.nextInt(3)) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * longPolarity) / 23.0;
-        return new LatLng(newLat, newLong);
+//        Random rnd = new Random();
+
+        return Geomath.moveTowardsTarget(moverLocation.getLatitude(), moverLocation.getLongitude(),
+                targetLocation.getLatitude(), targetLocation.getLongitude(), speed);
     }
 
     @Override
