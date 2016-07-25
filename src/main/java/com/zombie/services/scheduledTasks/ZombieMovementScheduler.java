@@ -76,7 +76,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
                                     //TODO: Need to put logic for calling an attack in here too
 
                                     zombieService.save(zombie);
-                                
+
                             }
                     );
                 }
@@ -100,9 +100,9 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
         // This should make each unit of zombie speed = roughly 0 to 2 feet per tic
         double newLat = moverLocation.getLatitude()
-                + (speed * (rnd.nextInt(3) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * latPolarity;
+                + ((speed * (rnd.nextInt(3) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * latPolarity) / 11.0;
         double newLong = moverLocation.getLongitude()
-                + (speed * (rnd.nextInt(3) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * longPolarity;
+                + ((speed * (rnd.nextInt(3) + Globals.ZOMBIE_SPEED_UNIT_DISTANCE)) * longPolarity) / 11.0;
         return new LatLng(newLat, newLong);
     }
 
