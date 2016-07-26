@@ -52,10 +52,10 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
     protected synchronized void runTask() throws InterruptedException {
         Globals.prln("ZombieMovementScheduler runimp");
-        Globals.prln("ZombieMovementSched users list has size = " + users.size());
+        Globals.prln("ZombieMovementSched users list has size = " + users.size() + 3);
         users.forEach(
                 user ->{
-            Globals.prln("ZombieMovementSched for user : " + user.getName());
+            Globals.prln("ZombieMovementSched fora user : " + user.getName());
             //todo register zombies or use in-memory ones instead of getting them all from the DB
             zombieService.findZombiesByUser(user).stream().forEach(
                             zombie ->{
