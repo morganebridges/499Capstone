@@ -3,7 +3,6 @@ package com.zombie.services.scheduledTasks;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
-import com.zombie.models.Zombie;
 import com.zombie.models.ZombieTraits;
 import com.zombie.models.dto.LatLng;
 import com.zombie.services.NotificationService;
@@ -58,8 +57,7 @@ public class ZombieMovementScheduler implements AlarmObserver {
                 user ->{
             Globals.prln("ZombieMovementSched for user : " + user.getName());
             //todo register zombies or use in-memory ones instead of getting them all from the DB
-            Iterable<Zombie> zombIterable = zombieService.findZombiesByUser(user);
-            zombIterable.forEach(
+            zombieService.findZombiesByUser(user).stream().forEach(
                             zombie ->{
                                 if(zombie.getLocation() == null) {
                                     Globals.prln("Zombie found with no location");

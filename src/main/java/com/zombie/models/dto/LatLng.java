@@ -11,11 +11,14 @@ public class LatLng {
 	private int id;
 	private double latitude;
 	private double longitude;
+
 	protected LatLng(){}
+
 	public LatLng(double latitude, double longitude){
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+
 	public double getLatitude() {
 		return latitude;
 	}
@@ -28,5 +31,8 @@ public class LatLng {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
+	public String toString() {
+		return "latitude: " + latitude + ", longitude: " + longitude;
+	}
 }
