@@ -66,19 +66,21 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
                                 Globals.prln("Moving zombie towards ={} location={} targetLocation={}" +
                                     zombie + zombie.getLocation() + target.getLocation());
-                                LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
+                                //We only move the zombie if they are outside of the user's attack range
+                                if(!Geomath.isInRange(zombie.getLocation(), user.getLocation(), user.getattackRange())) {
+                                    LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
 
-                                if (Geomath.isInRange(newLocation, target.getLocation(), ZombieTraits.getBiteRange())) {
-                                    // TODO: bite target
+                                    if (Geomath.isInRange(newLocation, target.getLocation(), ZombieTraits.getBiteRange())) {
+                                        // TODO: bite target
+                                    }
+
+                                    Globals.prln("Moved zombie={} location={} newLocation={}" +
+                                            zombie + zombie.getLocation() + newLocation);
+                                    zombie.setLongitude(newLocation.getLongitude());
+                                    zombie.setLatitude(newLocation.getLatitude());
+
+                                    //TODO: Need to put logic for calling an attack in here too
                                 }
-
-                                Globals.prln("Moved zombie={} location={} newLocation={}" +
-                                        zombie + zombie.getLocation() + newLocation);
-                                zombie.setLongitude(newLocation.getLongitude());
-                                zombie.setLatitude(newLocation.getLatitude());
-
-                                //TODO: Need to put logic for calling an attack in here too
-
                                 zombieService.save(zombie);
 
                             }
