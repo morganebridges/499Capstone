@@ -81,20 +81,34 @@ public class Geomath {
     public static LatLng moveTowardsTarget(
             double sourceLat, double sourceLng, double destLat, double destLng, double meters) {
         double dx = deg2rad(destLng - sourceLng) * Math.cos(deg2rad(sourceLat)) * 6371000;
-        Globals.prln("dx = " + dx);
         double dy = deg2rad(destLat - sourceLat) * 6371000;
-        Globals.prln("dy = " + dy);
         double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
-        Globals.prln("d = " + d);
         d = d < meters ? meters : d;
-        Globals.prln("d after sanity check = " + d);
         double f = d == 0 ? 1 : meters / d;
-        Globals.prln("f = " + f);
         double newLat = sourceLat + (destLat - sourceLat) * f;
-        Globals.prln("new lat = " + newLat + ", oldLat = " + sourceLat + ", targetLat = " + destLat);
         double newLng = sourceLng + (destLng - sourceLng) * f;
-        Globals.prln("new lng = " + newLng + ", oldLng = " + sourceLng + ", targetLng = " + destLng);
+
         return new LatLng(newLat, newLng);
+    }
+
+    public static LatLng moveTowardsTarget(
+            LatLng source, LatLng dest, double meters) {
+        return moveTowardsTarget(source.getLatitude(), source.getLongitude(),
+                dest.getLatitude(), dest.getLongitude(), meters);
+    }
+
+    public static boolean isInRange(
+            double sourceLat, double sourceLng, double destLat, double destLng, double rangeInMeters) {
+        double dx = deg2rad(destLng - sourceLng) * Math.cos(deg2rad(sourceLat)) * 6371000;
+        double dy = deg2rad(destLat - sourceLat) * 6371000;
+        double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
+        return d < rangeInMeters;
+    }
+
+    public static boolean isInRange(
+            LatLng source, LatLng dest, double rangeInMeters) {
+        return isInRange(source.getLatitude(), source.getLongitude(),
+                dest.getLatitude(), dest.getLongitude(), rangeInMeters);
     }
 
     public static double metersToDegrees(double meters){

@@ -62,19 +62,24 @@ public class ZombieMovementScheduler implements AlarmObserver {
                                 if(zombie.getLocation() == null) {
                                     Globals.prln("Zombie found with no location");
                                 }
-                                    User target = userService.findUserById(zombie.getClientKey());
+                                User target = userService.findUserById(zombie.getClientKey());
 
-                                    Globals.prln("Moving zombie towards ={} location={} targetLocation={}" +
-                                        zombie + zombie.getLocation() + target.getLocation());
-                                    LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
-                                    Globals.prln("Moved zombie={} location={} newLocation={}" +
-                                            zombie + zombie.getLocation() + newLocation);
-                                    zombie.setLongitude(newLocation.getLongitude());
-                                    zombie.setLatitude(newLocation.getLatitude());
+                                Globals.prln("Moving zombie towards ={} location={} targetLocation={}" +
+                                    zombie + zombie.getLocation() + target.getLocation());
+                                LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
 
-                                    //TODO: Need to put logic for calling an attack in here too
+                                if (Geomath.isInRange(newLocation, target.getLocation(), ZombieTraits.getBiteRange())) {
+                                    // TODO: bite target
+                                }
 
-                                    zombieService.save(zombie);
+                                Globals.prln("Moved zombie={} location={} newLocation={}" +
+                                        zombie + zombie.getLocation() + newLocation);
+                                zombie.setLongitude(newLocation.getLongitude());
+                                zombie.setLatitude(newLocation.getLatitude());
+
+                                //TODO: Need to put logic for calling an attack in here too
+
+                                zombieService.save(zombie);
 
                             }
                     );
