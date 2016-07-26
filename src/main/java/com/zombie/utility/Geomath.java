@@ -86,7 +86,7 @@ public class Geomath {
         Globals.prln("dy = " + dy);
         double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
         Globals.prln("d = " + d);
-        d = d > meters ? meters : d;
+        d = d < meters ? meters : d;
         Globals.prln("d after sanity check = " + d);
         double f = d == 0 ? 1 : meters / d;
         Globals.prln("f = " + f);
