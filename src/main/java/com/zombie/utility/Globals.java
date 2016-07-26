@@ -10,7 +10,6 @@ public class Globals {
 	 * play cycle tasks. Time values are in milliseconds to be comparable to System.currentTime
 	 */
 
-	public static final double ZOMBIE_SPEED_UNIT_DISTANCE = 0.00000895311255;
 	public static final long ZOMBIE_LOOP_TIME = 20000;
 	//Values regarding how to deal with zombie generation
 	public static final long ENEMY_SPAWN_INTERVAL = 75000;
@@ -21,7 +20,7 @@ public class Globals {
 	public static final int WAKING_URGENCY_THRESHOLD = 7;
 
 	//Values for the movement of zombies.
-	public static final long ZOMBIE_MOVEMENT_REFRESH_INTERVAL = 500;
+	public static final long ZOMBIE_MOVEMENT_REFRESH_INTERVAL = 2000;
 
 	//public static HashMap<Long, Zombie> tempZomList = new HashMap<>();
 	public static boolean zombiesGenerated = false;
