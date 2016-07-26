@@ -81,12 +81,19 @@ public class Geomath {
     public static LatLng moveTowardsTarget(
             double sourceLat, double sourceLng, double destLat, double destLng, double meters) {
         double dx = (destLng - sourceLng) * Math.cos(sourceLat) * 6371000;
+        Globals.prln("dx = " + dx);
         double dy = Math.sin(destLat - sourceLat) * 6371000;
+        Globals.prln("dy = " + dy);
         double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
+        Globals.prln("d = " + d);
         d = d > meters ? meters : d;
+        Globals.prln("d after sanity check = " + d);
         double f = d == 0 ? 1 : meters / d;
+        Globals.prln("f = " + f);
         double newLat = sourceLat + (destLat - sourceLat) * f;
+        Globals.prln("new lat = " + newLat + ", oldLat = " + sourceLat + ", targetLat = " + destLat);
         double newLng = sourceLng + (destLng - sourceLng) * f;
+        Globals.prln("new lng = " + newLng + ", oldLng = " + sourceLng + ", targetLng = " + destLng);
         return new LatLng(newLat, newLng);
     }
 
