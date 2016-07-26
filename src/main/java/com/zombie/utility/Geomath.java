@@ -82,9 +82,9 @@ public class Geomath {
             double sourceLat, double sourceLng, double destLat, double destLng, double meters) {
         double dx = (destLng - sourceLng) * Math.cos(sourceLat) * 6371000;
         double dy = Math.sin(destLat - sourceLat) * 6371000;
-        double d = Math.sqrt(dx * dx + dy * dy);
+        double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
         d = d > meters ? meters : d;
-        double f = meters / d;
+        double f = d == 0 ? 1 : meters / d;
         double newLat = sourceLat + (destLat - sourceLat) * f;
         double newLng = sourceLng + (destLng - sourceLng) * f;
         return new LatLng(newLat, newLng);

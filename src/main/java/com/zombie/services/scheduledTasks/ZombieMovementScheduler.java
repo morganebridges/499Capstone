@@ -64,8 +64,10 @@ public class ZombieMovementScheduler implements AlarmObserver {
                                 }
                                     User target = userService.findUserById(zombie.getClientKey());
 
+                                    Globals.prln("Moving zombie towards ={} location={} targetLocation={}" +
+                                        zombie + zombie.getLocation() + target.getLocation());
                                     LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
-                                    Globals.prln("Moving zombie={} location={} newLocation={}" +
+                                    Globals.prln("Moved zombie={} location={} newLocation={}" +
                                             zombie + zombie.getLocation() + newLocation);
                                     zombie.setLongitude(newLocation.getLongitude());
                                     zombie.setLatitude(newLocation.getLatitude());
