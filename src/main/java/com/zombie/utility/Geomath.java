@@ -80,9 +80,9 @@ public class Geomath {
 
     public static LatLng moveTowardsTarget(
             double sourceLat, double sourceLng, double destLat, double destLng, double meters) {
-        double dx = (destLng - sourceLng) * Math.cos(deg2rad(sourceLat)) * 6371000;
+        double dx = deg2rad(destLng - sourceLng) * Math.cos(deg2rad(sourceLat)) * 6371000;
         Globals.prln("dx = " + dx);
-        double dy = Math.sin(deg2rad(destLat - sourceLat)) * 6371000;
+        double dy = deg2rad(destLat - sourceLat) * 6371000;
         Globals.prln("dy = " + dy);
         double d = Math.sqrt(Math.abs(dx * dx + dy * dy));
         Globals.prln("d = " + d);
