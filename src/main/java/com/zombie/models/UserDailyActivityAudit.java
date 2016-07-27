@@ -3,6 +3,7 @@ package com.zombie.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by morganebridges on 5/25/16.
@@ -12,10 +13,12 @@ public class UserDailyActivityAudit {
     @Id
     @GeneratedValue
     private long id;
+	private Date day;
 	private int numberOfActiveUsers;
 
-	public UserDailyActivityAudit(int numberOfActiveUsers) {
+	public UserDailyActivityAudit(int numberOfActiveUsers, Date day) {
 		this.numberOfActiveUsers = numberOfActiveUsers;
+		this.day = day;
 	}
 
 	public long getId() {
@@ -24,6 +27,10 @@ public class UserDailyActivityAudit {
 
 	public int getNumberOfActiveUsers() {
 		return numberOfActiveUsers;
+	}
+
+	public Date getDay() {
+		return this.day;
 	}
 
 	@Override
@@ -39,6 +46,6 @@ public class UserDailyActivityAudit {
 
 	@Override
 	public String toString(){
-		return "UserDailyActivityAudit id=" + this.id + " numberOfActiveUsers=" + this.numberOfActiveUsers;
+		return "UserDailyActivityAudit id=" + this.id + " numberOfActiveUsers=" + this.numberOfActiveUsers + " day=" + day;
 	}
 }

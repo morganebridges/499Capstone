@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class UserDailyActivityMonitor {
 
 	@Scheduled(cron = DAILY_CRON)
 	public synchronized void monitorUsers() {
-		UserDailyActivityAudit auditRow = new UserDailyActivityAudit(activeUsers.size());
+		UserDailyActivityAudit auditRow = new UserDailyActivityAudit(activeUsers.size(), new Date());
 		userDailyActivityAuditRepository.save(auditRow);
 		activeUsers = new HashSet<>();
 	}
