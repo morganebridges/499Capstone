@@ -52,10 +52,10 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
     protected synchronized void runTask() throws InterruptedException {
         Globals.prln("ZombieMovementScheduler runimp");
-        Globals.prln("ZombieMovementSched users list has size = " + users.size());
+        Globals.prln("ZombieMovementSched users list has size = " + users.size() + 3);
         users.forEach(
                 user ->{
-            Globals.prln("ZombieMovementSched for user : " + user.getName());
+            Globals.prln("ZombieMovementSched fora user : " + user.getName());
             //todo register zombies or use in-memory ones instead of getting them all from the DB
             zombieService.findZombiesByUser(user).stream().forEach(
                             zombie ->{
@@ -66,19 +66,21 @@ public class ZombieMovementScheduler implements AlarmObserver {
 
                                 Globals.prln("Moving zombie towards ={} location={} targetLocation={}" +
                                     zombie + zombie.getLocation() + target.getLocation());
-                                LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
+                                //We only move the zombie if they are outside of the user's attack range
+                                if(!Geomath.isInRange(zombie.getLocation(), user.getLocation(), user.getattackRange())) {
+                                    LatLng newLocation = advanceTowardTarget(zombie.getLocation(), target.getLocation(), ZombieTraits.getSpeed());
 
-                                if (Geomath.isInRange(newLocation, target.getLocation(), ZombieTraits.getBiteRange())) {
-                                    // TODO: bite target
+                                    if (Geomath.isInRange(newLocation, target.getLocation(), ZombieTraits.getBiteRange())) {
+                                        // TODO: bite target
+                                    }
+
+                                    Globals.prln("Moved zombie={} location={} newLocation={}" +
+                                            zombie + zombie.getLocation() + newLocation);
+                                    zombie.setLongitude(newLocation.getLongitude());
+                                    zombie.setLatitude(newLocation.getLatitude());
+
+                                    //TODO: Need to put logic for calling an attack in here too
                                 }
-
-                                Globals.prln("Moved zombie={} location={} newLocation={}" +
-                                        zombie + zombie.getLocation() + newLocation);
-                                zombie.setLongitude(newLocation.getLongitude());
-                                zombie.setLatitude(newLocation.getLatitude());
-
-                                //TODO: Need to put logic for calling an attack in here too
-
                                 zombieService.save(zombie);
 
                             }
