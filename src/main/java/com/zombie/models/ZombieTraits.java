@@ -6,7 +6,7 @@ package com.zombie.models;
 public class ZombieTraits {
 
     private static double biteRange = 2;
-    private static double speed = 2;
+    private static double speed = 1;
     private static long timeToLive = 30000;
     private static int defaultHp = 5;
 

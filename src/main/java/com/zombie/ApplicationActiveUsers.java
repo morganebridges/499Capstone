@@ -93,7 +93,6 @@ public  class ApplicationActiveUsers {
             user.setLastModified(new Date());
             dangerManager.deRegisterUser(user.getId());
             zombieGenScheduler.deRegisterUser(user.getId());
-
         }else{
             //That user was not logged in.
         }
