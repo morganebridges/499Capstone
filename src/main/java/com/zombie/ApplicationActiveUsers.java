@@ -3,10 +3,8 @@ package com.zombie;
 import com.zombie.entityManagers.AbstractManager;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
-import com.zombie.repositories.UserRepository;
 import com.zombie.services.NotificationService;
 import com.zombie.services.UserService;
-
 import com.zombie.services.ZombieService;
 import com.zombie.services.interfaces.communications.ContextSubscriber;
 import com.zombie.services.scheduledTasks.ZombieGenerationScheduler;
@@ -14,12 +12,13 @@ import com.zombie.services.scheduledTasks.ZombieMovementScheduler;
 import com.zombie.utility.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 
 /** This class is to contain and maintain our active users.
  * Created by morganebridges on 7/9/16.
@@ -50,7 +49,7 @@ public  class ApplicationActiveUsers {
 
     public void initialize(){
         if(managerList == null)
-            managerList = new ArrayList<AbstractManager>();
+            managerList = new ArrayList<>();
         if(instance == null)
             instance = this;
 
@@ -99,6 +98,11 @@ public  class ApplicationActiveUsers {
         }
         return user;
 
+    }
+
+    public User deactivateUser(long userId){
+        User user = userService.findUserById(userId);
+        return deactivateUser(user);
     }
 
     /**
