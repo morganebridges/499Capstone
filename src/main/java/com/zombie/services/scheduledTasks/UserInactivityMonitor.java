@@ -29,6 +29,8 @@ public class UserInactivityMonitor {
 	ApplicationActiveUsers guru;
 	@Autowired
 	UserActivityAuditRepository userActivityAuditRepository;
+	@Autowired
+	UserDailyActivityMonitor userDailyActivityMonitor;
 
 	private Map<Long, UserActivityTimingDTO> activeUsers = new HashMap<>();
 
@@ -60,20 +62,11 @@ public class UserInactivityMonitor {
 		if (activeUsers.containsKey(userId)) {
 			activeUsers.get(userId).lastActivity = now;
 		} else {
-			UserActivityTimingDTO timing = activeUsers.get(userId);
-			timing.lastActivity = now;
-			timing.becameActive = now;
+			UserActivityTimingDTO timing = new UserActivityTimingDTO(now, now);
+			activeUsers.put(userId, timing);
+			userDailyActivityMonitor.registerActivity(userId);
 		}
-	}
 
-	public synchronized void deactivate(long userId) {
-		if (activeUsers.containsKey(userId)) {
-			long now = System.currentTimeMillis();
-			UserActivityTimingDTO timing = activeUsers.get(userId);
-			UserActivityAudit auditRow = new UserActivityAudit(userId, now - timing.becameActive);
-			userActivityAuditRepository.save(auditRow);
-			activeUsers.remove(userId);
-		}
 	}
 
 	private class UserActivityTimingDTO {

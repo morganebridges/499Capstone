@@ -6,6 +6,7 @@ import com.zombie.models.dto.ClientUpdateDTO;
 import com.zombie.models.dto.UserActionDto;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
+import com.zombie.services.scheduledTasks.UserInactivityMonitor;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @ComponentScan("com.zombie")
 @EnableAutoConfiguration
@@ -33,6 +35,9 @@ public class UserController {
 
 	@Autowired
 	ZombieService zombieService;
+
+	@Autowired
+	UserInactivityMonitor userInactivityMonitor;
 
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -54,6 +59,7 @@ public class UserController {
 			Globals.zombiesGenerated = true;
 		}
 		Globals.userLastUpdate = System.currentTimeMillis();
+		userInactivityMonitor.registerActivity(userActionDto.getId());
 
 		//update location of user from the DTO
 		if(userActionDto.getLatitude() != 0 && userActionDto.getLongitude() != 0)
@@ -77,7 +83,7 @@ public class UserController {
 		ClientUpdateDTO dtoReturn = new ClientUpdateDTO(targetId, list, user, userActionDto.action);
 		//log.trace("Returning zombies. Total zombie list length={}", zombieList.size());
 
-		return new ResponseEntity<ClientUpdateDTO>(dtoReturn, HttpStatus.OK);
+		return new ResponseEntity<>(dtoReturn, HttpStatus.OK);
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
