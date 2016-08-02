@@ -6,6 +6,7 @@ import com.zombie.models.dto.ClientUpdateDTO;
 import com.zombie.models.dto.UserActionDto;
 import com.zombie.services.UserService;
 import com.zombie.services.ZombieService;
+import com.zombie.services.scheduledTasks.UserDailyActivityMonitor;
 import com.zombie.services.scheduledTasks.UserInactivityMonitor;
 import com.zombie.utility.Globals;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	UserInactivityMonitor userInactivityMonitor;
+
+	@Autowired
+	UserDailyActivityMonitor userDailyActivityMonitor;
 
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -114,7 +119,6 @@ public class UserController {
 		userService.login(newUser);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
-
 
 	@RequestMapping(path="/attack", method=RequestMethod.POST)
 	public ResponseEntity<Zombie>attack(@RequestBody UserActionDto userActionDto, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException {

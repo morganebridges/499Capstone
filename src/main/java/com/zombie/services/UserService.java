@@ -1,10 +1,13 @@
 package com.zombie.services;
 
+import com.sun.xml.internal.ws.spi.db.RepeatedElementBridge;
 import com.zombie.ApplicationActiveUsers;
 import com.zombie.entityManagers.PlayerDangerManager;
 import com.zombie.models.User;
+import com.zombie.models.UserDailyActivityAudit;
 import com.zombie.models.Zombie;
 import com.zombie.models.dto.LatLng;
+import com.zombie.repositories.UserDailyActivityAuditRepository;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import org.slf4j.Logger;
@@ -37,6 +40,12 @@ public class UserService {
 
     @Autowired
     ApplicationActiveUsers guru;
+
+    @Autowired
+    UserDailyActivityAuditRepository userAuditRepo;
+
+    @Autowired
+    UserDailyActivityAuditRepository userDailyAuditRepo;
 
 
     Logger log = LoggerFactory.getLogger(UserService.class);
@@ -135,4 +144,6 @@ public class UserService {
 
         return zombie;
     }
+
+
 }

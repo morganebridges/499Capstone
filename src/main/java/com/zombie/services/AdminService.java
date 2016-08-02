@@ -1,6 +1,11 @@
 package com.zombie.services;
 
 import com.zombie.models.User;
+import com.zombie.models.UserActivityAudit;
+import com.zombie.repositories.UserActivityAuditRepository;
+import com.zombie.repositories.UserDailyActivityAuditRepository;
+import com.zombie.services.scheduledTasks.UserDailyActivityMonitor;
+import com.zombie.services.scheduledTasks.UserInactivityMonitor;
 import com.zombie.utility.Globals;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -18,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -31,6 +37,12 @@ import java.util.NoSuchElementException;
 public class AdminService {
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	UserActivityAuditRepository userInactivityMonitorRepo;
+
+	@Autowired
+	UserDailyActivityAuditRepository userDailyActivityMonitorRepo;
 
 	Logger log = LoggerFactory.getLogger(AdminService.class);
 
@@ -190,5 +202,80 @@ public class AdminService {
 		}
 		//log.trace("finishing importUserData numberOfUsers={}", numOfUsers);
 		return numOfUsers;
+	}
+
+	public byte[] generateUserInfo() {
+		//log.trace("In exportuserData");
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet();
+
+		Iterator<String> userFieldIterator = Globals.getOrderedUserFields().iterator();
+
+		//Write the header row
+		Row headerRow = sheet.createRow(0);
+		int headerColumn = 0;
+		while(userFieldIterator.hasNext()) {
+			Cell cell = headerRow.createCell(headerColumn);
+			cell.setCellValue(userFieldIterator.next());
+			headerColumn++;
+		}
+
+		Iterator<UserActivityAudit> userIterator = userInactivityMonitorRepo.findAll().iterator();
+		//Write user rows
+		int rowNum = 1;
+		while(userIterator.hasNext()) {
+			int column = 0;
+			Row row = sheet.createRow(rowNum);
+			UserActivityAudit user = userIterator.next();
+			LinkedList<String> fieldList = new LinkedList<>();
+			fieldList.add("Activity Duration");
+			fieldList.add("User Id");
+
+			//Cell style for date
+			CellStyle dateCellStyle = workbook.createCellStyle();
+			dateCellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat("m/d/yy h:mm"));
+
+			while (fieldList.iterator().hasNext()) {
+				Object field = fieldList.iterator().next();
+				System.out.println("before loop");
+				System.out.println("column");
+				Cell cell = row.createCell(column);
+				if ((field == null || field.equals("")) && (column == 0 || column == 6)) {
+					cell.setCellValue("");
+				}else if (field instanceof String) {
+					cell.setCellValue((String)field);
+				} else if (field instanceof Integer) {
+					cell.setCellValue((Integer)field);
+				} else if (field instanceof Double) {
+					cell.setCellValue((Double)field);
+				} else if (field instanceof Date) {
+					cell.setCellValue((Date)field);
+					cell.setCellStyle(dateCellStyle);
+				} else if (field instanceof Boolean) {
+					cell.setCellValue((Boolean)field);
+				} else {
+					throw new IllegalStateException("Can't identify type in user object");
+				}
+
+				column++;
+			}
+
+			rowNum++;
+		}
+
+		try (ByteArrayOutputStream out = new ByteArrayOutputStream())
+		{
+			//Write the workbook to output stream
+			workbook.write(out);
+			byte[] bytes = out.toByteArray();
+			out.close();
+			//log.trace("exportUserData returning data");
+			return bytes;
+		}
+		catch (IOException e)
+		{
+			//log.error("Error exporting user data", e);
+			return new byte[0];
+		}
 	}
 }
