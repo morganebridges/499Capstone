@@ -25,7 +25,7 @@ public class DownloadExcelController {
 
 	private final Logger log = LoggerFactory.getLogger(DownloadExcelController.class);
 
-	@RequestMapping(value = "/downloadservice", method = RequestMethod.GET,
+	@RequestMapping(value = "/download", method = RequestMethod.GET,
 			produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 	public ResponseEntity<InputStreamResource> downloadFile() {
 		try {
