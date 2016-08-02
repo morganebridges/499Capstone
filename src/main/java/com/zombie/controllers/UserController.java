@@ -38,11 +38,11 @@ public class UserController {
 	@Autowired
 	ZombieService zombieService;
 
-	@Autowired
-	UserInactivityMonitor userInactivityMonitor;
+		@Autowired
+		UserInactivityMonitor userInactivityMonitor;
 
-	@Autowired
-	UserDailyActivityMonitor userDailyActivityMonitor;
+		@Autowired
+		UserDailyActivityMonitor userDailyActivityMonitor;
 
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
