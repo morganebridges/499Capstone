@@ -59,6 +59,7 @@ public class DownloadExcelController {
 			produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 	public ResponseEntity<InputStreamResource> downloadUserStats() {
 		try {
+			System.out.println("DownloadExcelController.downloadUserStats");
 			//log.trace("User export being requested");
 			byte[] out = adminService.generateUserInfo();
 			ByteArrayInputStream in = new ByteArrayInputStream(out);
@@ -80,6 +81,7 @@ public class DownloadExcelController {
 		} catch (Exception e) {
 			//log.error("Error exporting user data", e);
 			e.printStackTrace();
+			System.out.println("Eception thrown in DownloadExcel controller");
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}

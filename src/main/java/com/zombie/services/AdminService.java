@@ -204,13 +204,14 @@ public class AdminService {
 	}
 
 	public byte[] generateUserInfo() {
+		System.out.println("AdminService.generateUserInfo()");
+
 		//log.trace("In exportuserData");
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 
 		Iterator<String> userFieldIterator = Globals.getOrderedUserFields().iterator();
 		LinkedList<String> fieldList = new LinkedList<>();
-
 
 
 		fieldList.add("Id");
@@ -227,6 +228,7 @@ public class AdminService {
 		}
 
 		Iterator<UserActivityAudit> userIterator = userInactivityMonitorRepo.findAll().iterator();
+		System.out.println("User activity repo produced a result with entries: " + userIterator.hasNext());
 		//Write user rows
 		int rowNum = 1;
 		while(userIterator.hasNext()) {
@@ -257,6 +259,7 @@ public class AdminService {
 			//log.error("Error exporting user data", e);
 
 			e.printStackTrace();
+			System.out.println("Exception thrown when trying to write the workbook to bytes");
 			return new byte[0];
 		}
 	}
