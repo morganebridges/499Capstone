@@ -51,8 +51,8 @@ public class ZombieMovementScheduler implements AlarmObserver {
     }
 
     protected synchronized void runTask() throws InterruptedException {
-        Globals.prln("ZombieMovementScheduler runimp");
-        Globals.prln("ZombieMovementSched users list has size = " + users.size() + 3);
+        //Globals.prln("ZombieMovementScheduler runimp");
+        //Globals.prln("ZombieMovementSched users list has size = " + users.size() + 3);
         users.forEach(
                 user ->{
             Globals.prln("ZombieMovementSched fora user : " + user.getName());
