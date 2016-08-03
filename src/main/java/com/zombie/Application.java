@@ -97,7 +97,6 @@ public class Application implements CommandLineRunner{
             }
             TestDataPrep prep = new TestDataPrep(userService, guru);
 
-            prep.populate(30);
     }
     /**
      * Clear out your hibernate cache
