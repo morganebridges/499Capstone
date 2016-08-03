@@ -23,6 +23,8 @@ public class DownloadExcelController {
 	@Autowired
 	AdminService adminService;
 
+
+
 	private final Logger log = LoggerFactory.getLogger(DownloadExcelController.class);
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET,
@@ -49,6 +51,7 @@ public class DownloadExcelController {
 
 		} catch (Exception e) {
 			//log.error("Error exporting user data", e);
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}
@@ -76,6 +79,7 @@ public class DownloadExcelController {
 
 		} catch (Exception e) {
 			//log.error("Error exporting user data", e);
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
 	}

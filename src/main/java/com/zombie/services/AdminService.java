@@ -41,7 +41,6 @@ public class AdminService {
 	@Autowired
 	UserActivityAuditRepository userInactivityMonitorRepo;
 
-	@Autowired
 	UserDailyActivityAuditRepository userDailyActivityMonitorRepo;
 
 	Logger log = LoggerFactory.getLogger(AdminService.class);
@@ -210,13 +209,20 @@ public class AdminService {
 		XSSFSheet sheet = workbook.createSheet();
 
 		Iterator<String> userFieldIterator = Globals.getOrderedUserFields().iterator();
+		LinkedList<String> fieldList = new LinkedList<>();
 
+
+
+		fieldList.add("Id");
+		fieldList.add("User Id");
+		fieldList.add("Activity Duration");
 		//Write the header row
 		Row headerRow = sheet.createRow(0);
 		int headerColumn = 0;
 		while(userFieldIterator.hasNext()) {
 			Cell cell = headerRow.createCell(headerColumn);
-			cell.setCellValue(userFieldIterator.next());
+			cell.setCellValue("User Id");
+
 			headerColumn++;
 		}
 
@@ -224,44 +230,18 @@ public class AdminService {
 		//Write user rows
 		int rowNum = 1;
 		while(userIterator.hasNext()) {
-			int column = 0;
 			Row row = sheet.createRow(rowNum);
 			UserActivityAudit user = userIterator.next();
-			LinkedList<String> fieldList = new LinkedList<>();
-			fieldList.add("Activity Duration");
-			fieldList.add("User Id");
 
-			//Cell style for date
-			CellStyle dateCellStyle = workbook.createCellStyle();
-			dateCellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat("m/d/yy h:mm"));
-
-			while (fieldList.iterator().hasNext()) {
-				Object field = fieldList.iterator().next();
-				System.out.println("before loop");
-				System.out.println("column");
-				Cell cell = row.createCell(column);
-				if ((field == null || field.equals("")) && (column == 0 || column == 6)) {
-					cell.setCellValue("");
-				}else if (field instanceof String) {
-					cell.setCellValue((String)field);
-				} else if (field instanceof Integer) {
-					cell.setCellValue((Integer)field);
-				} else if (field instanceof Double) {
-					cell.setCellValue((Double)field);
-				} else if (field instanceof Date) {
-					cell.setCellValue((Date)field);
-					cell.setCellStyle(dateCellStyle);
-				} else if (field instanceof Boolean) {
-					cell.setCellValue((Boolean)field);
-				} else {
-					throw new IllegalStateException("Can't identify type in user object");
-				}
-
-				column++;
-			}
+			Cell idCell = row.createCell(0);
+			idCell.setCellValue(user.getId());
+			Cell userIdCell = row.createCell(1);
+			userIdCell.setCellValue(user.getUserId());
+			Cell inactiveTimeCell = row.createCell(1);
+			inactiveTimeCell.setCellValue(user.getActivityDuration());
 
 			rowNum++;
-		}
+			}
 
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream())
 		{
@@ -275,6 +255,8 @@ public class AdminService {
 		catch (IOException e)
 		{
 			//log.error("Error exporting user data", e);
+
+			e.printStackTrace();
 			return new byte[0];
 		}
 	}
