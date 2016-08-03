@@ -2,6 +2,7 @@ package com.zombie.services;
 
 import com.zombie.models.User;
 import com.zombie.models.UserActivityAudit;
+import com.zombie.models.UserDailyActivityAudit;
 import com.zombie.repositories.UserActivityAuditRepository;
 import com.zombie.repositories.UserDailyActivityAuditRepository;
 import com.zombie.services.scheduledTasks.UserDailyActivityMonitor;
@@ -41,6 +42,7 @@ public class AdminService {
 	@Autowired
 	UserActivityAuditRepository userInactivityMonitorRepo;
 
+	@Autowired
 	UserDailyActivityAuditRepository userDailyActivityMonitorRepo;
 
 	Logger log = LoggerFactory.getLogger(AdminService.class);
@@ -219,13 +221,11 @@ public class AdminService {
 		fieldList.add("Activity Duration");
 		//Write the header row
 		Row headerRow = sheet.createRow(0);
-		int headerColumn = 0;
-		while(userFieldIterator.hasNext()) {
-			Cell cell = headerRow.createCell(headerColumn);
-			cell.setCellValue("User Id");
+		headerRow.createCell(0).setCellValue("Id");
+		headerRow.createCell(1).setCellValue("User Id");
+		headerRow.createCell(2).setCellValue("Activity Duration");
 
-			headerColumn++;
-		}
+
 
 		Iterator<UserActivityAudit> userIterator = userInactivityMonitorRepo.findAll().iterator();
 		System.out.println("User activity repo produced a result with entries: " + userIterator.hasNext());
@@ -239,11 +239,63 @@ public class AdminService {
 			idCell.setCellValue(user.getId());
 			Cell userIdCell = row.createCell(1);
 			userIdCell.setCellValue(user.getUserId());
-			Cell inactiveTimeCell = row.createCell(1);
+			Cell inactiveTimeCell = row.createCell(2);
 			inactiveTimeCell.setCellValue(user.getActivityDuration());
 
 			rowNum++;
 			}
+
+		try (ByteArrayOutputStream out = new ByteArrayOutputStream())
+		{
+			//Write the workbook to output stream
+			workbook.write(out);
+			byte[] bytes = out.toByteArray();
+			out.close();
+			//log.trace("exportUserData returning data");
+			return bytes;
+		}
+		catch (IOException e)
+		{
+			//log.error("Error exporting user data", e);
+
+			e.printStackTrace();
+			System.out.println("Exception thrown when trying to write the workbook to bytes");
+			return new byte[0];
+		}
+	}
+	public byte[] generateDailyUserInfo() {
+		System.out.println("AdminService.generateDailyUserInfo()");
+
+		//log.trace("In exportuserData");
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet();
+
+		//Write the header row
+		Row headerRow = sheet.createRow(0);
+		headerRow.createCell(0).setCellValue("Id");
+		headerRow.createCell(1).setCellValue("Day");
+		headerRow.createCell(2).setCellValue("Active users");
+
+
+
+		Iterator<UserDailyActivityAudit> userIterator = userDailyActivityMonitorRepo.findAll().iterator();
+		System.out.println("User activity repo produced a result with entries: " + userIterator.hasNext());
+		//Write user rows
+		int rowNum = 1;
+		while(userIterator.hasNext()) {
+			Row row = sheet.createRow(rowNum);
+			UserDailyActivityAudit user = userIterator.next();
+
+			Cell idCell = row.createCell(0);
+			idCell.setCellValue(user.getId());
+			Cell dateCell = row.createCell(1);
+			dateCell.setCellValue(user.getDay());
+
+			Cell activeUsersCell = row.createCell(2);
+			activeUsersCell.setCellValue(user.getNumberOfActiveUsers());
+
+			rowNum++;
+		}
 
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream())
 		{

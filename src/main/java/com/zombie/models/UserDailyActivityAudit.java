@@ -15,7 +15,7 @@ public class UserDailyActivityAudit {
     private long id;
 	private Date day;
 	private int numberOfActiveUsers;
-
+	public UserDailyActivityAudit(){}
 	public UserDailyActivityAudit(int numberOfActiveUsers, Date day) {
 		this.numberOfActiveUsers = numberOfActiveUsers;
 		this.day = day;

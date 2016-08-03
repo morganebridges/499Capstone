@@ -84,5 +84,36 @@ public class DownloadExcelController {
 			System.out.println("Eception thrown in DownloadExcel controller");
 			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
 		}
+
+	}
+	@RequestMapping(value = "/dldailyactivity", method = RequestMethod.GET,
+			produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	public ResponseEntity<InputStreamResource> downloadDailyUserStats() {
+		try {
+			System.out.println("DownloadExcelController.downloadDailyUserStats");
+			//log.trace("User export being requested");
+			byte[] out = adminService.generateDailyUserInfo();
+			ByteArrayInputStream in = new ByteArrayInputStream(out);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+			headers.add("Pragma", "no-cache");
+			headers.add("Expires", "0");
+
+
+			ResponseEntity<InputStreamResource> response = ResponseEntity.ok().headers(headers)
+					.contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+					.body(new InputStreamResource(in));
+			String statusCode = response.getStatusCode().name();
+			//log.info("User export being sent statusCode={}", statusCode);
+			return response;
+
+
+		} catch (Exception e) {
+			//log.error("Error exporting user data", e);
+			e.printStackTrace();
+			System.out.println("Eception thrown in DownloadDailyExcel controller");
+			return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+		}
 	}
 }

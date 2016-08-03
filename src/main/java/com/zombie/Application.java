@@ -3,6 +3,8 @@ package com.zombie;
 
 //locals
 
+import com.zombie.models.UserActivityAudit;
+import com.zombie.models.UserDailyActivityAudit;
 import com.zombie.repositories.UserRepository;
 import com.zombie.repositories.ZombieRepository;
 import com.zombie.services.NotificationService;
@@ -96,6 +98,7 @@ public class Application implements CommandLineRunner{
                 System.out.println("We're waiting for the guru");
             }
             TestDataPrep prep = new TestDataPrep(userService, guru);
+
 
     }
     /**

@@ -15,6 +15,7 @@ public class UserActivityAudit {
     private long userId;
 	private long activityDuration;
 
+	public UserActivityAudit(){}
 	public UserActivityAudit(long userId, long activityDuration) {
 		this.userId = userId;
 		this.activityDuration = activityDuration;
