@@ -62,7 +62,7 @@ public class ZombieGenerationScheduler extends AbstractManager implements AlarmO
 
     private synchronized void generationLoop() throws InterruptedException {
         long lastCheck = System.currentTimeMillis();
-        System.out.println("ZombieScheduledTask runimp");
+        //System.out.println("ZombieScheduledTask runimp");
 
 
         //log.debug("ZombieGenerationManager in runWork");
